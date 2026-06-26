@@ -317,22 +317,25 @@
 
       ctx.clearRect(0, 0, W, H);
 
-      /* halo externo */
-      var halo = ctx.createRadialGradient(cx, cy, R * 0.85, cx, cy, R * 1.18);
-      halo.addColorStop(0, 'rgba(11,110,92,0.10)');
-      halo.addColorStop(1, 'rgba(11,110,92,0)');
-      ctx.beginPath(); ctx.arc(cx, cy, R * 1.18, 0, Math.PI * 2);
-      ctx.fillStyle = halo; ctx.fill();
+      /* atmosfera exterior (anel azul suave) */
+      var atmo = ctx.createRadialGradient(cx, cy, R * 0.92, cx, cy, R * 1.22);
+      atmo.addColorStop(0, 'rgba(60,140,255,0.22)');
+      atmo.addColorStop(0.5, 'rgba(30,80,200,0.08)');
+      atmo.addColorStop(1, 'rgba(0,0,0,0)');
+      ctx.beginPath(); ctx.arc(cx, cy, R * 1.22, 0, Math.PI * 2);
+      ctx.fillStyle = atmo; ctx.fill();
 
-      /* esfera — gradiente de luz */
-      var grd = ctx.createRadialGradient(cx - R * 0.3, cy - R * 0.32, R * 0.04, cx, cy, R);
-      grd.addColorStop(0,    'rgba(255,255,255,0.97)');
-      grd.addColorStop(0.38, 'rgba(210,235,255,0.88)');
-      grd.addColorStop(0.72, 'rgba(140,195,240,0.72)');
-      grd.addColorStop(1,    'rgba(80,155,220,0.55)');
+      /* esfera — oceano profundo (satélite) */
+      var grd = ctx.createRadialGradient(cx - R * 0.28, cy - R * 0.3, R * 0.05, cx + R * 0.1, cy + R * 0.1, R * 1.05);
+      grd.addColorStop(0,    '#1a3a5c');
+      grd.addColorStop(0.35, '#0d2640');
+      grd.addColorStop(0.7,  '#071830');
+      grd.addColorStop(1,    '#030d1e');
       ctx.beginPath(); ctx.arc(cx, cy, R, 0, Math.PI * 2);
       ctx.fillStyle = grd; ctx.fill();
-      ctx.strokeStyle = 'rgba(100,170,230,0.3)';
+
+      /* borda esfera */
+      ctx.strokeStyle = 'rgba(60,130,220,0.35)';
       ctx.lineWidth = 1.5 * DPR;
       ctx.stroke();
 
@@ -352,7 +355,7 @@
           if (!started) { ctx.moveTo(sx, sy); started = true; }
           else ctx.lineTo(sx, sy);
         }
-        ctx.strokeStyle = 'rgba(60,140,210,0.18)';
+        ctx.strokeStyle = 'rgba(80,160,255,0.20)';
         ctx.lineWidth = DPR;
         ctx.stroke();
       }
@@ -370,7 +373,7 @@
           if (!started2) { ctx.moveTo(sx2, sy2); started2 = true; }
           else ctx.lineTo(sx2, sy2);
         }
-        ctx.strokeStyle = 'rgba(60,140,210,0.13)';
+        ctx.strokeStyle = 'rgba(80,160,255,0.14)';
         ctx.lineWidth = DPR;
         ctx.stroke();
       }
@@ -379,7 +382,6 @@
       ROUTES.forEach(function (r, idx) {
         var a = CITIES[r[0]], b = CITIES[r[1]];
         var pts = greatArc(a.lat, a.lng, b.lat, b.lng, 48);
-        /* anima um ponto viajante ao longo do arco */
         var tOffset = (idx * 0.37 + pulseT * 0.6) % 1;
 
         ctx.beginPath();
@@ -390,7 +392,7 @@
           if (!arcStarted) { ctx.moveTo(sx, sy); arcStarted = true; }
           else ctx.lineTo(sx, sy);
         });
-        ctx.strokeStyle = 'rgba(11,110,92,0.38)';
+        ctx.strokeStyle = 'rgba(80,220,180,0.45)';
         ctx.lineWidth = 1.4 * DPR;
         ctx.setLineDash([5 * DPR, 4 * DPR]);
         ctx.stroke();
@@ -402,36 +404,51 @@
         if (tp && tp.z > 0.05) {
           var tx = cx + tp.x * R, ty2 = cy + tp.y * R;
           ctx.beginPath(); ctx.arc(tx, ty2, 3.5 * DPR, 0, Math.PI * 2);
-          ctx.fillStyle = '#B65A38'; ctx.fill();
+          ctx.fillStyle = '#e8a87c'; ctx.fill();
         }
       });
 
-      /* --- pontos de cidade --- */
+      /* --- pontos de cidade + nomes --- */
+      ctx.save();
+      ctx.font = 'bold ' + Math.round(10 * DPR) + 'px "DM Sans", sans-serif';
       CITIES.forEach(function (c) {
         var p = project(c.lat, c.lng);
         if (p.z < 0.05) return;
         var sx = cx + p.x * R, sy = cy + p.y * R;
-        var size = (c.accent ? 5.5 : 4) * DPR * (0.6 + p.z * 0.4);
+        var visibility = Math.min(1, (p.z - 0.05) / 0.4); /* fade na borda */
+        var size = (c.accent ? 5.5 : 4) * DPR * (0.65 + p.z * 0.35);
 
         /* pulse para Porto Alegre */
         if (c.accent) {
           var pulse = (Math.sin(pulseT * Math.PI * 2) * 0.5 + 0.5);
           ctx.beginPath();
-          ctx.arc(sx, sy, size + pulse * 8 * DPR, 0, Math.PI * 2);
-          ctx.strokeStyle = 'rgba(182,90,56,' + (0.5 - pulse * 0.45) + ')';
+          ctx.arc(sx, sy, size + pulse * 9 * DPR, 0, Math.PI * 2);
+          ctx.strokeStyle = 'rgba(232,168,124,' + (0.55 * visibility - pulse * 0.45 * visibility) + ')';
           ctx.lineWidth = 1.5 * DPR;
           ctx.stroke();
         }
 
         ctx.beginPath(); ctx.arc(sx, sy, size, 0, Math.PI * 2);
-        ctx.fillStyle = c.accent ? '#B65A38' : '#0B6E5C';
+        ctx.fillStyle = c.accent
+          ? 'rgba(232,168,124,' + visibility + ')'
+          : 'rgba(80,220,180,' + visibility + ')';
         ctx.fill();
-      });
 
-      /* reflexo de luz (canto superior) */
-      var shine = ctx.createRadialGradient(cx - R * 0.36, cy - R * 0.38, 0, cx - R * 0.3, cy - R * 0.3, R * 0.52);
-      shine.addColorStop(0, 'rgba(255,255,255,0.26)');
-      shine.addColorStop(1, 'rgba(255,255,255,0)');
+        /* nome da cidade */
+        ctx.shadowColor = 'rgba(0,0,0,0.9)';
+        ctx.shadowBlur = 4 * DPR;
+        ctx.fillStyle = c.accent
+          ? 'rgba(255,200,150,' + visibility + ')'
+          : 'rgba(200,240,255,' + visibility + ')';
+        ctx.fillText(c.name, sx + (size + 5 * DPR), sy + 4 * DPR);
+        ctx.shadowBlur = 0;
+      });
+      ctx.restore();
+
+      /* reflexo de luz — atmosfera lateral esquerda */
+      var shine = ctx.createRadialGradient(cx - R * 0.6, cy - R * 0.5, 0, cx - R * 0.3, cy - R * 0.25, R * 0.55);
+      shine.addColorStop(0, 'rgba(100,180,255,0.12)');
+      shine.addColorStop(1, 'rgba(100,180,255,0)');
       ctx.beginPath(); ctx.arc(cx, cy, R, 0, Math.PI * 2);
       ctx.fillStyle = shine; ctx.fill();
     }
