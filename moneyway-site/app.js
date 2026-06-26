@@ -184,79 +184,289 @@
       .catch(function () { /* mantém os valores fallback */ });
   })();
 
-  /* ========== GLOBO INTERATIVO (scroll + drag + touch) ========== */
+  /* ========== GLOBO 3D — Canvas com projeção ortográfica ========== */
   (function () {
-    var el = document.getElementById('globe-3d');
-    if (!el) return;
+    var canvas = document.getElementById('globe-canvas');
+    if (!canvas) return;
 
-    var rX = 0, rY = 0;   /* rotação atual (suavizada) */
-    var tX = 0, tY = 0;   /* rotação alvo */
-    var baseY = 0;         /* contribuição do scroll */
-    var drag = false;
-    var px = 0, py = 0;
+    var ctx = canvas.getContext('2d');
+    var DPR = Math.min(window.devicePixelRatio || 1, 2);
 
-    /* scroll → gira no eixo Y */
+    /* --- estado de rotação --- */
+    var rotY = 0.4;   /* ângulo atual Y (rad) */
+    var rotX = 0.18;  /* ângulo atual X (rad) — leve tilt inicial */
+    var velY = 0.003; /* velocidade de auto-spin */
+    var velX = 0;
+    var tgtY = rotY, tgtX = rotX;
+    var drag = false, px = 0, py = 0;
+    var userDragged = false;
+
+    /* --- cidades [lat°, lng°, accent] --- */
+    var CITIES = [
+      [-30.0, -51.2, true,  'Porto Alegre'],
+      [ 40.7, -74.0, false, 'New York'],
+      [ 51.5,  -0.1, false, 'Londres'],
+      [-23.5, -46.6, false, 'São Paulo'],
+      [ 48.8,   2.3, false, 'Paris'],
+      [ 25.2,  55.3, false, 'Dubai'],
+      [  1.4, 103.8, false, 'Singapore'],
+      [ 35.7, 139.7, false, 'Tóquio'],
+    ].map(function (c) {
+      return { lat: c[0] * Math.PI / 180, lng: c[1] * Math.PI / 180, accent: c[2], name: c[3] };
+    });
+
+    /* --- rotas entre cidades [idx_a, idx_b] --- */
+    var ROUTES = [[0,1],[0,2],[0,3],[1,2],[2,4],[2,5],[5,6],[6,7]];
+
+    /* projeta um ponto esférico com rotX/rotY atuais
+       retorna {x,y} em coordenadas normalizadas [-1,1] e z de profundidade */
+    function project(lat, lng) {
+      /* ponto na esfera unitária */
+      var x0 =  Math.cos(lat) * Math.sin(lng);
+      var y0 =  Math.sin(lat);
+      var z0 =  Math.cos(lat) * Math.cos(lng);
+      /* rotação Y */
+      var x1 = x0 * Math.cos(rotY) + z0 * Math.sin(rotY);
+      var z1 = -x0 * Math.sin(rotY) + z0 * Math.cos(rotY);
+      /* rotação X */
+      var y2 = y0 * Math.cos(rotX) - z1 * Math.sin(rotX);
+      var z2 = y0 * Math.sin(rotX) + z1 * Math.cos(rotX);
+      return { x: x1, y: -y2, z: z2 };
+    }
+
+    /* gera pontos de um grande círculo entre dois pontos da esfera */
+    function greatArc(la1, lo1, la2, lo2, steps) {
+      var pts = [];
+      for (var i = 0; i <= steps; i++) {
+        var t = i / steps;
+        var lat = la1 + (la2 - la1) * t;
+        var lng = lo1 + (lo2 - lo1) * t;
+        pts.push(project(lat, lng));
+      }
+      return pts;
+    }
+
+    /* --- resize canvas --- */
+    function resize() {
+      var W = canvas.parentElement.offsetWidth;
+      canvas.width  = W * DPR;
+      canvas.height = W * DPR;
+      canvas.style.width  = W + 'px';
+      canvas.style.height = W + 'px';
+    }
+    resize();
+    window.addEventListener('resize', resize);
+
+    /* --- pulse das cidades (Porto Alegre) --- */
+    var pulseT = 0;
+
+    /* --- desenha um frame --- */
+    function draw() {
+      var W = canvas.width, H = canvas.height;
+      var R = W * 0.42;
+      var cx = W / 2, cy = H / 2;
+
+      ctx.clearRect(0, 0, W, H);
+
+      /* halo externo */
+      var halo = ctx.createRadialGradient(cx, cy, R * 0.85, cx, cy, R * 1.18);
+      halo.addColorStop(0, 'rgba(11,110,92,0.10)');
+      halo.addColorStop(1, 'rgba(11,110,92,0)');
+      ctx.beginPath(); ctx.arc(cx, cy, R * 1.18, 0, Math.PI * 2);
+      ctx.fillStyle = halo; ctx.fill();
+
+      /* esfera — gradiente de luz */
+      var grd = ctx.createRadialGradient(cx - R * 0.3, cy - R * 0.32, R * 0.04, cx, cy, R);
+      grd.addColorStop(0,    'rgba(255,255,255,0.97)');
+      grd.addColorStop(0.38, 'rgba(210,235,255,0.88)');
+      grd.addColorStop(0.72, 'rgba(140,195,240,0.72)');
+      grd.addColorStop(1,    'rgba(80,155,220,0.55)');
+      ctx.beginPath(); ctx.arc(cx, cy, R, 0, Math.PI * 2);
+      ctx.fillStyle = grd; ctx.fill();
+      ctx.strokeStyle = 'rgba(100,170,230,0.3)';
+      ctx.lineWidth = 1.5 * DPR;
+      ctx.stroke();
+
+      /* --- grade de latitude/longitude --- */
+      var STEPS = 96;
+
+      /* latitudes */
+      for (var lat = -60; lat <= 60; lat += 30) {
+        var latR = lat * Math.PI / 180;
+        ctx.beginPath();
+        var started = false;
+        for (var i = 0; i <= STEPS; i++) {
+          var lngR = (i / STEPS) * Math.PI * 2 - Math.PI;
+          var p = project(latR, lngR);
+          if (p.z < 0) { started = false; continue; }
+          var sx = cx + p.x * R, sy = cy + p.y * R;
+          if (!started) { ctx.moveTo(sx, sy); started = true; }
+          else ctx.lineTo(sx, sy);
+        }
+        ctx.strokeStyle = 'rgba(60,140,210,0.18)';
+        ctx.lineWidth = DPR;
+        ctx.stroke();
+      }
+
+      /* longitudes */
+      for (var lng = 0; lng < 360; lng += 30) {
+        var lngR2 = lng * Math.PI / 180;
+        ctx.beginPath();
+        var started2 = false;
+        for (var j = 0; j <= STEPS / 2; j++) {
+          var latR2 = (j / (STEPS / 2)) * Math.PI - Math.PI / 2;
+          var p2 = project(latR2, lngR2);
+          if (p2.z < 0) { started2 = false; continue; }
+          var sx2 = cx + p2.x * R, sy2 = cy + p2.y * R;
+          if (!started2) { ctx.moveTo(sx2, sy2); started2 = true; }
+          else ctx.lineTo(sx2, sy2);
+        }
+        ctx.strokeStyle = 'rgba(60,140,210,0.13)';
+        ctx.lineWidth = DPR;
+        ctx.stroke();
+      }
+
+      /* --- arcos de rota --- */
+      ROUTES.forEach(function (r, idx) {
+        var a = CITIES[r[0]], b = CITIES[r[1]];
+        var pts = greatArc(a.lat, a.lng, b.lat, b.lng, 48);
+        /* anima um ponto viajante ao longo do arco */
+        var tOffset = (idx * 0.37 + pulseT * 0.6) % 1;
+
+        ctx.beginPath();
+        var arcStarted = false;
+        pts.forEach(function (p) {
+          if (p.z < 0) { arcStarted = false; return; }
+          var sx = cx + p.x * R, sy = cy + p.y * R;
+          if (!arcStarted) { ctx.moveTo(sx, sy); arcStarted = true; }
+          else ctx.lineTo(sx, sy);
+        });
+        ctx.strokeStyle = 'rgba(11,110,92,0.38)';
+        ctx.lineWidth = 1.4 * DPR;
+        ctx.setLineDash([5 * DPR, 4 * DPR]);
+        ctx.stroke();
+        ctx.setLineDash([]);
+
+        /* viajante */
+        var ti = Math.floor(tOffset * (pts.length - 1));
+        var tp = pts[ti];
+        if (tp && tp.z > 0.05) {
+          var tx = cx + tp.x * R, ty2 = cy + tp.y * R;
+          ctx.beginPath(); ctx.arc(tx, ty2, 3.5 * DPR, 0, Math.PI * 2);
+          ctx.fillStyle = '#B65A38'; ctx.fill();
+        }
+      });
+
+      /* --- pontos de cidade --- */
+      CITIES.forEach(function (c) {
+        var p = project(c.lat, c.lng);
+        if (p.z < 0.05) return;
+        var sx = cx + p.x * R, sy = cy + p.y * R;
+        var size = (c.accent ? 5.5 : 4) * DPR * (0.6 + p.z * 0.4);
+
+        /* pulse para Porto Alegre */
+        if (c.accent) {
+          var pulse = (Math.sin(pulseT * Math.PI * 2) * 0.5 + 0.5);
+          ctx.beginPath();
+          ctx.arc(sx, sy, size + pulse * 8 * DPR, 0, Math.PI * 2);
+          ctx.strokeStyle = 'rgba(182,90,56,' + (0.5 - pulse * 0.45) + ')';
+          ctx.lineWidth = 1.5 * DPR;
+          ctx.stroke();
+        }
+
+        ctx.beginPath(); ctx.arc(sx, sy, size, 0, Math.PI * 2);
+        ctx.fillStyle = c.accent ? '#B65A38' : '#0B6E5C';
+        ctx.fill();
+      });
+
+      /* reflexo de luz (canto superior) */
+      var shine = ctx.createRadialGradient(cx - R * 0.36, cy - R * 0.38, 0, cx - R * 0.3, cy - R * 0.3, R * 0.52);
+      shine.addColorStop(0, 'rgba(255,255,255,0.26)');
+      shine.addColorStop(1, 'rgba(255,255,255,0)');
+      ctx.beginPath(); ctx.arc(cx, cy, R, 0, Math.PI * 2);
+      ctx.fillStyle = shine; ctx.fill();
+    }
+
+    /* --- loop principal --- */
+    var lastTime = 0;
+    function loop(ts) {
+      requestAnimationFrame(loop);
+      var dt = Math.min((ts - lastTime) / 1000, 0.05);
+      lastTime = ts;
+      pulseT = (pulseT + dt * 0.5) % 1;
+
+      if (!drag) {
+        if (!userDragged) {
+          /* auto-spin suave quando o usuário não interagiu */
+          rotY += velY;
+        } else {
+          /* desacelera gradualmente após soltar */
+          velY *= 0.96;
+          rotY += velY;
+          velX *= 0.96;
+          rotX += velX;
+          rotX = Math.max(-0.7, Math.min(0.7, rotX));
+        }
+        /* scroll drive */
+        tgtY = rotY;
+        tgtX = rotX;
+      } else {
+        rotY += (tgtY - rotY) * 0.18;
+        rotX += (tgtX - rotX) * 0.18;
+      }
+
+      draw();
+    }
+    requestAnimationFrame(loop);
+
+    /* --- interações --- */
+
+    /* scroll → velocidade proporcional */
+    var lastScrollY = 0;
     window.addEventListener('scroll', function () {
-      baseY = window.scrollY * 0.14;
-      if (!drag) tY = baseY;
+      var delta = window.scrollY - lastScrollY;
+      lastScrollY = window.scrollY;
+      velY = delta * 0.003;
+      userDragged = true;
     }, { passive: true });
 
     /* mouse drag */
-    el.addEventListener('mousedown', function (e) {
-      drag = true;
+    canvas.addEventListener('mousedown', function (e) {
+      drag = true; userDragged = true;
       px = e.clientX; py = e.clientY;
-      el.style.cursor = 'grabbing';
+      velY = 0; velX = 0;
       e.preventDefault();
     });
     window.addEventListener('mousemove', function (e) {
       if (!drag) return;
-      tY += (e.clientX - px) * 0.55;
-      tX -= (e.clientY - py) * 0.35;
-      tX = Math.max(-30, Math.min(30, tX));
+      var dx = e.clientX - px, dy = e.clientY - py;
+      tgtY += dx * 0.008;
+      tgtX -= dy * 0.006;
+      tgtX = Math.max(-0.7, Math.min(0.7, tgtX));
+      velY = dx * 0.004;
+      velX = -dy * 0.003;
       px = e.clientX; py = e.clientY;
     });
     window.addEventListener('mouseup', function () {
-      if (!drag) return;
       drag = false;
-      el.style.cursor = 'grab';
-      baseY = tY; /* mantém posição após soltar */
     });
 
-    /* hover parallax sutil (sem arrastar) */
-    el.addEventListener('mousemove', function (e) {
-      if (drag) return;
-      var r = el.getBoundingClientRect();
-      var dx = (e.clientX - r.left - r.width  / 2) / (r.width  / 2);
-      var dy = (e.clientY - r.top  - r.height / 2) / (r.height / 2);
-      tY = baseY + dx * 16;
-      tX = -dy * 10;
-    });
-    el.addEventListener('mouseleave', function () {
-      if (drag) return;
-      tY = baseY; tX = 0;
-    });
-
-    /* touch (mobile) */
-    el.addEventListener('touchstart', function (e) {
-      px = e.touches[0].clientX;
-      py = e.touches[0].clientY;
+    /* touch */
+    canvas.addEventListener('touchstart', function (e) {
+      drag = true; userDragged = true;
+      px = e.touches[0].clientX; py = e.touches[0].clientY;
+      velY = 0; velX = 0;
     }, { passive: true });
-    el.addEventListener('touchmove', function (e) {
-      tY += (e.touches[0].clientX - px) * 0.55;
-      tX -= (e.touches[0].clientY - py) * 0.35;
-      tX = Math.max(-30, Math.min(30, tX));
-      px = e.touches[0].clientX;
-      py = e.touches[0].clientY;
-      baseY = tY;
+    canvas.addEventListener('touchmove', function (e) {
+      if (!drag) return;
+      var dx = e.touches[0].clientX - px, dy = e.touches[0].clientY - py;
+      tgtY += dx * 0.008;
+      tgtX -= dy * 0.006;
+      tgtX = Math.max(-0.7, Math.min(0.7, tgtX));
+      velY = dx * 0.004; velX = -dy * 0.003;
+      px = e.touches[0].clientX; py = e.touches[0].clientY;
     }, { passive: true });
-
-    /* loop rAF com suavização exponencial */
-    (function loop() {
-      rX += (tX - rX) * 0.07;
-      rY += (tY - rY) * 0.07;
-      el.style.transform = 'rotateX(' + rX.toFixed(2) + 'deg) rotateY(' + rY.toFixed(2) + 'deg)';
-      requestAnimationFrame(loop);
-    })();
+    canvas.addEventListener('touchend', function () { drag = false; });
   })();
 
   /* ========== MULTILÍNGUE ========== */
