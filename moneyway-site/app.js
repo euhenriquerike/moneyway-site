@@ -605,4 +605,34 @@
     }
   })();
 
+  /* ========== NEWSLETTER — seleção de canal ========== */
+  (function () {
+    var chBtns = document.querySelectorAll('.nl-ch');
+    var emailF = document.querySelector('.nl-field-email');
+    var wppF   = document.querySelector('.nl-field-wpp');
+    var emailI = document.getElementById('nl-email');
+    var wppI   = document.getElementById('nl-wpp');
+    var canal  = document.getElementById('nl-canal');
+    if (!chBtns.length) return;
+
+    function applyChannel(ch) {
+      if (canal) canal.value = ch;
+      var showEmail = ch === 'email' || ch === 'ambos';
+      var showWpp   = ch === 'whatsapp' || ch === 'ambos';
+      if (emailF) emailF.style.display = showEmail ? '' : 'none';
+      if (wppF)   wppF.style.display   = showWpp   ? '' : 'none';
+      if (emailI) emailI.required = showEmail;
+      if (wppI)   wppI.required   = showWpp;
+    }
+    applyChannel('email');
+
+    chBtns.forEach(function (b) {
+      b.addEventListener('click', function () {
+        chBtns.forEach(function (x) { x.classList.remove('active'); });
+        b.classList.add('active');
+        applyChannel(b.getAttribute('data-ch'));
+      });
+    });
+  })();
+
 })();

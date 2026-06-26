@@ -320,9 +320,9 @@ section { padding-block: clamp(44px, 6vw, 72px); position: relative; }
 .google-badge__count { font-family: var(--mono); font-size: 13px; font-weight: 400; color: var(--slate-2); }
 
 /* ============ BLOG ============ */
-.blog-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: clamp(16px, 1.8vw, 22px); margin-top: clamp(40px, 5vw, 56px); }
-@media (max-width: 980px) { .blog-grid { grid-template-columns: repeat(2, 1fr); } }
-@media (max-width: 560px) { .blog-grid { grid-template-columns: 1fr; } }
+.blog-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(16px, 1.8vw, 22px); margin-top: clamp(36px, 4vw, 48px); }
+@media (max-width: 860px) { .blog-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 520px) { .blog-grid { grid-template-columns: 1fr; } }
 .post { background: #fff; border: 1px solid var(--line); border-radius: var(--r); overflow: hidden; box-shadow: var(--shadow-sm); transition: transform .25s, box-shadow .25s; text-decoration: none; display: flex; flex-direction: column; }
 .post:hover { transform: translateY(-4px); box-shadow: var(--shadow); }
 .post__img { aspect-ratio: 16 / 10; position: relative; overflow: hidden; }
@@ -489,15 +489,23 @@ html.js .reveal.in { opacity: 1; transform: none; }
 
 /* ============ NEWSLETTER ============ */
 .newsletter-section { background: var(--navy); }
-.nl-card { display: flex; align-items: center; justify-content: space-between; gap: clamp(30px,5vw,64px); flex-wrap: wrap; }
+.nl-card { display: flex; align-items: flex-start; justify-content: space-between; gap: clamp(30px,5vw,64px); flex-wrap: wrap; }
 .nl-card .s-title { color: var(--cream); }
-.nl-text { flex: 1; min-width: 240px; }
+.nl-text { flex: 1; min-width: 220px; }
 .nl-text p { color: rgba(244,239,230,.7); }
-.nl-form { display: flex; gap: 12px; flex-wrap: wrap; flex: 1; min-width: 280px; align-items: center; }
-.nl-form input { flex: 1; min-width: 160px; font-family: var(--sans); font-size: 15px; color: var(--navy);
-  border: none; border-radius: 100px; padding: 14px 20px; outline: none; background: rgba(255,255,255,.95); }
+.nl-form-wrap { flex: 1; min-width: 280px; display: flex; flex-direction: column; gap: 12px; }
+/* tabs de canal */
+.nl-channels { display: flex; gap: 6px; background: rgba(255,255,255,.08); border-radius: 100px; padding: 4px; }
+.nl-ch { flex: 1; font-family: var(--disp); font-weight: 700; font-size: 13px; color: rgba(244,239,230,.65); background: transparent;
+  border: none; border-radius: 100px; padding: 10px 12px; cursor: pointer; transition: all .18s; display: flex; align-items: center; justify-content: center; gap: 6px; white-space: nowrap; }
+.nl-ch.active { background: var(--emerald); color: #fff; }
+/* form */
+.nl-form { display: flex; flex-direction: column; gap: 10px; }
+.nl-form input { font-family: var(--sans); font-size: 15px; color: var(--navy);
+  border: none; border-radius: 12px; padding: 14px 18px; outline: none; background: rgba(255,255,255,.95); width: 100%; box-sizing: border-box; }
 .nl-form input:focus { background: #fff; }
-@media (max-width: 600px) { .nl-form { flex-direction: column; } .nl-form input { width: 100%; } .nl-form .btn { width: 100%; justify-content: center; } }
+.nl-form .btn { justify-content: center; }
+.nl-field-email, .nl-field-wpp { width: 100%; }
 
 /* ============ SUBPÁGINA PJ ============ */
 .pj-hero-badge { display: inline-flex; align-items: center; gap: 10px; background: var(--emerald); color: #fff; border-radius: 100px; padding: 8px 18px; font-size: 13px; font-weight: 700; margin-bottom: 20px; }
