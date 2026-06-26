@@ -184,6 +184,81 @@
       .catch(function () { /* mantém os valores fallback */ });
   })();
 
+  /* ========== GLOBO INTERATIVO (scroll + drag + touch) ========== */
+  (function () {
+    var el = document.getElementById('globe-3d');
+    if (!el) return;
+
+    var rX = 0, rY = 0;   /* rotação atual (suavizada) */
+    var tX = 0, tY = 0;   /* rotação alvo */
+    var baseY = 0;         /* contribuição do scroll */
+    var drag = false;
+    var px = 0, py = 0;
+
+    /* scroll → gira no eixo Y */
+    window.addEventListener('scroll', function () {
+      baseY = window.scrollY * 0.14;
+      if (!drag) tY = baseY;
+    }, { passive: true });
+
+    /* mouse drag */
+    el.addEventListener('mousedown', function (e) {
+      drag = true;
+      px = e.clientX; py = e.clientY;
+      el.style.cursor = 'grabbing';
+      e.preventDefault();
+    });
+    window.addEventListener('mousemove', function (e) {
+      if (!drag) return;
+      tY += (e.clientX - px) * 0.55;
+      tX -= (e.clientY - py) * 0.35;
+      tX = Math.max(-30, Math.min(30, tX));
+      px = e.clientX; py = e.clientY;
+    });
+    window.addEventListener('mouseup', function () {
+      if (!drag) return;
+      drag = false;
+      el.style.cursor = 'grab';
+      baseY = tY; /* mantém posição após soltar */
+    });
+
+    /* hover parallax sutil (sem arrastar) */
+    el.addEventListener('mousemove', function (e) {
+      if (drag) return;
+      var r = el.getBoundingClientRect();
+      var dx = (e.clientX - r.left - r.width  / 2) / (r.width  / 2);
+      var dy = (e.clientY - r.top  - r.height / 2) / (r.height / 2);
+      tY = baseY + dx * 16;
+      tX = -dy * 10;
+    });
+    el.addEventListener('mouseleave', function () {
+      if (drag) return;
+      tY = baseY; tX = 0;
+    });
+
+    /* touch (mobile) */
+    el.addEventListener('touchstart', function (e) {
+      px = e.touches[0].clientX;
+      py = e.touches[0].clientY;
+    }, { passive: true });
+    el.addEventListener('touchmove', function (e) {
+      tY += (e.touches[0].clientX - px) * 0.55;
+      tX -= (e.touches[0].clientY - py) * 0.35;
+      tX = Math.max(-30, Math.min(30, tX));
+      px = e.touches[0].clientX;
+      py = e.touches[0].clientY;
+      baseY = tY;
+    }, { passive: true });
+
+    /* loop rAF com suavização exponencial */
+    (function loop() {
+      rX += (tX - rX) * 0.07;
+      rY += (tY - rY) * 0.07;
+      el.style.transform = 'rotateX(' + rX.toFixed(2) + 'deg) rotateY(' + rY.toFixed(2) + 'deg)';
+      requestAnimationFrame(loop);
+    })();
+  })();
+
   /* ========== MULTILÍNGUE ========== */
   (function () {
     var T = {
