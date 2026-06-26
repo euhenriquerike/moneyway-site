@@ -330,20 +330,20 @@
 
   <div class="ca-gallery">
     <div class="ca-gallery__item reveal">
+      <img src="https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcRl0FngtSjiA7eyhoRIrCQOibSnBvJy90OAWtkRQsfHqVWET0iy" alt="Dólar Americano antigo" loading="lazy" />
+      <div class="ca-gallery__caption">Dólar Americano antigo</div>
+    </div>
+    <div class="ca-gallery__item reveal d1">
+      <img src="https://www.francoantigo.com.br/images/100_chf_1998_2016.webp" alt="Franco Suíço antigo" loading="lazy" />
+      <div class="ca-gallery__caption">Franco Suíço antigo</div>
+    </div>
+    <div class="ca-gallery__item reveal">
       <img src="../assets/photos/gbp-old.webp" alt="Libra Esterlina antiga" loading="lazy" />
       <div class="ca-gallery__caption">Libra Esterlina antiga</div>
     </div>
     <div class="ca-gallery__item reveal d1">
-      <img src="../assets/photos/usd-old-100.jpg" alt="Dólar Americano antigo" loading="lazy" />
-      <div class="ca-gallery__caption">Dólar Americano antigo</div>
-    </div>
-    <div class="ca-gallery__item reveal">
-      <img src="../assets/photos/franklin-macro.avif" alt="Detalhe de cédula estrangeira antiga" loading="lazy" />
-      <div class="ca-gallery__caption">Dólar Americano — detalhe</div>
-    </div>
-    <div class="ca-gallery__item reveal d1">
-      <img src="../assets/photos/usd-pile.avif" alt="Cédulas estrangeiras antigas" loading="lazy" />
-      <div class="ca-gallery__caption">Cédulas estrangeiras em papel</div>
+      <img src="https://quebecsemfronteiras.com.br/wp-content/uploads/2021/01/EmbeddedImage-9.jpg" alt="Dólar Canadense antigo" loading="lazy" />
+      <div class="ca-gallery__caption">Dólar Canadense antigo</div>
     </div>
   </div>
 </div></section>
@@ -399,12 +399,12 @@
 
   function update() {
     var ok = ck1.checked && ck2.checked && ck3.checked;
-    btn.disabled = !ok;
-    btn.setAttribute('aria-disabled', String(!ok));
     if (ok) {
       btn.removeAttribute('disabled');
+      btn.setAttribute('aria-disabled', 'false');
     } else {
       btn.setAttribute('disabled', '');
+      btn.setAttribute('aria-disabled', 'true');
     }
   }
 
