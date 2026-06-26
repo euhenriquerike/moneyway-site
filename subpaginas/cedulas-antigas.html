@@ -4,327 +4,149 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Cédulas Estrangeiras Antigas - Money Way Câmbio</title>
-<meta name="description" content="Compre e venda cédulas estrangeiras antigas com a Money Way. Avaliação especializada, atendimento personalizado e processo seguro em Porto Alegre." />
+<meta name="description" content="Avaliamos e compramos cédulas estrangeiras antigas com segurança, transparência e expertise de mais de 20 anos. Money Way Câmbio - Porto Alegre." />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
 <link rel="stylesheet" href="../moneyway-site/styles.css" />
 <style>
-
-/* ===== HERO ESCURO ===== */
-.ca-hero {
-  padding-top: clamp(130px, 18vh, 180px);
-  padding-bottom: clamp(60px, 8vw, 100px);
-  background: var(--navy);
-  position: relative;
-  overflow: hidden;
-}
-.ca-hero::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background:
-    radial-gradient(ellipse 60% 60% at 80% 50%, rgba(182,90,56,.13) 0%, transparent 70%),
-    radial-gradient(ellipse 40% 50% at 15% 90%, rgba(11,110,92,.1) 0%, transparent 60%);
-  pointer-events: none;
-}
-.ca-hero__inner {
-  position: relative;
-  z-index: 2;
+.cedula-img-row {
   display: grid;
-  grid-template-columns: 1fr clamp(200px, 26vw, 320px);
-  gap: clamp(32px, 6vw, 80px);
-  align-items: center;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(16px, 2vw, 28px);
+  margin-top: clamp(36px, 5vw, 56px);
 }
-.ca-hero .crumb { color: rgba(244,239,230,.45); margin-bottom: 0; }
-.ca-hero .crumb a { color: rgba(244,239,230,.45); text-decoration: none; }
-.ca-hero .crumb a:hover { color: var(--terra-soft); }
-.ca-hero h1 {
-  font-family: var(--serif);
-  font-weight: 400;
-  font-size: clamp(50px, 7.8vw, 90px);
-  line-height: 1.0;
-  letter-spacing: -0.01em;
-  color: var(--cream);
-  margin: 20px 0 0;
-}
-.ca-hero h1 em { color: var(--terra-soft); font-style: italic; }
-.ca-hero__lede {
-  color: rgba(244,239,230,.72);
-  font-size: clamp(16px, 1.4vw, 19px);
-  max-width: 50ch;
-  margin: 24px 0 0;
-  line-height: 1.65;
-}
-.ca-hero__cta { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 38px; }
-.btn--light {
-  background: rgba(255,255,255,.1);
-  color: var(--cream);
-  border: 1px solid rgba(255,255,255,.2);
-  backdrop-filter: blur(8px);
-}
-.btn--light:hover { background: rgba(255,255,255,.18); transform: translateY(-2px); }
-
-/* Decorativo direito */
-.ca-deco {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.ca-deco svg { width: 100%; height: auto; }
-
-/* ===== BENEFÍCIOS ===== */
-.ca-benefit-strip {
-  background: var(--bg-2);
-  border-top: 1px solid var(--line);
-  border-bottom: 1px solid var(--line);
-}
-
-/* ===== O QUE COMPRAMOS ===== */
-.ca-what-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: clamp(16px, 2vw, 24px);
-  margin-top: clamp(40px, 5vw, 60px);
-}
-.ca-what-card {
-  background: #fff;
-  border: 1px solid var(--line);
-  border-radius: var(--r);
-  padding: clamp(28px, 3vw, 40px);
-  box-shadow: var(--shadow-sm);
-  transition: transform .28s, box-shadow .28s;
-  position: relative;
-  overflow: hidden;
-}
-.ca-what-card::after {
-  content: '';
-  position: absolute;
-  top: 0; left: 0; right: 0;
-  height: 3px;
-  background: var(--terra);
-  transform: scaleX(0);
-  transform-origin: left;
-  transition: transform .35s cubic-bezier(.4,0,.2,1);
-}
-.ca-what-card:hover { transform: translateY(-5px); box-shadow: var(--shadow); }
-.ca-what-card:hover::after { transform: scaleX(1); }
-.ca-what-num {
-  font-family: var(--serif);
-  font-size: 54px;
-  font-weight: 400;
-  font-style: italic;
-  color: var(--line);
-  line-height: 1;
-  margin-bottom: 14px;
-  user-select: none;
-}
-.ca-what-card h3 {
-  font-family: var(--disp);
-  font-weight: 700;
-  font-size: clamp(16px, 1.4vw, 19px);
-  color: var(--navy);
-  margin: 0 0 10px;
-  line-height: 1.25;
-}
-.ca-what-card p {
-  color: var(--slate);
-  font-size: 14.5px;
-  line-height: 1.65;
-  margin: 0 0 20px;
-}
-.ca-tags { display: flex; flex-wrap: wrap; gap: 7px; }
-.ca-tag {
-  font-family: var(--mono);
-  font-size: 11px;
-  letter-spacing: .06em;
-  color: var(--terra);
-  background: rgba(182,90,56,.07);
-  border: 1px solid rgba(182,90,56,.2);
-  border-radius: 100px;
-  padding: 4px 11px;
-  white-space: nowrap;
-}
-
-/* ===== COMO FUNCIONA ===== */
-.ca-steps {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: clamp(16px, 2vw, 30px);
-  margin-top: clamp(44px, 5vw, 60px);
-  position: relative;
-}
-.ca-steps::before {
-  content: '';
-  position: absolute;
-  top: 27px;
-  left: calc(12.5% + 14px);
-  right: calc(12.5% + 14px);
-  height: 1px;
-  background: linear-gradient(90deg, var(--terra-soft), var(--emerald-lift));
-  opacity: .35;
-  z-index: 0;
-}
-.ca-step { position: relative; z-index: 1; text-align: center; }
-.ca-step__num {
-  width: 54px;
-  height: 54px;
-  border-radius: 50%;
-  background: var(--navy);
-  color: var(--cream);
-  display: grid;
-  place-items: center;
-  margin: 0 auto 20px;
-  font-family: var(--serif);
-  font-size: 22px;
-  font-style: italic;
-  font-weight: 400;
-  border: 3px solid var(--bg);
-  box-shadow: 0 6px 20px -8px rgba(27,51,70,.45);
-}
-.ca-step h3 {
-  font-family: var(--disp);
-  font-weight: 700;
-  font-size: 15px;
-  color: var(--navy);
-  margin: 0 0 8px;
-}
-.ca-step p {
-  color: var(--slate);
-  font-size: 13.5px;
-  line-height: 1.6;
-  margin: 0;
-}
-
-/* ===== FORMULÁRIO ===== */
-.ca-form-wrap {
-  background: #fff;
-  border: 1px solid var(--line);
+@media (max-width: 600px) { .cedula-img-row { grid-template-columns: 1fr; } }
+.cedula-img-row img {
+  width: 100%;
+  height: 240px;
+  object-fit: cover;
   border-radius: var(--r);
   box-shadow: var(--shadow);
-  margin-top: clamp(34px, 5vw, 52px);
-  overflow: hidden;
 }
-.ca-form-head {
-  padding: 22px clamp(24px, 3vw, 36px);
-  border-bottom: 1px solid rgba(255,255,255,.1);
+
+.cedula-types {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(14px, 2vw, 22px);
+  margin-top: clamp(36px, 5vw, 52px);
+}
+@media (max-width: 720px) { .cedula-types { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 480px) { .cedula-types { grid-template-columns: 1fr; } }
+.cedula-type {
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: var(--r);
+  padding: clamp(24px, 2.8vw, 34px);
+  box-shadow: var(--shadow-sm);
+}
+.cedula-type__ic {
+  width: 52px;
+  height: 52px;
+  border-radius: 16px;
   background: var(--navy);
-  display: flex;
-  align-items: center;
-  gap: 14px;
-}
-.ca-form-head-ic {
-  width: 46px;
-  height: 46px;
-  border-radius: 14px;
-  background: rgba(182,90,56,.25);
-  color: var(--terra-soft);
+  color: var(--cream);
   display: grid;
   place-items: center;
-  flex: none;
+  margin-bottom: 18px;
 }
-.ca-form-head strong {
-  display: block;
+.cedula-type__ic svg { width: 26px; height: 26px; }
+.cedula-type h3 {
   font-family: var(--disp);
   font-weight: 700;
   font-size: 17px;
-  color: var(--cream);
-}
-.ca-form-head span {
-  font-family: var(--mono);
-  font-size: 11px;
-  letter-spacing: .1em;
-  text-transform: uppercase;
-  color: rgba(244,239,230,.45);
-}
-.ca-form-body {
-  padding: clamp(28px, 3.5vw, 44px);
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: clamp(20px, 2.5vw, 30px);
-}
-.ca-fg { display: flex; flex-direction: column; gap: 8px; }
-.ca-fg label {
-  font-family: var(--mono);
-  font-size: 11px;
-  letter-spacing: .12em;
-  text-transform: uppercase;
-  color: var(--slate-2);
-  font-weight: 600;
-}
-.ca-fg select,
-.ca-fg input,
-.ca-fg textarea {
-  font-family: var(--sans);
-  font-size: 15px;
   color: var(--navy);
-  border: 1px solid var(--line);
-  border-radius: 10px;
-  padding: 13px 16px;
-  background: var(--bg);
-  outline: none;
-  transition: border-color .2s, background .2s;
-  width: 100%;
-}
-.ca-fg textarea { resize: vertical; min-height: 100px; }
-.ca-fg select:focus, .ca-fg input:focus, .ca-fg textarea:focus {
-  border-color: var(--terra);
-  background: #fff;
-}
-.ca-fg--full { grid-column: 1 / -1; }
-.ca-type-toggle { display: flex; gap: 8px; }
-.ca-type-toggle button {
-  flex: 1;
-  font-family: var(--disp);
-  font-weight: 700;
-  font-size: 13.5px;
-  color: var(--slate);
-  background: var(--bg);
-  border: 1px solid var(--line);
-  border-radius: 10px;
-  padding: 13px 10px;
-  cursor: pointer;
-  transition: all .18s;
+  margin: 0 0 10px;
   line-height: 1.3;
 }
-.ca-type-toggle button.active {
-  background: var(--terra);
-  color: #fff;
-  border-color: var(--terra);
-}
-.ca-form-foot {
-  padding: clamp(20px, 2.5vw, 30px) clamp(24px, 3vw, 36px);
-  border-top: 1px solid var(--line);
-  background: var(--bg-2);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 18px;
-  flex-wrap: wrap;
-}
-.ca-form-note {
-  font-family: var(--mono);
-  font-size: 11.5px;
-  color: var(--slate-2);
-  line-height: 1.6;
-  max-width: 48ch;
+.cedula-type p {
+  color: var(--slate);
+  font-size: 14px;
+  line-height: 1.65;
+  margin: 0;
 }
 
-/* ===== RESPONSIVE ===== */
-@media (max-width: 900px) {
-  .ca-hero__inner { grid-template-columns: 1fr; }
-  .ca-deco { display: none; }
-  .ca-steps { grid-template-columns: repeat(2, 1fr); }
-  .ca-steps::before { display: none; }
+.cedula-dark {
+  background: var(--ink-deep);
+  border-radius: var(--r);
+  padding: clamp(40px, 6vw, 72px) clamp(28px, 4vw, 56px);
+  margin-top: clamp(36px, 5vw, 56px);
 }
-@media (max-width: 640px) {
-  .ca-what-grid { grid-template-columns: 1fr; }
-  .ca-form-body { grid-template-columns: 1fr; }
-  .ca-fg--full { grid-column: 1; }
+.cedula-dark .eyebrow { color: var(--terra-soft); }
+.cedula-dark .s-title { color: var(--cream); }
+
+.cedula-steps {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: clamp(14px, 2vw, 24px);
+  margin-top: clamp(36px, 5vw, 52px);
 }
-@media (max-width: 420px) {
-  .ca-steps { grid-template-columns: 1fr; }
+@media (max-width: 720px) { .cedula-steps { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 440px) { .cedula-steps { grid-template-columns: 1fr; } }
+.cedula-step {
+  background: rgba(255,255,255,.06);
+  border: 1px solid rgba(255,255,255,.12);
+  border-radius: var(--r);
+  padding: clamp(20px, 2.4vw, 28px);
 }
+.cedula-step__num {
+  font-family: var(--disp);
+  font-weight: 800;
+  font-size: 40px;
+  color: var(--terra-soft);
+  line-height: 1;
+  margin-bottom: 14px;
+}
+.cedula-step h4 {
+  font-family: var(--disp);
+  font-weight: 700;
+  font-size: 15px;
+  color: var(--cream);
+  margin: 0 0 8px;
+}
+.cedula-step p {
+  color: rgba(244,239,230,.65);
+  font-size: 13.5px;
+  line-height: 1.55;
+  margin: 0;
+}
+
+.faq-list {
+  margin-top: clamp(28px, 4vw, 44px);
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.faq-item {
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  overflow: hidden;
+  background: #fff;
+}
+.faq-item + .faq-item { margin-top: 8px; }
+.faq-q {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 24px;
+  cursor: pointer;
+  font-family: var(--disp);
+  font-weight: 700;
+  font-size: 16px;
+  color: var(--navy);
+  gap: 16px;
+  user-select: none;
+}
+.faq-q svg { flex: none; transition: transform .25s; }
+.faq-item.open .faq-q svg { transform: rotate(180deg); }
+.faq-a {
+  display: none;
+  padding: 0 24px 20px;
+  color: var(--slate);
+  font-size: 15px;
+  line-height: 1.65;
+}
+.faq-item.open .faq-a { display: block; }
 </style>
 </head>
 <body>
@@ -339,283 +161,153 @@
     <div class="nav__drop">
       <a href="../index.html#servicos">Serviços <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></a>
       <div class="nav__menu"><div class="nav__menu-inner">
-        <a href="cotacoes.html"><span class="di"></span> Compra de moeda em espécie</a>
-        <a href="transferencias.html"><span class="di"></span> Transferências Internacionais</a>
-        <a href="moneygram.html"><span class="di"></span> MoneyGram</a>
-        <a href="seguro-viagem.html"><span class="di"></span> Seguro Viagem</a>
-        <a href="passagens.html"><span class="di"></span> Passagens Aéreas</a>
+        <a href="cotacoes.html"><span class="di"></span> Compra e venda de moedas</a>
+        <a href="transferencias.html"><span class="di"></span> Transferência de valores nacionais</a>
         <a href="cedulas-antigas.html"><span class="di"></span> Cédulas Estrangeiras Antigas</a>
-        <a href="visa-travel-money.html"><span class="di"></span> Cartão de Débito Internacional</a>
+        <a href="viagem.html"><span class="di"></span> Passagem Aérea e Seguro de Viagem</a>
+        <a href="moneygram.html"><span class="di"></span> MoneyGram</a>
+        <a href="pj.html"><span class="di"></span> Importação e Exportação</a>
       </div></div>
     </div>
     <a href="../index.html#sobre">Sobre</a>
     <a href="blog.html">Blog</a>
     <a href="pj.html" class="nav__pj">Empresas PJ</a>
-    <a class="btn btn--grad nav__cta" href="https://wa.me/5551999649824?text=Ol%C3%A1!%20Quero%20saber%20mais%20sobre%20c%C3%A9dulas%20estrangeiras%20antigas." target="_blank" rel="noopener">Falar agora
+    <a class="btn btn--grad nav__cta" href="https://wa.me/5551999649824?text=Ol%C3%A1!%20Tenho%20c%C3%A9dulas%20estrangeiras%20antigas%20para%20avaliar." target="_blank" rel="noopener">Falar agora
       <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 0 1-8.5 8.5 8.5 8.5 0 0 1-3.8-.9L3 21l1.9-5.7a8.5 8.5 0 1 1 16.1-3.8z"/></svg></span>
     </a>
   </div>
 </div></nav>
 
-<!-- HERO -->
-<header class="ca-hero">
-  <div class="wrap">
-    <div class="ca-hero__inner">
-      <div class="ca-hero__text">
-        <p class="crumb reveal"><a href="../index.html">Home</a> / <a href="../index.html#servicos">Serviços</a> / Cédulas Estrangeiras Antigas</p>
-        <h1 class="reveal d1">Cédulas estrangeiras <em>antigas</em></h1>
-        <p class="ca-hero__lede reveal d2">Compre e venda notas históricas com quem entende de câmbio. Avaliação especializada, proposta justa e total segurança na transação.</p>
-        <div class="ca-hero__cta reveal d3">
-          <a class="btn btn--grad" href="https://wa.me/5551999649824?text=Ol%C3%A1!%20Tenho%20c%C3%A9dulas%20estrangeiras%20antigas%20e%20gostaria%20de%20uma%20avalia%C3%A7%C3%A3o." target="_blank" rel="noopener">Enviar fotos pelo WhatsApp
-            <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-8.5 8.5 8.5 8.5 0 0 1-3.8-.9L3 21l1.9-5.7a8.5 8.5 0 1 1 16.1-3.8z"/></svg></span>
-          </a>
-          <a class="btn btn--light" href="#como-funciona">Como funciona
-            <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
-          </a>
-        </div>
-      </div>
-
-      <!-- Decorativo: cédulas estilizadas em SVG -->
-      <div class="ca-deco reveal d2">
-        <svg viewBox="0 0 300 300" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-          <!-- Anel externo tracejado -->
-          <circle cx="150" cy="150" r="128" stroke="rgba(182,90,56,.18)" stroke-width="1" stroke-dasharray="5 7"/>
-          <!-- Anel interno -->
-          <circle cx="150" cy="150" r="90" stroke="rgba(11,110,92,.12)" stroke-width="1"/>
-
-          <!-- Cédula traseira — rotacionada -18° -->
-          <g transform="rotate(-18 150 150)">
-            <rect x="55" y="118" width="190" height="108" rx="9" fill="#0A1E2E" stroke="rgba(244,239,230,.08)" stroke-width="1"/>
-            <rect x="67" y="130" width="166" height="84" rx="5" fill="none" stroke="rgba(182,90,56,.2)" stroke-width="1"/>
-            <line x1="70" y1="154" x2="108" y2="154" stroke="rgba(244,239,230,.12)" stroke-width="1"/>
-            <line x1="70" y1="163" x2="92" y2="163" stroke="rgba(244,239,230,.08)" stroke-width="1"/>
-            <line x1="192" y1="154" x2="230" y2="154" stroke="rgba(244,239,230,.12)" stroke-width="1"/>
-            <circle cx="150" cy="172" r="20" fill="none" stroke="rgba(182,90,56,.18)" stroke-width="1"/>
-          </g>
-
-          <!-- Cédula do meio — rotacionada +4° -->
-          <g transform="rotate(4 150 150)">
-            <rect x="55" y="118" width="190" height="108" rx="9" fill="#162B3C" stroke="rgba(244,239,230,.06)" stroke-width="1"/>
-            <rect x="67" y="130" width="166" height="84" rx="5" fill="none" stroke="rgba(11,110,92,.28)" stroke-width="1"/>
-            <line x1="70" y1="154" x2="108" y2="154" stroke="rgba(244,239,230,.18)" stroke-width="1"/>
-            <line x1="70" y1="163" x2="92" y2="163" stroke="rgba(244,239,230,.1)" stroke-width="1"/>
-            <line x1="192" y1="154" x2="230" y2="154" stroke="rgba(244,239,230,.18)" stroke-width="1"/>
-            <circle cx="150" cy="172" r="20" fill="none" stroke="rgba(11,110,92,.38)" stroke-width="1.5"/>
-          </g>
-
-          <!-- Cédula da frente — rotacionada +22° -->
-          <g transform="rotate(22 150 150)">
-            <rect x="55" y="118" width="190" height="108" rx="9" fill="#1B3346" stroke="rgba(244,239,230,.06)" stroke-width="1"/>
-            <rect x="67" y="130" width="166" height="84" rx="5" fill="none" stroke="rgba(205,126,85,.35)" stroke-width="1"/>
-            <line x1="70" y1="154" x2="108" y2="154" stroke="rgba(244,239,230,.22)" stroke-width="1"/>
-            <line x1="70" y1="163" x2="92" y2="163" stroke="rgba(244,239,230,.14)" stroke-width="1"/>
-            <line x1="192" y1="154" x2="230" y2="154" stroke="rgba(244,239,230,.22)" stroke-width="1"/>
-            <circle cx="150" cy="172" r="20" fill="rgba(182,90,56,.1)" stroke="rgba(205,126,85,.6)" stroke-width="1.5"/>
-            <text x="150" y="178" text-anchor="middle" font-family="Georgia, serif" font-style="italic" font-size="16" fill="rgba(205,126,85,.75)">$</text>
-          </g>
-
-          <!-- Partículas flutuantes -->
-          <circle cx="62" cy="76" r="5" fill="rgba(182,90,56,.35)"/>
-          <circle cx="238" cy="212" r="4" fill="rgba(11,110,92,.4)"/>
-          <circle cx="210" cy="68" r="7" fill="rgba(182,90,56,.12)" stroke="rgba(205,126,85,.4)" stroke-width="1"/>
-          <circle cx="74" cy="222" r="4" fill="rgba(244,239,230,.12)" stroke="rgba(244,239,230,.2)" stroke-width="1"/>
-          <circle cx="248" cy="98" r="3" fill="rgba(182,90,56,.4)"/>
-        </svg>
-      </div>
-    </div>
+<header class="page-hero"><div class="wrap">
+  <p class="crumb reveal"><a href="../index.html">Início</a> / <a href="../index.html#servicos">Serviços</a> / Cédulas Estrangeiras Antigas</p>
+  <h1 class="reveal d1">Cédulas estrangeiras <em>antigas</em></h1>
+  <p class="page-lede reveal d2">Guardou notas de outras épocas? A Money Way avalia, orienta e compra suas cédulas com <strong>segurança, transparência e expertise de mercado</strong>.</p>
+  <div class="page-cta reveal d3">
+    <a class="btn btn--grad" href="https://wa.me/5551999649824?text=Ol%C3%A1!%20Tenho%20c%C3%A9dulas%20estrangeiras%20antigas%20e%20gostaria%20de%20uma%20avalia%C3%A7%C3%A3o." target="_blank" rel="noopener">Quero avaliar minhas cédulas
+      <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-8.5 8.5 8.5 8.5 0 0 1-3.8-.9L3 21l1.9-5.7a8.5 8.5 0 1 1 16.1-3.8z"/></svg></span>
+    </a>
+    <a class="btn btn--ghost" href="cotacoes.html">Ver cotações
+      <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+    </a>
   </div>
-</header>
+</div></header>
 
-<!-- BENEFÍCIOS -->
-<section class="ca-benefit-strip" style="padding-block:clamp(40px,5vw,60px)"><div class="wrap">
+<section style="padding-top:clamp(20px,3vw,40px)"><div class="wrap">
   <div class="benefit-grid">
     <div class="benefit reveal">
-      <div class="bic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 0 0 1.946-.806 3.42 3.42 0 0 1 4.438 0 3.42 3.42 0 0 0 1.946.806 3.42 3.42 0 0 1 3.138 3.138 3.42 3.42 0 0 0 .806 1.946 3.42 3.42 0 0 1 0 4.438 3.42 3.42 0 0 0-.806 1.946 3.42 3.42 0 0 1-3.138 3.138 3.42 3.42 0 0 0-1.946.806 3.42 3.42 0 0 1-4.438 0 3.42 3.42 0 0 0-1.946-.806 3.42 3.42 0 0 1-3.138-3.138 3.42 3.42 0 0 0-.806-1.946 3.42 3.42 0 0 1 0-4.438 3.42 3.42 0 0 0 .806-1.946 3.42 3.42 0 0 1 3.138-3.138z"/></svg></div>
+      <div class="bic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/><path d="M11 8v6M8 11h6"/></svg></div>
       <h3>Avaliação especializada</h3>
-      <p>Cada nota é analisada com critério: estado de conservação, raridade, série e demanda de mercado.</p>
+      <p>Nossa equipe tem mais de 20 anos de experiência em câmbio e conhece o mercado de cédulas antigas.</p>
     </div>
     <div class="benefit reveal d1">
-      <div class="bic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
-      <h3>Atendimento personalizado</h3>
-      <p>Você fala diretamente com quem entende. Sem chatbots, sem filas — só uma resposta clara e rápida.</p>
+      <div class="bic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1v22M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>
+      <h3>Preço justo</h3>
+      <p>Pagamos o valor correto pelas suas cédulas, com total transparência nos critérios usados.</p>
     </div>
     <div class="benefit reveal d2">
-      <div class="bic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
-      <h3>Processo seguro</h3>
-      <p>Compra e venda com total transparência. Proposta objetiva, pagamento imediato e sem surpresas.</p>
+      <div class="bic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg></div>
+      <h3>Transação segura</h3>
+      <p>Operação regulamentada, com documentação e rastreabilidade em conformidade com o Banco Central.</p>
     </div>
   </div>
 </div></section>
 
-<!-- O QUE COMPRAMOS -->
-<section><div class="wrap">
+<section style="padding-top:0"><div class="wrap">
+  <div class="cedula-img-row">
+    <img src="../assets/photos/usd-old-100.jpg" alt="Notas de dólar antigas" />
+    <img src="../assets/photos/dollar-100.jpg" alt="Cédulas estrangeiras" />
+  </div>
+</div></section>
+
+<section style="padding-top:0"><div class="wrap">
   <p class="eyebrow reveal">O que avaliamos</p>
-  <h2 class="s-title reveal d1" style="max-width:22ch">Notas que guardam <span class="grad-text">história</span></h2>
-  <p class="s-sub reveal d2">Se você tem cédulas estrangeiras que não circulam mais, provavelmente têm valor. Veja o que trabalhamos.</p>
-
-  <div class="ca-what-grid">
-
-    <div class="ca-what-card reveal">
-      <div class="ca-what-num">01</div>
-      <h3>Moedas em desuso</h3>
-      <p>Notas de países que trocaram de moeda ou entraram na Zona do Euro. As mais procuradas pelos colecionadores.</p>
-      <div class="ca-tags">
-        <span class="ca-tag">Marco Alemão</span>
-        <span class="ca-tag">Lira Italiana</span>
-        <span class="ca-tag">Peseta Espanhola</span>
-        <span class="ca-tag">Franco Francês</span>
-        <span class="ca-tag">Escudo Português</span>
+  <h2 class="s-title reveal d1" style="max-width:22ch">Quais cédulas a <span class="grad-text">Money Way compra</span></h2>
+  <div class="cedula-types">
+    <div class="cedula-type reveal">
+      <div class="cedula-type__ic">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15 15 0 0 1 0 20M12 2a15 15 0 0 0 0 20"/></svg>
       </div>
+      <h3>Dólares antigos</h3>
+      <p>Notas de dólar americano de séries antigas, incluindo cédulas com design anterior a 1996 que podem ter valor de coleção acima do facial.</p>
     </div>
-
-    <div class="ca-what-card reveal d1">
-      <div class="ca-what-num">02</div>
-      <h3>Países extintos ou reorganizados</h3>
-      <p>Cédulas de nações que deixaram de existir ou passaram por grandes transformações políticas e territoriais.</p>
-      <div class="ca-tags">
-        <span class="ca-tag">URSS</span>
-        <span class="ca-tag">Iugoslávia</span>
-        <span class="ca-tag">Alemanha Oriental</span>
-        <span class="ca-tag">Tchecoslováquia</span>
-        <span class="ca-tag">Rodésia</span>
+    <div class="cedula-type reveal d1">
+      <div class="cedula-type__ic">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2M12 12v5M9 14h6"/></svg>
       </div>
+      <h3>Moedas europeias antigas</h3>
+      <p>Marcos alemães, liras italianas, francos franceses e outras moedas pré-Euro que ainda circulam em circuito de colecionadores.</p>
     </div>
-
-    <div class="ca-what-card reveal">
-      <div class="ca-what-num">03</div>
-      <h3>Séries antigas de moedas atuais</h3>
-      <p>Versões antigas de moedas que ainda existem, mas cujas cédulas mais antigas já não circulam e têm valor numismático.</p>
-      <div class="ca-tags">
-        <span class="ca-tag">Dólar série antiga</span>
-        <span class="ca-tag">Libra antiga</span>
-        <span class="ca-tag">Franco Suíço antigo</span>
-        <span class="ca-tag">Iene antigo</span>
+    <div class="cedula-type reveal d2">
+      <div class="cedula-type__ic">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l3 7H22l-5.5 4 2 7L12 17l-6.5 3 2-7L2 9h7z"/></svg>
       </div>
+      <h3>Raridades e coleções</h3>
+      <p>Cédulas de edições comemorativas, erros de impressão, séries limitadas ou de países extintos com valor numismático.</p>
     </div>
-
-    <div class="ca-what-card reveal d1">
-      <div class="ca-what-num">04</div>
-      <h3>Raridades e colecionáveis</h3>
-      <p>Notas comemorativas, erros de impressão, séries limitadas e exemplares em estado de conservação excepcional.</p>
-      <div class="ca-tags">
-        <span class="ca-tag">Notas comemorativas</span>
-        <span class="ca-tag">Erros de impressão</span>
-        <span class="ca-tag">Séries flor de cunho</span>
-        <span class="ca-tag">Polímero raro</span>
-      </div>
-    </div>
-
   </div>
 </div></section>
 
-<!-- COMO FUNCIONA -->
-<section id="como-funciona" style="background:var(--bg-2);border-top:1px solid var(--line);border-bottom:1px solid var(--line)"><div class="wrap">
-  <p class="eyebrow reveal">Passo a passo</p>
-  <h2 class="s-title reveal d1" style="max-width:20ch">Simples do início <span class="grad-text">ao fim</span></h2>
-
-  <div class="ca-steps">
-
-    <div class="ca-step reveal">
-      <div class="ca-step__num">1</div>
-      <h3>Tire fotos</h3>
-      <p>Fotografe frente e verso de cada cédula com boa iluminação e sem flash direto.</p>
+<section><div class="wrap">
+  <div class="cedula-dark">
+    <p class="eyebrow reveal" style="color:var(--terra-soft)">Como funciona</p>
+    <h2 class="s-title reveal d1" style="color:var(--cream);max-width:26ch">Do WhatsApp ao pagamento em <span style="font-style:italic">quatro passos</span></h2>
+    <div class="cedula-steps">
+      <div class="cedula-step reveal">
+        <div class="cedula-step__num">01</div>
+        <h4>Você envia as fotos</h4>
+        <p>Fotografe frente e verso das cédulas com boa iluminação e mande no nosso WhatsApp.</p>
+      </div>
+      <div class="cedula-step reveal d1">
+        <div class="cedula-step__num">02</div>
+        <h4>Nossa equipe avalia</h4>
+        <p>Especialistas analisam estado de conservação, série, raridade e procedência das notas.</p>
+      </div>
+      <div class="cedula-step reveal d2">
+        <div class="cedula-step__num">03</div>
+        <h4>Você recebe a proposta</h4>
+        <p>Apresentamos o valor de compra com critérios claros. Sem pressão para decidir.</p>
+      </div>
+      <div class="cedula-step reveal d3">
+        <div class="cedula-step__num">04</div>
+        <h4>Entrega e pagamento</h4>
+        <p>Combinamos a entrega presencial ou por correspondência registrada, com pagamento imediato.</p>
+      </div>
     </div>
-
-    <div class="ca-step reveal d1">
-      <div class="ca-step__num">2</div>
-      <h3>Envie pelo WhatsApp</h3>
-      <p>Mande as fotos diretamente para o nosso número. Resposta em até 1 dia útil.</p>
-    </div>
-
-    <div class="ca-step reveal d2">
-      <div class="ca-step__num">3</div>
-      <h3>Receba a proposta</h3>
-      <p>Nosso especialista avalia e retorna com uma proposta clara, justa e sem compromisso.</p>
-    </div>
-
-    <div class="ca-step reveal d3">
-      <div class="ca-step__num">4</div>
-      <h3>Fechamos negócio</h3>
-      <p>Presencialmente em Porto Alegre ou via correio registrado. Pagamento imediato.</p>
-    </div>
-
   </div>
 </div></section>
 
-<!-- FORMULÁRIO -->
+<section style="padding-top:0"><div class="wrap">
+  <p class="eyebrow reveal">Dúvidas frequentes</p>
+  <h2 class="s-title reveal d1" style="max-width:28ch">Respostas sobre <span class="grad-text">cédulas antigas</span></h2>
+  <div class="faq-list reveal d2">
+    <div class="faq-item">
+      <div class="faq-q">Minhas notas velhas têm valor?<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><path d="M6 9l6 6 6-6"/></svg></div>
+      <div class="faq-a">Depende da moeda, ano, série e conservação. Cédulas americanas antigas ainda são aceitas nos EUA pelo valor facial, mas séries antigas podem ter valor de coleção acima disso. Avaliamos caso a caso sem compromisso.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">E se as notas estiverem amassadas ou rasgadas?<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><path d="M6 9l6 6 6-6"/></svg></div>
+      <div class="faq-a">O estado de conservação influencia o valor, mas mesmo cédulas com desgaste podem ser avaliadas. Envie as fotos e nossa equipe dá um parecer honesto.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">Vocês compram moedas metálicas também?<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><path d="M6 9l6 6 6-6"/></svg></div>
+      <div class="faq-a">Trabalhamos principalmente com cédulas. Para moedas metálicas raras, entre em contato e analisamos o caso.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">Posso enviar as notas pelos Correios?<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><path d="M6 9l6 6 6-6"/></svg></div>
+      <div class="faq-a">Sim, para clientes fora de Porto Alegre trabalhamos com envio por SEDEX com declaração de valor. Combinamos os detalhes após a avaliação inicial por foto.</div>
+    </div>
+  </div>
+</div></section>
+
 <section style="padding-bottom:clamp(44px,6vw,72px)"><div class="wrap">
-  <p class="eyebrow reveal">Fale conosco</p>
-  <h2 class="s-title reveal d1" style="max-width:22ch">Conte o que você <span class="grad-text">tem</span></h2>
-  <p class="s-sub reveal d2">Preencha abaixo e abriremos o WhatsApp com a mensagem pronta. Quanto mais detalhes, mais rápida a avaliação.</p>
-
-  <div class="ca-form-wrap reveal d1">
-    <div class="ca-form-head">
-      <div class="ca-form-head-ic">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="22" height="22"><rect x="2" y="6" width="20" height="14" rx="2"/><path d="M2 10h20M7 6V4M17 6V4"/></svg>
-      </div>
-      <div>
-        <strong>Avaliação de cédulas antigas</strong>
-        <span>Gera mensagem automática no WhatsApp</span>
-      </div>
+  <div class="rates-cta-box reveal">
+    <div class="rates-cta-box__text">
+      <strong>Tem cédulas antigas para avaliar?</strong>
+      <span>Mande as fotos no WhatsApp. Resposta com avaliação especializada em até 24 horas.</span>
     </div>
-
-    <div class="ca-form-body">
-      <!-- Tipo -->
-      <div class="ca-fg ca-fg--full">
-        <label>O que você quer fazer?</label>
-        <div class="ca-type-toggle">
-          <button class="active" type="button" id="ca-tipo-vender">Tenho cédulas para vender</button>
-          <button type="button" id="ca-tipo-comprar">Quero comprar / colecionismo</button>
-          <button type="button" id="ca-tipo-info">Só quero tirar dúvidas</button>
-        </div>
-      </div>
-
-      <!-- País de origem -->
-      <div class="ca-fg">
-        <label>País de origem das cédulas</label>
-        <select id="ca-pais">
-          <option value="">Selecione o país</option>
-          <option>Alemanha (Marco / RDA)</option>
-          <option>Itália (Lira)</option>
-          <option>Espanha (Peseta)</option>
-          <option>França (Franco)</option>
-          <option>Portugal (Escudo)</option>
-          <option>Reino Unido (Libra antiga)</option>
-          <option>Estados Unidos (série antiga)</option>
-          <option>URSS / Rússia</option>
-          <option>Iugoslávia</option>
-          <option>Japão (Iene antigo)</option>
-          <option>Argentina</option>
-          <option>Outros / Não sei</option>
-        </select>
-      </div>
-
-      <!-- Quantidade aproximada -->
-      <div class="ca-fg">
-        <label>Quantidade aproximada</label>
-        <select id="ca-qtd">
-          <option value="">Selecione</option>
-          <option>1 cédula</option>
-          <option>2 a 5 cédulas</option>
-          <option>6 a 20 cédulas</option>
-          <option>Mais de 20 cédulas</option>
-          <option>Coleção completa</option>
-        </select>
-      </div>
-
-      <!-- Descrição livre -->
-      <div class="ca-fg ca-fg--full">
-        <label>Descreva as cédulas (opcional)</label>
-        <textarea id="ca-desc" placeholder="Ex: Tenho 3 notas de 100 marcos alemães em bom estado, anos 70/80. Também tenho algumas liras italianas..."></textarea>
-      </div>
-    </div>
-
-    <div class="ca-form-foot">
-      <p class="ca-form-note">Após clicar, o WhatsApp abrirá com a mensagem pronta. Você pode revisar e adicionar as fotos antes de enviar.</p>
-      <button class="btn btn--grad" id="ca-btn" type="button">Enviar no WhatsApp
-        <span class="ic"><svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18"><path d="M12 2a10 10 0 0 0-8.6 15l-1.3 4 4.1-1.3A10 10 0 1 0 12 2zm5.4 14.2c-.2.6-1.2 1.1-1.7 1.2-.4.1-1 .1-1.6-.1-.4-.1-.9-.3-1.5-.5-2.6-1.1-4.3-3.8-4.4-4-.1-.2-1-1.4-1-2.6s.6-1.8.9-2.1c.2-.2.5-.3.6-.3h.5c.2 0 .4 0 .5.4l.7 1.7c.1.1.1.3 0 .5l-.3.5-.3.3c-.1.1-.2.3-.1.5.1.2.6 1 1.3 1.6.9.8 1.6 1 1.8 1.1.2.1.3.1.5-.1l.6-.7c.2-.2.3-.2.5-.1l1.6.8c.2.1.4.2.4.3.1.1.1.6-.1 1z"/></svg></span>
-      </button>
-    </div>
+    <a class="btn btn--grad" href="https://wa.me/5551999649824?text=Ol%C3%A1!%20Tenho%20c%C3%A9dulas%20estrangeiras%20antigas%20e%20gostaria%20de%20uma%20avalia%C3%A7%C3%A3o." target="_blank" rel="noopener">Chamar no WhatsApp
+      <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 0 1-8.5 8.5 8.5 8.5 0 0 1-3.8-.9L3 21l1.9-5.7a8.5 8.5 0 1 1 16.1-3.8z"/></svg></span>
+    </a>
   </div>
 </div></section>
 
@@ -626,56 +318,18 @@
   </div>
 </div></footer>
 
-<a class="wa" href="https://wa.me/5551999649824?text=Ol%C3%A1!%20Tenho%20c%C3%A9dulas%20estrangeiras%20antigas%20e%20gostaria%20de%20uma%20avalia%C3%A7%C3%A3o." target="_blank" rel="noopener" aria-label="Falar no WhatsApp">
+<a class="wa" href="https://wa.me/5551999649824?text=Ol%C3%A1!%20Gostaria%20de%20falar%20com%20a%20Money%20Way%20C%C3%A2mbio." target="_blank" rel="noopener" aria-label="Falar no WhatsApp">
   <svg viewBox="0 0 24 24"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38c1.45.79 3.08 1.21 4.79 1.21h.01c5.46 0 9.91-4.45 9.91-9.91C21.96 6.45 17.5 2 12.04 2zm0 18.13h-.01c-1.52 0-3.01-.41-4.3-1.18l-.31-.18-3.12.82.83-3.04-.2-.31a8.2 8.2 0 0 1-1.26-4.35c0-4.54 3.7-8.23 8.24-8.23 2.2 0 4.27.86 5.82 2.42a8.18 8.18 0 0 1 2.41 5.82c0 4.54-3.69 8.41-8.3 8.41zm4.52-6.16c-.25-.12-1.47-.72-1.69-.81-.23-.08-.39-.12-.56.13-.16.25-.64.81-.79.97-.14.17-.29.19-.54.06-.25-.12-1.05-.39-1.99-1.23-.74-.66-1.23-1.47-1.38-1.72-.14-.25-.01-.38.11-.51.11-.11.25-.29.37-.43.13-.14.17-.25.25-.41.08-.17.04-.31-.02-.43-.06-.12-.56-1.34-.76-1.84-.2-.48-.41-.42-.56-.43h-.48c-.17 0-.43.06-.66.31-.23.25-.86.85-.86 2.07 0 1.22.89 2.4 1.01 2.56.12.17 1.75 2.67 4.23 3.74.59.26 1.05.41 1.41.52.59.19 1.13.16 1.56.1.48-.07 1.47-.6 1.68-1.18.21-.58.21-1.07.14-1.18-.06-.1-.22-.16-.47-.28z"/></svg>
 </a>
 
 <script src="../moneyway-site/app.js"></script>
 <script>
-(function () {
-  var tipo = 'vender';
-  var btnVender = document.getElementById('ca-tipo-vender');
-  var btnComprar = document.getElementById('ca-tipo-comprar');
-  var btnInfo = document.getElementById('ca-tipo-info');
-  var paisSel = document.getElementById('ca-pais');
-  var qtdSel = document.getElementById('ca-qtd');
-  var descIn = document.getElementById('ca-desc');
-  var sendBtn = document.getElementById('ca-btn');
-
-  function setTipo(t) {
-    tipo = t;
-    btnVender.classList.toggle('active', t === 'vender');
-    btnComprar.classList.toggle('active', t === 'comprar');
-    btnInfo.classList.toggle('active', t === 'info');
-  }
-
-  function buildMsg() {
-    var pais = paisSel.value || '';
-    var qtd = qtdSel.value || '';
-    var desc = descIn.value.trim() || '';
-
-    var acoes = {
-      vender: 'Olá! Tenho cédulas estrangeiras antigas e gostaria de uma avaliação para venda.',
-      comprar: 'Olá! Tenho interesse em comprar cédulas estrangeiras antigas / colecionismo.',
-      info: 'Olá! Gostaria de tirar algumas dúvidas sobre cédulas estrangeiras antigas.'
-    };
-
-    var msg = acoes[tipo];
-    if (pais) msg += ' País de origem: ' + pais + '.';
-    if (qtd) msg += ' Quantidade aproximada: ' + qtd + '.';
-    if (desc) msg += ' Detalhes: ' + desc;
-    return msg;
-  }
-
-  btnVender.addEventListener('click', function () { setTipo('vender'); });
-  btnComprar.addEventListener('click', function () { setTipo('comprar'); });
-  btnInfo.addEventListener('click', function () { setTipo('info'); });
-
-  sendBtn.addEventListener('click', function () {
-    var url = 'https://wa.me/5551999649824?text=' + encodeURIComponent(buildMsg());
-    window.open(url, '_blank', 'noopener');
+document.querySelectorAll('.faq-q').forEach(function(q) {
+  q.addEventListener('click', function() {
+    var item = q.parentElement;
+    item.classList.toggle('open');
   });
-})();
+});
 </script>
 </body>
 </html>

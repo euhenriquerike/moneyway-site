@@ -9,6 +9,150 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
 <link rel="stylesheet" href="moneyway-site/styles.css" />
+<style>
+.partners-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: clamp(16px, 2.4vw, 28px);
+  margin-top: clamp(36px, 5vw, 52px);
+}
+@media (max-width: 860px) { .partners-grid { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 480px) { .partners-grid { grid-template-columns: 1fr; } }
+.partner-item {
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: var(--r);
+  padding: clamp(22px, 2.4vw, 30px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 12px;
+  box-shadow: var(--shadow-sm);
+}
+.partner-item__ic {
+  width: 60px;
+  height: 60px;
+  border-radius: 18px;
+  background: var(--navy);
+  color: var(--cream);
+  display: grid;
+  place-items: center;
+}
+.partner-item strong {
+  font-family: var(--disp);
+  font-weight: 700;
+  font-size: 16px;
+  color: var(--navy);
+}
+.partner-item span {
+  font-size: 13px;
+  color: var(--slate);
+  line-height: 1.5;
+}
+
+/* Popup cotações */
+.cq-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,.55);
+  z-index: 9998;
+  display: none;
+  opacity: 0;
+  transition: opacity .28s;
+}
+.cq-overlay.show { display: block; opacity: 1; }
+.cq-popup {
+  position: fixed;
+  bottom: clamp(20px, 4vw, 40px);
+  right: clamp(16px, 3vw, 36px);
+  width: clamp(280px, 90vw, 380px);
+  background: #fff;
+  border-radius: 20px;
+  box-shadow: 0 20px 60px rgba(0,0,0,.18), 0 4px 16px rgba(0,0,0,.1);
+  z-index: 9999;
+  transform: translateY(20px);
+  opacity: 0;
+  transition: transform .3s, opacity .3s;
+  overflow: hidden;
+  display: none;
+}
+.cq-popup.show { transform: translateY(0); opacity: 1; display: block; }
+.cq-popup__head {
+  background: var(--navy);
+  padding: 20px 24px 18px;
+  position: relative;
+}
+.cq-popup__head h3 {
+  font-family: var(--serif);
+  font-size: 22px;
+  color: #fff;
+  margin: 0 0 4px;
+  font-weight: 400;
+}
+.cq-popup__head h3 em { font-style: italic; color: var(--terra-soft); }
+.cq-popup__head p {
+  font-size: 13.5px;
+  color: rgba(244,239,230,.7);
+  margin: 0;
+  line-height: 1.45;
+}
+.cq-close {
+  position: absolute;
+  top: 14px;
+  right: 16px;
+  background: rgba(255,255,255,.12);
+  border: none;
+  color: #fff;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  font-size: 18px;
+  line-height: 1;
+  transition: background .18s;
+}
+.cq-close:hover { background: rgba(255,255,255,.22); }
+.cq-popup__body {
+  padding: 20px 24px 24px;
+}
+.cq-popup__body label {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--slate-2);
+  font-weight: 600;
+  display: block;
+  margin-bottom: 7px;
+}
+.cq-popup__body input {
+  width: 100%;
+  font-family: var(--sans);
+  font-size: 15px;
+  color: var(--navy);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 12px 15px;
+  margin-bottom: 14px;
+  outline: none;
+  transition: border-color .2s;
+  box-sizing: border-box;
+}
+.cq-popup__body input:focus { border-color: var(--emerald); }
+.cq-popup__body .btn { width: 100%; justify-content: center; }
+.cq-dismiss {
+  display: block;
+  text-align: center;
+  margin-top: 10px;
+  font-size: 12.5px;
+  color: var(--slate-2);
+  cursor: pointer;
+  text-decoration: underline;
+}
+</style>
 </head>
 <body>
 
@@ -221,7 +365,7 @@
         <div class="svc__ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="8" cy="8" r="6"/><path d="M18.09 10.37A6 6 0 1 1 10.34 18M7 6h1v4"/></svg></div>
         <h3>Compra de cédula estrangeira antiga</h3>
         <p>Avaliamos e compramos cédulas antigas com segurança, transparência e expertise de mercado.</p>
-        <a class="svc__more" href="https://wa.me/5551999649824?text=Tenho%20c%C3%A9dulas%20antigas%20para%20avaliar." target="_blank" rel="noopener">Saiba mais <span class="ar">→</span></a>
+        <a class="svc__more" href="subpaginas/cedulas-antigas.html">Saiba mais <span class="ar">→</span></a>
       </article>
       <article class="svc reveal">
         <div class="svc__ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.8 19.2L16 11l3.5-3.5a2.12 2.12 0 0 0-3-3L13 8 4.8 6.2a1 1 0 0 0-.9.3l-1 1a1 1 0 0 0 .2 1.5L8 12l-2 2-2-.5a1 1 0 0 0-.9.3l-.5.5a1 1 0 0 0 .2 1.6L6 18l1.6 2.7a1 1 0 0 0 1.6.2l.5-.5a1 1 0 0 0 .3-.9L11 18l2-2 2.9 5.8a1 1 0 0 0 1.5.2l1-1a1 1 0 0 0 .3-.9z"/><path d="M12 2l8 4v6c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V6l8-4z" opacity=".3"/></svg></div>
@@ -283,6 +427,44 @@
           <button class="gc__dot" data-i="2" aria-label="Avaliação 3"></button>
           <button class="gc__dot" data-i="3" aria-label="Avaliação 4"></button>
         </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PARCEIROS ============ -->
+<section class="partners-section" style="background:var(--bg-2);padding:clamp(44px,6vw,72px) 0">
+  <div class="wrap">
+    <p class="eyebrow reveal" style="text-align:center">Credenciamentos e parcerias</p>
+    <h2 class="s-title reveal d1" style="text-align:center;max-width:32ch;margin-inline:auto">Operações respaldadas por <span class="grad-text">parceiros de confiança</span></h2>
+    <div class="partners-grid reveal d2">
+      <div class="partner-item">
+        <div class="partner-item__ic">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="32" height="32"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg>
+        </div>
+        <strong>Banco Central do Brasil</strong>
+        <span>Correspondente cambial credenciado e autorizado pelo BACEN</span>
+      </div>
+      <div class="partner-item">
+        <div class="partner-item__ic">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="32" height="32"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15 15 0 0 1 0 20M12 2a15 15 0 0 0 0 20"/></svg>
+        </div>
+        <strong>Confidence | Travelex</strong>
+        <span>Corretora parceira para câmbio e transferências internacionais</span>
+      </div>
+      <div class="partner-item">
+        <div class="partner-item__ic">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="32" height="32"><path d="M12 2l8 4v6c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V6l8-4z"/><path d="M9 12l2 2 4-4"/></svg>
+        </div>
+        <strong>GTA Seguros</strong>
+        <span>Parceiros de seguro viagem para destinos nacionais e internacionais</span>
+      </div>
+      <div class="partner-item">
+        <div class="partner-item__ic">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="32" height="32"><path d="M17.8 19.2L16 11l3.5-3.5a2.12 2.12 0 0 0-3-3L13 8 4.8 6.2a1 1 0 0 0-.9.3l-1 1a1 1 0 0 0 .2 1.5L8 12l-2 2-2-.5a1 1 0 0 0-.9.3l-.5.5a1 1 0 0 0 .2 1.6L6 18l1.6 2.7a1 1 0 0 0 1.6.2l.5-.5a1 1 0 0 0 .3-.9L11 18l2-2 2.9 5.8a1 1 0 0 0 1.5.2l1-1a1 1 0 0 0 .3-.9z"/></svg>
+        </div>
+        <strong>CVC</strong>
+        <span>Emissão de passagens aéreas nacionais e internacionais</span>
       </div>
     </div>
   </div>
@@ -411,5 +593,76 @@
 </a>
 
 <script src="moneyway-site/app.js"></script>
+
+<!-- POPUP COTAÇÕES -->
+<div class="cq-overlay" id="cq-overlay"></div>
+<div class="cq-popup" id="cq-popup">
+  <div class="cq-popup__head">
+    <button class="cq-close" id="cq-close" aria-label="Fechar">×</button>
+    <h3>Receba cotações <em>diariamente</em></h3>
+    <p>Dólar, euro e mais de 10 moedas no seu WhatsApp. Grátis.</p>
+  </div>
+  <div class="cq-popup__body">
+    <label>Seu nome</label>
+    <input type="text" id="cq-nome" placeholder="Como você se chama?" />
+    <label>Seu WhatsApp</label>
+    <input type="tel" id="cq-tel" placeholder="(51) 9 9999-9999" />
+    <a class="btn btn--grad" id="cq-btn" href="#" target="_blank" rel="noopener">Quero receber as cotações
+      <span class="ic"><svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16"><path d="M12 2a10 10 0 0 0-8.6 15l-1.3 4 4.1-1.3A10 10 0 1 0 12 2zm5.4 14.2c-.2.6-1.2 1.1-1.7 1.2-.4.1-1 .1-1.6-.1-.4-.1-.9-.3-1.5-.5-2.6-1.1-4.3-3.8-4.4-4-.1-.2-1-1.4-1-2.6s.6-1.8.9-2.1c.2-.2.5-.3.6-.3h.5c.2 0 .4 0 .5.4l.7 1.7c.1.1.1.3 0 .5l-.3.5-.3.3c-.1.1-.2.3-.1.5.1.2.6 1 1.3 1.6.9.8 1.6 1 1.8 1.1.2.1.3.1.5-.1l.6-.7c.2-.2.3-.2.5-.1l1.6.8c.2.1.4.2.4.3.1.1.1.6-.1 1z"/></svg></span>
+    </a>
+    <span class="cq-dismiss" id="cq-dismiss">Agora não</span>
+  </div>
+</div>
+
+<script>
+(function () {
+  var popup = document.getElementById('cq-popup');
+  var overlay = document.getElementById('cq-overlay');
+  var closeBtn = document.getElementById('cq-close');
+  var dismissBtn = document.getElementById('cq-dismiss');
+  var cqBtn = document.getElementById('cq-btn');
+  var cqNome = document.getElementById('cq-nome');
+  var cqTel = document.getElementById('cq-tel');
+
+  var SESSION_KEY = 'mw_cq_dismissed';
+  if (sessionStorage.getItem(SESSION_KEY)) return;
+
+  function open() {
+    popup.classList.add('show');
+  }
+  function close() {
+    popup.classList.remove('show');
+    sessionStorage.setItem(SESSION_KEY, '1');
+  }
+
+  closeBtn.addEventListener('click', close);
+  dismissBtn.addEventListener('click', close);
+  overlay.addEventListener('click', close);
+
+  cqBtn.addEventListener('click', function (e) {
+    e.preventDefault();
+    var nome = cqNome.value.trim();
+    var tel = cqTel.value.trim();
+    if (!tel) { cqTel.focus(); return; }
+    var msg = 'Olá! Me chamo ' + (nome || 'visitante') + ' e quero receber as cotações de câmbio diárias da Money Way no meu WhatsApp.';
+    window.open('https://wa.me/5551999649824?text=' + encodeURIComponent(msg), '_blank', 'noopener');
+    close();
+  });
+
+  var scrollFired = false;
+  window.addEventListener('scroll', function () {
+    if (scrollFired) return;
+    var scrolled = window.scrollY / (document.body.scrollHeight - window.innerHeight);
+    if (scrolled > 0.35) {
+      scrollFired = true;
+      setTimeout(open, 800);
+    }
+  }, { passive: true });
+
+  setTimeout(function () {
+    if (!scrollFired) { scrollFired = true; open(); }
+  }, 12000);
+})();
+</script>
 </body>
 </html>

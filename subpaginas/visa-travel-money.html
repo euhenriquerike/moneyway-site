@@ -3,86 +3,423 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Visa Travel Money - Money Way Câmbio</title>
+<title>Cartão de Débito Internacional - Money Way Câmbio</title>
+<meta name="description" content="Cartão pré-pago internacional para viagens. Trave o câmbio antes de embarcar, use em mais de 200 países com a segurança da rede Visa. Money Way Câmbio - Porto Alegre." />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
 <link rel="stylesheet" href="../moneyway-site/styles.css" />
+<style>
+.card-hero-visual {
+  margin-top: clamp(36px, 5vw, 56px);
+  background: linear-gradient(135deg, var(--navy) 0%, #1a3a6e 60%, var(--emerald) 100%);
+  border-radius: var(--r);
+  padding: clamp(32px, 4vw, 52px);
+  display: flex;
+  align-items: center;
+  gap: clamp(24px, 3vw, 48px);
+  flex-wrap: wrap;
+}
+.card-visual {
+  flex: none;
+  width: 280px;
+  height: 176px;
+  background: linear-gradient(135deg, rgba(255,255,255,.18), rgba(255,255,255,.06));
+  border: 1px solid rgba(255,255,255,.22);
+  border-radius: 16px;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-shadow: 0 20px 60px rgba(0,0,0,.3);
+  backdrop-filter: blur(8px);
+}
+@media (max-width: 640px) { .card-visual { width: 100%; height: 160px; } }
+.card-visual__band {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,.7);
+}
+.card-visual__name {
+  font-family: var(--disp);
+  font-weight: 700;
+  font-size: 20px;
+  color: #fff;
+}
+.card-visual__num {
+  font-family: var(--mono);
+  font-size: 14px;
+  color: rgba(255,255,255,.6);
+  letter-spacing: .2em;
+}
+.card-visual__bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+.card-visual__visa {
+  font-family: var(--disp);
+  font-weight: 800;
+  font-size: 22px;
+  font-style: italic;
+  color: rgba(255,255,255,.9);
+}
+.card-hero-text { flex: 1; min-width: 200px; }
+.card-hero-text h2 {
+  font-family: var(--serif);
+  font-size: clamp(24px, 3.2vw, 42px);
+  color: #fff;
+  margin: 0 0 14px;
+  line-height: 1.2;
+}
+.card-hero-text p {
+  color: rgba(244,239,230,.8);
+  font-size: 16px;
+  line-height: 1.6;
+  margin: 0 0 24px;
+}
+.card-hero-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.card-hero-chip {
+  background: rgba(255,255,255,.12);
+  border: 1px solid rgba(255,255,255,.18);
+  border-radius: 100px;
+  padding: 6px 14px;
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: rgba(244,239,230,.85);
+}
+
+.compare-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 0;
+  border: 1px solid var(--line);
+  border-radius: var(--r);
+  overflow: hidden;
+  margin-top: clamp(28px, 4vw, 44px);
+}
+@media (max-width: 600px) { .compare-grid { grid-template-columns: 1fr; } }
+.compare-col { border-right: 1px solid var(--line); }
+.compare-col:last-child { border-right: none; }
+.compare-col.highlight { background: var(--emerald); }
+.compare-head {
+  padding: 20px 24px 16px;
+  border-bottom: 1px solid var(--line);
+  font-family: var(--disp);
+  font-weight: 700;
+  font-size: 15px;
+  color: var(--navy);
+}
+.compare-col.highlight .compare-head {
+  color: #fff;
+  border-bottom-color: rgba(255,255,255,.18);
+}
+.compare-head span {
+  display: block;
+  font-family: var(--mono);
+  font-size: 10.5px;
+  font-weight: 400;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--slate-2);
+  margin-bottom: 4px;
+}
+.compare-col.highlight .compare-head span { color: rgba(255,255,255,.65); }
+.compare-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 13px 24px;
+  border-bottom: 1px solid var(--line);
+  font-size: 14px;
+  color: var(--slate);
+  line-height: 1.45;
+}
+.compare-col.highlight .compare-row { color: rgba(255,255,255,.9); border-bottom-color: rgba(255,255,255,.12); }
+.compare-row:last-child { border-bottom: none; }
+.cmp-ic {
+  flex: none;
+  width: 18px;
+  height: 18px;
+  margin-top: 1px;
+}
+
+.card-steps {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: clamp(14px, 2vw, 22px);
+  margin-top: clamp(32px, 4vw, 48px);
+  counter-reset: card-step;
+}
+@media (max-width: 700px) { .card-steps { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 440px) { .card-steps { grid-template-columns: 1fr; } }
+.card-step {
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: var(--r);
+  padding: clamp(22px, 2.4vw, 30px);
+  box-shadow: var(--shadow-sm);
+  position: relative;
+}
+.card-step__n {
+  font-family: var(--disp);
+  font-weight: 800;
+  font-size: 38px;
+  color: var(--cream);
+  line-height: 1;
+  margin-bottom: 14px;
+  position: absolute;
+  top: 18px;
+  right: 20px;
+}
+.card-step h4 {
+  font-family: var(--disp);
+  font-weight: 700;
+  font-size: 16px;
+  color: var(--navy);
+  margin: 0 0 8px;
+  padding-right: 40px;
+}
+.card-step p {
+  color: var(--slate);
+  font-size: 13.5px;
+  line-height: 1.55;
+  margin: 0;
+}
+
+.moedas-band {
+  background: var(--bg-2);
+  border-radius: var(--r);
+  padding: clamp(28px, 3.5vw, 44px);
+  margin-top: clamp(36px, 5vw, 52px);
+  display: flex;
+  gap: clamp(20px, 3vw, 44px);
+  flex-wrap: wrap;
+  align-items: center;
+}
+.moedas-band__text h3 {
+  font-family: var(--disp);
+  font-weight: 700;
+  font-size: clamp(18px, 2.2vw, 26px);
+  color: var(--navy);
+  margin: 0 0 8px;
+}
+.moedas-band__text p { color: var(--slate); font-size: 15px; margin: 0; }
+.moedas-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.moeda-chip {
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 8px 14px;
+  font-family: var(--mono);
+  font-size: 12px;
+  letter-spacing: .08em;
+  color: var(--navy);
+  font-weight: 500;
+}
+</style>
 </head>
 <body>
+
 <nav class="nav"><div class="nav__bar">
-  <a class="brand" href="../Money Way - Site.html#top">
+  <a class="brand" href="../index.html#top">
     <img class="brand__sym" src="../moneyway-site/sym.png" alt="" aria-hidden="true" />
     <span class="brand__name">Money&#8201;Way</span><span class="brand__tag">Câmbio</span>
   </a>
   <div class="nav__links">
-      <div class="nav__drop">
-        <a href="../Money Way - Site.html#servicos">Serviços <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></a>
-        <div class="nav__menu"><div class="nav__menu-inner">
-          <a href="conta-global.html"><span class="di"></span> Conta Global</a>
-          <a href="transferencias.html"><span class="di"></span> Transferências Internacionais</a>
-          <a href="moneygram.html"><span class="di"></span> MoneyGram</a>
-          <a href="seguro-viagem.html"><span class="di"></span> Seguro Viagem</a>
-          <a href="passagens.html"><span class="di"></span> Passagens Aéreas</a>
-          <a href="visa-travel-money.html"><span class="di"></span> Visa Travel Money</a>
-        </div></div>
-      </div>
-      <a href="cotacoes.html">Cotações</a>
-      <a href="../Money Way - Site.html#sobre">Sobre</a>
-      <a href="blog.html">Blog</a>
-      <a class="btn btn--grad nav__cta" href="https://wa.me/5551999649824?text=Ol%C3%A1!%20Gostaria%20de%20falar%20com%20a%20Money%20Way%20C%C3%A2mbio." target="_blank" rel="noopener">Falar agora
-        <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 0 1-8.5 8.5 8.5 8.5 0 0 1-3.8-.9L3 21l1.9-5.7a8.5 8.5 0 1 1 16.1-3.8z"/></svg></span>
-      </a></div>
-</div></nav>
-<header class="page-hero"><div class="wrap">
-  <p class="crumb reveal"><div class="nav__drop">
-        <a href="../Money Way - Site.html#servicos">Serviços <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></a>
-        <div class="nav__menu"><div class="nav__menu-inner">
-          <a href="conta-global.html"><span class="di"></span> Conta Global</a>
-          <a href="transferencias.html"><span class="di"></span> Transferências Internacionais</a>
-          <a href="moneygram.html"><span class="di"></span> MoneyGram</a>
-          <a href="seguro-viagem.html"><span class="di"></span> Seguro Viagem</a>
-          <a href="passagens.html"><span class="di"></span> Passagens Aéreas</a>
-          <a href="visa-travel-money.html"><span class="di"></span> Visa Travel Money</a>
-        </div></div>
-      </div> / Visa Travel Money</p>
-  <h1 class="reveal d1">Visa Travel Money: <em>seu cartão de viagem</em></h1>
-  <p class="page-lede reveal d2">Cartão pré-pago internacional para <strong>levar sua moeda com segurança e praticidade</strong>.</p>
-  <div class="page-cta reveal d3">
-    <a class="btn btn--grad" href="https://wa.me/5551999649824?text=Ol%C3%A1!%20Quero%20saber%20mais%20sobre%20Visa%20Travel%20Money." target="_blank" rel="noopener">Falar com especialista
-      <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg></span></a>
-    <a class="btn btn--ghost" href="cotacoes.html">Ver cotações <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a>
+    <a href="cotacoes.html">Cotações</a>
+    <div class="nav__drop">
+      <a href="../index.html#servicos">Serviços <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></a>
+      <div class="nav__menu"><div class="nav__menu-inner">
+        <a href="cotacoes.html"><span class="di"></span> Compra e venda de moedas</a>
+        <a href="transferencias.html"><span class="di"></span> Transferência de valores nacionais</a>
+        <a href="cedulas-antigas.html"><span class="di"></span> Cédulas Estrangeiras Antigas</a>
+        <a href="viagem.html"><span class="di"></span> Passagem Aérea e Seguro de Viagem</a>
+        <a href="moneygram.html"><span class="di"></span> MoneyGram</a>
+        <a href="pj.html"><span class="di"></span> Importação e Exportação</a>
+      </div></div>
+    </div>
+    <a href="../index.html#sobre">Sobre</a>
+    <a href="blog.html">Blog</a>
+    <a href="pj.html" class="nav__pj">Empresas PJ</a>
+    <a class="btn btn--grad nav__cta" href="https://wa.me/5551999649824?text=Ol%C3%A1!%20Quero%20saber%20mais%20sobre%20o%20cart%C3%A3o%20de%20d%C3%A9bito%20internacional." target="_blank" rel="noopener">Falar agora
+      <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 0 1-8.5 8.5 8.5 8.5 0 0 1-3.8-.9L3 21l1.9-5.7a8.5 8.5 0 1 1 16.1-3.8z"/></svg></span>
+    </a>
   </div>
+</div></nav>
+
+<header class="page-hero"><div class="wrap">
+  <p class="crumb reveal"><a href="../index.html">Início</a> / <a href="../index.html#servicos">Serviços</a> / Cartão de Débito Internacional</p>
+  <h1 class="reveal d1">Cartão de débito <em>internacional</em></h1>
+  <p class="page-lede reveal d2">Trave o câmbio antes de embarcar. Pague e saque em mais de 200 países com <strong>segurança, praticidade e sem surpresas na cotação</strong>.</p>
+  <div class="page-cta reveal d3">
+    <a class="btn btn--grad" href="https://wa.me/5551999649824?text=Ol%C3%A1!%20Quero%20saber%20mais%20sobre%20o%20cart%C3%A3o%20pr%C3%A9-pago%20internacional." target="_blank" rel="noopener">Solicitar meu cartão
+      <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-8.5 8.5 8.5 8.5 0 0 1-3.8-.9L3 21l1.9-5.7a8.5 8.5 0 1 1 16.1-3.8z"/></svg></span>
+    </a>
+    <a class="btn btn--ghost" href="cotacoes.html">Ver cotações
+      <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+    </a>
+  </div>
+
+  <div class="card-hero-visual">
+    <div class="card-visual">
+      <div>
+        <div class="card-visual__band">Money Way Câmbio</div>
+        <div class="card-visual__name">Cartão Pré-Pago</div>
+      </div>
+      <div class="card-visual__num">**** **** **** ****</div>
+      <div class="card-visual__bottom">
+        <div style="color:rgba(255,255,255,.6);font-size:12px;font-family:var(--mono)">INTERNATIONAL</div>
+        <div class="card-visual__visa">VISA</div>
+      </div>
+    </div>
+    <div class="card-hero-text">
+      <h2>O jeito mais inteligente de levar dinheiro na viagem</h2>
+      <p>Você carrega o cartão em casa, já com a cotação travada. Sem variação cambial durante a viagem, sem risco de perder dinheiro físico.</p>
+      <div class="card-hero-chips">
+        <span class="card-hero-chip">Rede Visa</span>
+        <span class="card-hero-chip">+200 países</span>
+        <span class="card-hero-chip">Saques em ATMs</span>
+        <span class="card-hero-chip">Cotação travada</span>
+        <span class="card-hero-chip">Saldo protegido</span>
+      </div>
+    </div>
+  </div>
+
 </div></header>
 
 <section style="padding-top:clamp(20px,3vw,40px)"><div class="wrap">
   <div class="benefit-grid">
-        <div class="benefit reveal"><div class="bic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="3"/><path d="M2 10h20"/></svg></div><h3>Pré-pago</h3><p>Carregue antes e gaste no exterior sem levar dinheiro vivo.</p></div>
-        <div class="benefit reveal d1"><div class="bic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15 15 0 0 1 0 20M12 2a15 15 0 0 0 0 20"/></svg></div><h3>Rede Visa</h3><p>Aceito em milhões de estabelecimentos no mundo todo.</p></div>
-        <div class="benefit reveal d2"><div class="bic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l8 4v6c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V6l8-4z"/><path d="M9 12l2 2 4-4"/></svg></div><h3>Mais seguro</h3><p>Em caso de perda, seu saldo fica protegido.</p></div>
+    <div class="benefit reveal">
+      <div class="bic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1v22M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>
+      <h3>Cotação travada</h3>
+      <p>Você carrega o cartão com a taxa do dia da compra. O que varia no exterior não te afeta mais.</p>
+    </div>
+    <div class="benefit reveal d1">
+      <div class="bic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15 15 0 0 1 0 20M12 2a15 15 0 0 0 0 20"/></svg></div>
+      <h3>Aceito no mundo todo</h3>
+      <p>Bandeira Visa: funciona em lojas, restaurantes, hotéis e e-commerces internacionais.</p>
+    </div>
+    <div class="benefit reveal d2">
+      <div class="bic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg></div>
+      <h3>Saldo protegido</h3>
+      <p>Em caso de perda ou roubo, o saldo fica bloqueado. Diferente de dinheiro em espécie, que some sem volta.</p>
+    </div>
   </div>
 </div></section>
 
 <section style="padding-top:0"><div class="wrap">
   <p class="eyebrow reveal">Como funciona</p>
-  <h2 class="s-title reveal d1" style="max-width:18ch">Trave a sua taxa e viaje leve</h2>
-  <div class="prose reveal d2" style="margin-top:clamp(22px,3vw,32px)">
-        <p>O <strong>Visa Travel Money</strong> é o jeito inteligente de levar moeda na viagem: você trava a cotação na recarga e gasta no exterior com a segurança da rede Visa.</p>
-        <p>Nossa equipe ajuda na emissão e recarga do cartão. Fale com a gente e prepare a sua próxima viagem.</p>
-  </div>
-  <div class="page-cta reveal d3">
-    <a class="btn btn--grad" href="https://wa.me/5551999649824?text=Ol%C3%A1!%20Quero%20saber%20mais%20sobre%20Visa%20Travel%20Money." target="_blank" rel="noopener">Chamar no WhatsApp
-      <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg></span></a>
+  <h2 class="s-title reveal d1" style="max-width:22ch">Do atendimento ao <span class="grad-text">embarque em 4 passos</span></h2>
+  <div class="card-steps">
+    <div class="card-step reveal">
+      <div class="card-step__n">01</div>
+      <h4>Fale com a Money Way</h4>
+      <p>Escolha a moeda e o valor. Nossa equipe emite o cartão e trava a cotação no momento da recarga.</p>
+    </div>
+    <div class="card-step reveal d1">
+      <div class="card-step__n">02</div>
+      <h4>Carregue antes de viajar</h4>
+      <p>Pague em reais com a taxa travada. O saldo fica disponível em moeda estrangeira no cartão.</p>
+    </div>
+    <div class="card-step reveal d2">
+      <div class="card-step__n">03</div>
+      <h4>Use no exterior</h4>
+      <p>Pague em lojas, restaurantes e hotéis ou saque em ATMs onde houver a bandeira Visa.</p>
+    </div>
+    <div class="card-step reveal d3">
+      <div class="card-step__n">04</div>
+      <h4>Saldo sobrando?</h4>
+      <p>Ao voltar, o saldo residual pode ser resgatado ou mantido para a próxima viagem.</p>
+    </div>
   </div>
 </div></section>
+
+<section style="padding-top:0"><div class="wrap">
+  <p class="eyebrow reveal">Comparativo</p>
+  <h2 class="s-title reveal d1" style="max-width:26ch">Cartão pré-pago x outras <span class="grad-text">formas de pagamento</span></h2>
+  <div class="compare-grid reveal d2">
+    <div class="compare-col">
+      <div class="compare-head"><span>Opção</span>Dinheiro em espécie</div>
+      <div class="compare-row"><span class="cmp-ic">⚠️</span> Risco de perda ou roubo sem recuperação</div>
+      <div class="compare-row"><span class="cmp-ic">⚠️</span> Sujeito a variação no câmbio do destino</div>
+      <div class="compare-row"><span class="cmp-ic">✓</span> Aceito em praticamente todos os lugares</div>
+      <div class="compare-row"><span class="cmp-ic">⚠️</span> IOF de 1,1% na compra</div>
+      <div class="compare-row"><span class="cmp-ic">⚠️</span> Inconveniente carregar grandes valores</div>
+    </div>
+    <div class="compare-col highlight">
+      <div class="compare-head"><span style="color:rgba(255,255,255,.65)">Recomendado</span>Cartão pré-pago</div>
+      <div class="compare-row"><span class="cmp-ic">✅</span> Saldo protegido em caso de perda</div>
+      <div class="compare-row"><span class="cmp-ic">✅</span> Cotação travada, sem surpresas</div>
+      <div class="compare-row"><span class="cmp-ic">✅</span> Rede Visa em +200 países</div>
+      <div class="compare-row"><span class="cmp-ic">✅</span> Fácil de usar em lojas e ATMs</div>
+      <div class="compare-row"><span class="cmp-ic">✅</span> Pode carregar múltiplas moedas</div>
+    </div>
+    <div class="compare-col">
+      <div class="compare-head"><span>Opção</span>Cartão de crédito</div>
+      <div class="compare-row"><span class="cmp-ic">⚠️</span> Cotação do dia da fatura, não da compra</div>
+      <div class="compare-row"><span class="cmp-ic">⚠️</span> IOF de 6,38% + spread do banco</div>
+      <div class="compare-row"><span class="cmp-ic">✓</span> Amplamente aceito</div>
+      <div class="compare-row"><span class="cmp-ic">⚠️</span> Risco de fatura surpresa ao voltar</div>
+      <div class="compare-row"><span class="cmp-ic">⚠️</span> Depende do limite disponível</div>
+    </div>
+  </div>
+</div></section>
+
+<section style="padding-top:0"><div class="wrap">
+  <div class="moedas-band reveal">
+    <div class="moedas-band__text">
+      <h3>Moedas disponíveis para carregar</h3>
+      <p>Fale com nossa equipe para disponibilidade e cotação atual.</p>
+    </div>
+    <div class="moedas-chips">
+      <span class="moeda-chip">🇺🇸 USD</span>
+      <span class="moeda-chip">🇪🇺 EUR</span>
+      <span class="moeda-chip">🇬🇧 GBP</span>
+      <span class="moeda-chip">🇨🇦 CAD</span>
+      <span class="moeda-chip">🇦🇺 AUD</span>
+      <span class="moeda-chip">🇨🇭 CHF</span>
+      <span class="moeda-chip">🇦🇷 ARS</span>
+      <span class="moeda-chip">🇺🇾 UYU</span>
+    </div>
+  </div>
+</div></section>
+
+<section style="padding-bottom:clamp(44px,6vw,72px)"><div class="wrap">
+  <div class="rates-cta-box reveal">
+    <div class="rates-cta-box__text">
+      <strong>Quer levar o cartão na sua próxima viagem?</strong>
+      <span>Nossa equipe emite, carrega e entrega em Porto Alegre. Atendimento também online.</span>
+    </div>
+    <a class="btn btn--grad" href="https://wa.me/5551999649824?text=Ol%C3%A1!%20Quero%20solicitar%20um%20cart%C3%A3o%20pr%C3%A9-pago%20internacional." target="_blank" rel="noopener">Solicitar meu cartão
+      <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 0 1-8.5 8.5 8.5 8.5 0 0 1-3.8-.9L3 21l1.9-5.7a8.5 8.5 0 1 1 16.1-3.8z"/></svg></span>
+    </a>
+  </div>
+</div></section>
+
 <footer class="foot"><div class="wrap">
   <div class="foot__bar" style="border-top:none;margin-top:0;padding-top:0">
     <span>© 2026 Money Way Câmbio. Todos os direitos reservados.</span>
-    <span><a href="../Money Way - Site.html#top" style="color:inherit;text-decoration:none">Voltar ao início →</a></span>
+    <span><a href="../index.html#top" style="color:inherit;text-decoration:none">Voltar ao início →</a></span>
   </div>
 </div></footer>
+
 <a class="wa" href="https://wa.me/5551999649824?text=Ol%C3%A1!%20Gostaria%20de%20falar%20com%20a%20Money%20Way%20C%C3%A2mbio." target="_blank" rel="noopener" aria-label="Falar no WhatsApp">
   <svg viewBox="0 0 24 24"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38c1.45.79 3.08 1.21 4.79 1.21h.01c5.46 0 9.91-4.45 9.91-9.91C21.96 6.45 17.5 2 12.04 2zm0 18.13h-.01c-1.52 0-3.01-.41-4.3-1.18l-.31-.18-3.12.82.83-3.04-.2-.31a8.2 8.2 0 0 1-1.26-4.35c0-4.54 3.7-8.23 8.24-8.23 2.2 0 4.27.86 5.82 2.42a8.18 8.18 0 0 1 2.41 5.82c0 4.54-3.69 8.41-8.3 8.41zm4.52-6.16c-.25-.12-1.47-.72-1.69-.81-.23-.08-.39-.12-.56.13-.16.25-.64.81-.79.97-.14.17-.29.19-.54.06-.25-.12-1.05-.39-1.99-1.23-.74-.66-1.23-1.47-1.38-1.72-.14-.25-.01-.38.11-.51.11-.11.25-.29.37-.43.13-.14.17-.25.25-.41.08-.17.04-.31-.02-.43-.06-.12-.56-1.34-.76-1.84-.2-.48-.41-.42-.56-.43h-.48c-.17 0-.43.06-.66.31-.23.25-.86.85-.86 2.07 0 1.22.89 2.4 1.01 2.56.12.17 1.75 2.67 4.23 3.74.59.26 1.05.41 1.41.52.59.19 1.13.16 1.56.1.48-.07 1.47-.6 1.68-1.18.21-.58.21-1.07.14-1.18-.06-.1-.22-.16-.47-.28z"/></svg>
 </a>
+
 <script src="../moneyway-site/app.js"></script>
-</body></html>
+</body>
+</html>
