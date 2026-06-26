@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Transferências Internacionais - Money Way Câmbio</title>
+<meta name="description" content="Envie e receba dinheiro do exterior com segurança, transparência e atendimento ágil. Regulamentado pelo Banco Central do Brasil." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="../moneyway-site/styles.css" />
+<style>
+/* ---- Casos de uso ---- */
+.casos-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: clamp(14px, 2vw, 22px);
+  margin-top: clamp(36px, 5vw, 52px);
+}
+@media (max-width: 640px) { .casos-grid { grid-template-columns: 1fr; } }
+.caso {
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: var(--r);
+  padding: clamp(24px, 2.8vw, 34px);
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  gap: 18px;
+  align-items: flex-start;
+}
+.caso__num {
+  flex: none;
+  width: 42px;
+  height: 42px;
+  border-radius: 12px;
+  background: var(--emerald);
+  color: #fff;
+  display: grid;
+  place-items: center;
+  font-family: var(--disp);
+  font-weight: 800;
+  font-size: 18px;
+}
+.caso__body h3 {
+  font-family: var(--disp);
+  font-weight: 700;
+  font-size: 17px;
+  color: var(--navy);
+  margin: 0 0 8px;
+  line-height: 1.3;
+}
+.caso__body p {
+  color: var(--slate);
+  font-size: 14.5px;
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* ---- Formulário de simulação ---- */
+.sim-transfer {
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: var(--r);
+  box-shadow: var(--shadow);
+  margin-top: clamp(34px, 5vw, 52px);
+  overflow: hidden;
+}
+.sim-transfer__head {
+  padding: 20px clamp(22px, 3vw, 32px);
+  border-bottom: 1px solid var(--line);
+  background: var(--bg-2);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.sim-transfer__head-ic {
+  width: 44px;
+  height: 44px;
+  border-radius: 13px;
+  background: var(--emerald);
+  color: #fff;
+  display: grid;
+  place-items: center;
+  flex: none;
+}
+.sim-transfer__head-ic svg { width: 22px; height: 22px; }
+.sim-transfer__head-text strong {
+  display: block;
+  font-family: var(--disp);
+  font-weight: 700;
+  font-size: 17px;
+  color: var(--navy);
+}
+.sim-transfer__head-text span {
+  font-family: var(--mono);
+  font-size: 11.5px;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--slate-2);
+}
+.sim-transfer__body {
+  padding: clamp(24px, 3vw, 36px);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(20px, 3vw, 32px);
+}
+@media (max-width: 640px) { .sim-transfer__body { grid-template-columns: 1fr; } }
+.stf-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.stf-group label {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--slate-2);
+  font-weight: 600;
+}
+.stf-group select,
+.stf-group input {
+  font-family: var(--sans);
+  font-size: 15px;
+  color: var(--navy);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 13px 16px;
+  background: var(--bg);
+  outline: none;
+  transition: border-color .2s, background .2s;
+  width: 100%;
+}
+.stf-group select:focus,
+.stf-group input:focus {
+  border-color: var(--emerald);
+  background: #fff;
+}
+.stf-group--full { grid-column: 1 / -1; }
+.stf-dir {
+  display: flex;
+  gap: 8px;
+}
+.stf-dir button {
+  flex: 1;
+  font-family: var(--disp);
+  font-weight: 700;
+  font-size: 14px;
+  color: var(--slate);
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 12px 10px;
+  cursor: pointer;
+  transition: all .18s;
+}
+.stf-dir button.active {
+  background: var(--navy);
+  color: #fff;
+  border-color: var(--navy);
+}
+.sim-transfer__foot {
+  padding: clamp(20px, 2.4vw, 28px) clamp(22px, 3vw, 32px);
+  border-top: 1px solid var(--line);
+  background: var(--navy);
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  flex-wrap: wrap;
+}
+.sim-transfer__preview {
+  flex: 1;
+  min-width: 180px;
+}
+.sim-transfer__preview-label {
+  font-family: var(--mono);
+  font-size: 10.5px;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: rgba(244,239,230,.5);
+}
+.sim-transfer__preview-msg {
+  font-family: var(--disp);
+  font-weight: 600;
+  font-size: 14px;
+  color: var(--cream);
+  margin-top: 5px;
+  line-height: 1.45;
+  word-break: break-word;
+}
+</style>
+</head>
+<body>
+
+<nav class="nav"><div class="nav__bar">
+  <a class="brand" href="../index.html#top">
+    <img class="brand__sym" src="../moneyway-site/sym.png" alt="" aria-hidden="true" />
+    <span class="brand__name">Money&#8201;Way</span><span class="brand__tag">Câmbio</span>
+  </a>
+  <div class="nav__links">
+    <a href="cotacoes.html">Cotações</a>
+    <div class="nav__drop">
+      <a href="../index.html#servicos">Serviços <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></a>
+      <div class="nav__menu"><div class="nav__menu-inner">
+        <a href="cotacoes.html"><span class="di"></span> Compra de moeda em espécie</a>
+        <a href="transferencias.html"><span class="di"></span> Transferências Internacionais</a>
+        <a href="moneygram.html"><span class="di"></span> MoneyGram</a>
+        <a href="seguro-viagem.html"><span class="di"></span> Seguro Viagem</a>
+        <a href="passagens.html"><span class="di"></span> Passagens Aéreas</a>
+        <a href="cedulas-antigas.html"><span class="di"></span> Cédulas Estrangeiras Antigas</a>
+        <a href="visa-travel-money.html"><span class="di"></span> Cartão de Débito Internacional</a>
+      </div></div>
+    </div>
+    <a href="../index.html#sobre">Sobre</a>
+    <a href="blog.html">Blog</a>
+    <a href="pj.html" class="nav__pj">Empresas PJ</a>
+    <a class="btn btn--grad nav__cta" href="https://wa.me/5551999649824?text=Ol%C3%A1!%20Quero%20saber%20mais%20sobre%20transfer%C3%AAncias%20internacionais." target="_blank" rel="noopener">Falar agora
+      <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 0 1-8.5 8.5 8.5 8.5 0 0 1-3.8-.9L3 21l1.9-5.7a8.5 8.5 0 1 1 16.1-3.8z"/></svg></span>
+    </a>
+  </div>
+</div></nav>
+
+<!-- HERO -->
+<header class="page-hero"><div class="wrap">
+  <p class="crumb reveal"><a href="../index.html">Home</a> / <a href="../index.html#servicos">Serviços</a> / Transferências Internacionais</p>
+  <h1 class="reveal d1">Transferências <em>internacionais</em></h1>
+  <p class="page-lede reveal d2">Envie ou receba dinheiro do exterior com <strong>segurança, transparência e atendimento ágil</strong>. Operações autorizadas e regulamentadas pelo Banco Central do Brasil.</p>
+  <div class="page-cta reveal d3">
+    <a class="btn btn--grad" href="https://wa.me/5551999649824?text=Ol%C3%A1!%20Quero%20saber%20mais%20sobre%20transfer%C3%AAncias%20internacionais." target="_blank" rel="noopener">Falar com especialista
+      <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg></span>
+    </a>
+    <a class="btn btn--ghost" href="cotacoes.html">Ver cotações
+      <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+    </a>
+  </div>
+</div></header>
+
+<!-- BENEFÍCIOS -->
+<section style="padding-top:clamp(20px,3vw,40px)"><div class="wrap">
+  <div class="benefit-grid">
+    <div class="benefit reveal">
+      <div class="bic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></div>
+      <h3>Regulamentado pelo Banco Central</h3>
+      <p>Operações devidamente autorizadas e supervisionadas, com total conformidade legal.</p>
+    </div>
+    <div class="benefit reveal d1">
+      <div class="bic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h7l-1 8 10-12h-7l1-8z"/></svg></div>
+      <h3>Atendimento ágil</h3>
+      <p>Operações processadas com rapidez. Você acompanha cada etapa com nosso suporte próximo.</p>
+    </div>
+    <div class="benefit reveal d2">
+      <div class="bic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg></div>
+      <h3>100% online se preferir</h3>
+      <p>Todo o processo pode ser feito remotamente. Sem precisar sair de casa para fechar sua operação.</p>
+    </div>
+  </div>
+</div></section>
+
+<!-- SOBRE O SERVIÇO -->
+<section style="padding-top:0"><div class="wrap">
+  <p class="eyebrow reveal">O serviço</p>
+  <h2 class="s-title reveal d1" style="max-width:22ch">Dinheiro pelo mundo, <span class="grad-text">sem complicação</span></h2>
+  <div class="prose reveal d2" style="margin-top:clamp(22px,3vw,32px)">
+    <p>Oferecemos aos nossos clientes a possibilidade de efetuar ou receber transferências financeiras internacionais, devidamente autorizadas e regulamentadas pelo Banco Central do Brasil. Com a Money Way, você conta com total rapidez, transparência e segurança em todas as transações.</p>
+    <p>Nosso atendimento pode ser totalmente online e garante que suas transferências sejam processadas de forma ágil e confiável, seja para enviar ou para receber valores do exterior.</p>
+  </div>
+</div></section>
+
+<!-- CASOS DE USO -->
+<section style="padding-top:0"><div class="wrap">
+  <p class="eyebrow reveal">Quando usar</p>
+  <h2 class="s-title reveal d1" style="max-width:24ch">Em quais situações você pode <span class="grad-text">transferir</span></h2>
+
+  <div class="casos-grid">
+    <div class="caso reveal">
+      <div class="caso__num">1</div>
+      <div class="caso__body">
+        <h3>Disponibilidade de recursos no exterior ou transferência de patrimônio</h3>
+        <p>Operações entre contas de mesma titularidade, de uma conta sua no Brasil para o exterior ou vice-versa.</p>
+      </div>
+    </div>
+    <div class="caso reveal d1">
+      <div class="caso__num">2</div>
+      <div class="caso__body">
+        <h3>Manutenção de residente no exterior</h3>
+        <p>Quando você tem filhos, cônjuge ou parentes próximos morando fora do Brasil e precisa enviar recursos regularmente.</p>
+      </div>
+    </div>
+    <div class="caso reveal">
+      <div class="caso__num">3</div>
+      <div class="caso__body">
+        <h3>Pagamento de cursos e eventos internacionais</h3>
+        <p>Pague matrículas, mensalidades e inscrições em programas no exterior de forma facilitada, sem grandes burocracias.</p>
+      </div>
+    </div>
+    <div class="caso reveal d1">
+      <div class="caso__num">4</div>
+      <div class="caso__body">
+        <h3>Processos de cidadania, vistos e documentação</h3>
+        <p>Pague honorários de advogados, taxas consulares e custos de processos de regularização migratória no exterior.</p>
+      </div>
+    </div>
+    <div class="caso reveal">
+      <div class="caso__num">5</div>
+      <div class="caso__body">
+        <h3>Importação e exportação</h3>
+        <p>Pagamento de comércio exterior para empresas que operam com fornecedores ou clientes em outros países.</p>
+      </div>
+    </div>
+  </div>
+</div></section>
+
+<!-- FORMULÁRIO DE SIMULAÇÃO -->
+<section><div class="wrap">
+  <p class="eyebrow reveal">Simule agora</p>
+  <h2 class="s-title reveal d1" style="max-width:22ch">Preencha e fale com <span class="grad-text">um especialista</span></h2>
+  <p class="s-sub reveal d2">Informe os dados abaixo e ao clicar em "Enviar" abriremos o WhatsApp com a mensagem já preparada.</p>
+
+  <div class="sim-transfer reveal d1">
+    <div class="sim-transfer__head">
+      <div class="sim-transfer__head-ic">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>
+      </div>
+      <div class="sim-transfer__head-text">
+        <strong>Simulador de transferência internacional</strong>
+        <span>Gera mensagem automática no WhatsApp</span>
+      </div>
+    </div>
+
+    <div class="sim-transfer__body">
+      <!-- Direção -->
+      <div class="stf-group">
+        <label>Operação</label>
+        <div class="stf-dir">
+          <button class="active" data-dir="enviar" type="button" id="stf-dir-enviar">Quero enviar</button>
+          <button data-dir="receber" type="button" id="stf-dir-receber">Quero receber</button>
+        </div>
+      </div>
+
+      <!-- Destino/Origem -->
+      <div class="stf-group">
+        <label id="stf-dest-label">Para qual país</label>
+        <select id="stf-dest">
+          <option value="">Selecione o país</option>
+          <option>Estados Unidos</option>
+          <option>Portugal</option>
+          <option>Espanha</option>
+          <option>Itália</option>
+          <option>Alemanha</option>
+          <option>França</option>
+          <option>Reino Unido</option>
+          <option>Argentina</option>
+          <option>Uruguai</option>
+          <option>Canadá</option>
+          <option>Austrália</option>
+          <option>Japão</option>
+          <option>Outros</option>
+        </select>
+      </div>
+
+      <!-- Moeda -->
+      <div class="stf-group">
+        <label>Moeda</label>
+        <select id="stf-cur">
+          <option value="USD">Dólar Americano (USD)</option>
+          <option value="EUR">Euro (EUR)</option>
+          <option value="GBP">Libra Esterlina (GBP)</option>
+          <option value="CHF">Franco Suíço (CHF)</option>
+          <option value="CAD">Dólar Canadense (CAD)</option>
+          <option value="AUD">Dólar Australiano (AUD)</option>
+          <option value="ARS">Peso Argentino (ARS)</option>
+          <option value="UYU">Peso Uruguaio (UYU)</option>
+          <option value="Outra">Outra</option>
+        </select>
+      </div>
+
+      <!-- Valor -->
+      <div class="stf-group">
+        <label>Valor aproximado</label>
+        <input type="text" id="stf-val" inputmode="numeric" placeholder="Ex: 5.000" />
+      </div>
+
+      <!-- Motivo -->
+      <div class="stf-group stf-group--full">
+        <label>Motivo (opcional)</label>
+        <select id="stf-motivo">
+          <option value="">Não preciso informar</option>
+          <option>Manutenção de familiar no exterior</option>
+          <option>Pagamento de curso ou evento</option>
+          <option>Transferência de patrimônio</option>
+          <option>Cidadania, visto ou documentação</option>
+          <option>Importação ou exportação</option>
+          <option>Outro</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="sim-transfer__foot">
+      <div class="sim-transfer__preview">
+        <div class="sim-transfer__preview-label">Mensagem que será enviada</div>
+        <div class="sim-transfer__preview-msg" id="stf-preview">Preencha os campos acima para ver a mensagem.</div>
+      </div>
+      <button class="btn btn--grad" id="stf-btn" type="button">Enviar no WhatsApp
+        <span class="ic"><svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18"><path d="M12 2a10 10 0 0 0-8.6 15l-1.3 4 4.1-1.3A10 10 0 1 0 12 2zm5.4 14.2c-.2.6-1.2 1.1-1.7 1.2-.4.1-1 .1-1.6-.1-.4-.1-.9-.3-1.5-.5-2.6-1.1-4.3-3.8-4.4-4-.1-.2-1-1.4-1-2.6s.6-1.8.9-2.1c.2-.2.5-.3.6-.3h.5c.2 0 .4 0 .5.4l.7 1.7c.1.1.1.3 0 .5l-.3.5-.3.3c-.1.1-.2.3-.1.5.1.2.6 1 1.3 1.6.9.8 1.6 1 1.8 1.1.2.1.3.1.5-.1l.6-.7c.2-.2.3-.2.5-.1l1.6.8c.2.1.4.2.4.3.1.1.1.6-.1 1z"/></svg></span>
+      </button>
+    </div>
+  </div>
+</div></section>
+
+<!-- CTA FINAL -->
+<section style="padding-top:0;padding-bottom:clamp(44px,6vw,72px)"><div class="wrap">
+  <div class="rates-cta-box reveal">
+    <div class="rates-cta-box__text">
+      <strong>Prefere falar diretamente com a gente?</strong>
+      <span>Nosso time atende no WhatsApp, por telefone e de forma presencial em Porto Alegre.</span>
+    </div>
+    <a class="btn btn--grad" href="https://wa.me/5551999649824?text=Ol%C3%A1!%20Quero%20saber%20mais%20sobre%20transfer%C3%AAncias%20internacionais." target="_blank" rel="noopener">Chamar no WhatsApp
+      <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 0 1-8.5 8.5 8.5 8.5 0 0 1-3.8-.9L3 21l1.9-5.7a8.5 8.5 0 1 1 16.1-3.8z"/></svg></span>
+    </a>
+  </div>
+</div></section>
+
+<footer class="foot"><div class="wrap">
+  <div class="foot__bar" style="border-top:none;margin-top:0;padding-top:0">
+    <span>© 2026 Money Way Câmbio. Todos os direitos reservados.</span>
+    <span><a href="../index.html#top" style="color:inherit;text-decoration:none">Voltar ao início →</a></span>
+  </div>
+</div></footer>
+
+<a class="wa" href="https://wa.me/5551999649824?text=Ol%C3%A1!%20Gostaria%20de%20falar%20com%20a%20Money%20Way%20C%C3%A2mbio." target="_blank" rel="noopener" aria-label="Falar no WhatsApp">
+  <svg viewBox="0 0 24 24"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38c1.45.79 3.08 1.21 4.79 1.21h.01c5.46 0 9.91-4.45 9.91-9.91C21.96 6.45 17.5 2 12.04 2zm0 18.13h-.01c-1.52 0-3.01-.41-4.3-1.18l-.31-.18-3.12.82.83-3.04-.2-.31a8.2 8.2 0 0 1-1.26-4.35c0-4.54 3.7-8.23 8.24-8.23 2.2 0 4.27.86 5.82 2.42a8.18 8.18 0 0 1 2.41 5.82c0 4.54-3.69 8.41-8.3 8.41zm4.52-6.16c-.25-.12-1.47-.72-1.69-.81-.23-.08-.39-.12-.56.13-.16.25-.64.81-.79.97-.14.17-.29.19-.54.06-.25-.12-1.05-.39-1.99-1.23-.74-.66-1.23-1.47-1.38-1.72-.14-.25-.01-.38.11-.51.11-.11.25-.29.37-.43.13-.14.17-.25.25-.41.08-.17.04-.31-.02-.43-.06-.12-.56-1.34-.76-1.84-.2-.48-.41-.42-.56-.43h-.48c-.17 0-.43.06-.66.31-.23.25-.86.85-.86 2.07 0 1.22.89 2.4 1.01 2.56.12.17 1.75 2.67 4.23 3.74.59.26 1.05.41 1.41.52.59.19 1.13.16 1.56.1.48-.07 1.47-.6 1.68-1.18.21-.58.21-1.07.14-1.18-.06-.1-.22-.16-.47-.28z"/></svg>
+</a>
+
+<script src="../moneyway-site/app.js"></script>
+<script>
+(function () {
+  var dir = 'enviar';
+  var btnEnviar = document.getElementById('stf-dir-enviar');
+  var btnReceber = document.getElementById('stf-dir-receber');
+  var destLabel = document.getElementById('stf-dest-label');
+  var destSel = document.getElementById('stf-dest');
+  var curSel = document.getElementById('stf-cur');
+  var valIn = document.getElementById('stf-val');
+  var motivoSel = document.getElementById('stf-motivo');
+  var preview = document.getElementById('stf-preview');
+  var sendBtn = document.getElementById('stf-btn');
+
+  function updateDir(d) {
+    dir = d;
+    btnEnviar.classList.toggle('active', d === 'enviar');
+    btnReceber.classList.toggle('active', d === 'receber');
+    destLabel.textContent = d === 'enviar' ? 'Para qual país' : 'De qual país';
+    updatePreview();
+  }
+
+  function buildMsg() {
+    var dest = destSel.value || '';
+    var cur = curSel.value || '';
+    var val = valIn.value.trim() || '';
+    var motivo = motivoSel.value || '';
+
+    if (!dest && !val) return 'Preencha os campos acima para ver a mensagem.';
+
+    var acao = dir === 'enviar' ? 'enviar' : 'receber';
+    var prep = dir === 'enviar' ? 'para' : 'de';
+
+    var msg = 'Olá! Quero ' + acao;
+    if (val) msg += ' ' + val + ' ' + cur;
+    else if (cur) msg += ' ' + cur;
+    if (dest) msg += ' ' + prep + ' ' + dest;
+    if (motivo) msg += '. Motivo: ' + motivo;
+    msg += '. Poderia me ajudar com a cotação?';
+    return msg;
+  }
+
+  function updatePreview() {
+    preview.textContent = buildMsg();
+  }
+
+  btnEnviar.addEventListener('click', function () { updateDir('enviar'); });
+  btnReceber.addEventListener('click', function () { updateDir('receber'); });
+  destSel.addEventListener('change', updatePreview);
+  curSel.addEventListener('change', updatePreview);
+  valIn.addEventListener('input', updatePreview);
+  motivoSel.addEventListener('change', updatePreview);
+
+  sendBtn.addEventListener('click', function () {
+    var msg = buildMsg();
+    if (msg === 'Preencha os campos acima para ver a mensagem.') {
+      alert('Selecione o país e informe o valor antes de continuar.');
+      return;
+    }
+    var url = 'https://wa.me/5551999649824?text=' + encodeURIComponent(msg);
+    window.open(url, '_blank', 'noopener');
+  });
+
+  updatePreview();
+})();
+</script>
+</body>
+</html>
