@@ -3,86 +3,313 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>MoneyGram - Money Way Câmbio</title>
+<title>MoneyGram — Money Way Câmbio</title>
+<meta name="description" content="Envie e receba dinheiro internacionalmente com MoneyGram na Money Way Câmbio. Presente em mais de 200 países, disponível em minutos via Pix ou WhatsApp." />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
 <link rel="stylesheet" href="../moneyway-site/styles.css" />
+<style>
+.mg-widget {
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: var(--r);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+  margin-top: clamp(34px, 4vw, 50px);
+  max-width: 560px;
+}
+.mg-toggle {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  background: var(--bg-2);
+  border-bottom: 1px solid var(--line);
+}
+.mg-t {
+  font-family: var(--disp);
+  font-weight: 700;
+  font-size: 15px;
+  color: var(--slate);
+  background: transparent;
+  border: none;
+  border-bottom: 3px solid transparent;
+  padding: 18px 16px;
+  cursor: pointer;
+  transition: all .2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+.mg-t.active {
+  color: var(--emerald);
+  border-bottom-color: var(--emerald);
+  background: #fff;
+}
+.mg-panel {
+  padding: clamp(24px, 3vw, 36px);
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+.mg-field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.mg-field label {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--slate-2);
+  font-weight: 600;
+}
+.mg-field input,
+.mg-field select {
+  font-family: var(--sans);
+  font-size: 16px;
+  color: var(--navy);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 13px 16px;
+  background: var(--bg);
+  outline: none;
+  transition: border-color .2s, background .2s;
+  width: 100%;
+  box-sizing: border-box;
+}
+.mg-field input:focus,
+.mg-field select:focus {
+  border-color: var(--emerald);
+  background: #fff;
+}
+.mg-input-wrap {
+  display: flex;
+  align-items: center;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: var(--bg);
+  overflow: hidden;
+  transition: border-color .2s, background .2s;
+}
+.mg-input-wrap:focus-within {
+  border-color: var(--emerald);
+  background: #fff;
+}
+.mg-input-wrap span {
+  font-family: var(--disp);
+  font-weight: 700;
+  font-size: 15px;
+  color: var(--slate-2);
+  padding: 0 10px 0 16px;
+  white-space: nowrap;
+}
+.mg-input-wrap input {
+  border: none;
+  background: transparent;
+  border-radius: 0;
+  padding: 13px 16px 13px 0;
+  flex: 1;
+  min-width: 0;
+}
+.mg-input-wrap input:focus {
+  border-color: transparent;
+  background: transparent;
+}
+.mg-panel .btn {
+  width: 100%;
+  justify-content: center;
+  margin-top: 4px;
+}
+.mg-note {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--slate-2);
+  text-align: center;
+  line-height: 1.5;
+  margin: 0;
+}
+</style>
 </head>
 <body>
 <nav class="nav"><div class="nav__bar">
-  <a class="brand" href="../Money Way - Site.html#top">
+  <a class="brand" href="../index.html">
     <img class="brand__sym" src="../moneyway-site/sym.png" alt="" aria-hidden="true" />
     <span class="brand__name">Money&#8201;Way</span><span class="brand__tag">Câmbio</span>
   </a>
   <div class="nav__links">
-      <div class="nav__drop">
-        <a href="../Money Way - Site.html#servicos">Serviços <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></a>
-        <div class="nav__menu"><div class="nav__menu-inner">
-          <a href="conta-global.html"><span class="di"></span> Conta Global</a>
-          <a href="transferencias.html"><span class="di"></span> Transferências Internacionais</a>
-          <a href="moneygram.html"><span class="di"></span> MoneyGram</a>
-          <a href="seguro-viagem.html"><span class="di"></span> Seguro Viagem</a>
-          <a href="passagens.html"><span class="di"></span> Passagens Aéreas</a>
-          <a href="visa-travel-money.html"><span class="di"></span> Visa Travel Money</a>
-        </div></div>
-      </div>
-      <a href="cotacoes.html">Cotações</a>
-      <a href="../Money Way - Site.html#sobre">Sobre</a>
-      <a href="blog.html">Blog</a>
-      <a class="btn btn--grad nav__cta" href="https://wa.me/5551999649824?text=Ol%C3%A1!%20Gostaria%20de%20falar%20com%20a%20Money%20Way%20C%C3%A2mbio." target="_blank" rel="noopener">Falar agora
-        <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 0 1-8.5 8.5 8.5 8.5 0 0 1-3.8-.9L3 21l1.9-5.7a8.5 8.5 0 1 1 16.1-3.8z"/></svg></span>
-      </a></div>
-</div></nav>
-<header class="page-hero"><div class="wrap">
-  <p class="crumb reveal"><div class="nav__drop">
-        <a href="../Money Way - Site.html#servicos">Serviços <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></a>
-        <div class="nav__menu"><div class="nav__menu-inner">
-          <a href="conta-global.html"><span class="di"></span> Conta Global</a>
-          <a href="transferencias.html"><span class="di"></span> Transferências Internacionais</a>
-          <a href="moneygram.html"><span class="di"></span> MoneyGram</a>
-          <a href="seguro-viagem.html"><span class="di"></span> Seguro Viagem</a>
-          <a href="passagens.html"><span class="di"></span> Passagens Aéreas</a>
-          <a href="visa-travel-money.html"><span class="di"></span> Visa Travel Money</a>
-        </div></div>
-      </div> / MoneyGram</p>
-  <h1 class="reveal d1">Envie e receba com <em>MoneyGram</em></h1>
-  <p class="page-lede reveal d2">Transferências internacionais rápidas pela rede <strong>MoneyGram</strong>, com retirada em milhares de pontos no mundo.</p>
-  <div class="page-cta reveal d3">
-    <a class="btn btn--grad" href="https://wa.me/5551999649824?text=Ol%C3%A1!%20Quero%20saber%20mais%20sobre%20MoneyGram." target="_blank" rel="noopener">Falar com especialista
-      <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg></span></a>
-    <a class="btn btn--ghost" href="cotacoes.html">Ver cotações <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a>
+    <div class="nav__drop">
+      <a href="../index.html#servicos">Serviços <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></a>
+      <div class="nav__menu"><div class="nav__menu-inner">
+        <a href="cotacoes.html"><span class="di"></span> Compra e venda de moedas</a>
+        <a href="transferencias.html"><span class="di"></span> Transferência de valores nacionais</a>
+        <a href="cedulas-antigas.html"><span class="di"></span> Cédulas Estrangeiras Antigas</a>
+        <a href="viagem.html"><span class="di"></span> Passagem Aérea e Seguro de Viagem</a>
+        <a href="moneygram.html"><span class="di"></span> MoneyGram</a>
+        <a href="pj.html"><span class="di"></span> Importação e Exportação</a>
+      </div></div>
+    </div>
+    <a href="cotacoes.html">Cotações</a>
+    <a href="../index.html#sobre">Sobre</a>
+    <a href="blog.html">Blog</a>
+    <a href="pj.html" class="nav__pj">Empresas PJ</a>
+    <a class="btn btn--grad nav__cta" href="https://wa.me/5551999649824?text=Ol%C3%A1!%20Gostaria%20de%20falar%20com%20a%20Money%20Way%20C%C3%A2mbio." target="_blank" rel="noopener">Falar agora
+      <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 0 1-8.5 8.5 8.5 8.5 0 0 1-3.8-.9L3 21l1.9-5.7a8.5 8.5 0 1 1 16.1-3.8z"/></svg></span>
+    </a>
   </div>
+</div></nav>
+
+<header class="page-hero"><div class="wrap">
+  <p class="crumb reveal"><a href="../index.html">Início</a> / <a href="../index.html#servicos">Serviços</a> / MoneyGram</p>
+  <h1 class="reveal d1">Enviando dinheiro de forma <em>rápida e segura</em></h1>
+  <p class="page-lede reveal d2">A <strong>MoneyGram</strong>, presente em mais de 200 países, agora está disponível na Money Way para facilitar suas transações internacionais. Envie em espécie para qualquer lugar do mundo em apenas <strong>10 minutos</strong>!</p>
 </div></header>
 
 <section style="padding-top:clamp(20px,3vw,40px)"><div class="wrap">
   <div class="benefit-grid">
-        <div class="benefit reveal"><div class="bic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg></div><h3>Rede global</h3><p>Milhares de pontos de retirada em mais de 200 países.</p></div>
-        <div class="benefit reveal d1"><div class="bic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h7l-1 8 10-12h-7l1-8z"/></svg></div><h3>Em minutos</h3><p>Transferências disponíveis para retirada com agilidade.</p></div>
-        <div class="benefit reveal d2"><div class="bic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l8 4v6c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V6l8-4z"/><path d="M9 12l2 2 4-4"/></svg></div><h3>Confiável</h3><p>Parceiro reconhecido mundialmente em remessas.</p></div>
+    <div class="benefit reveal">
+      <div class="bic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l8 4v6c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V6l8-4z"/><path d="M9 12l2 2 4-4"/></svg></div>
+      <h3>Seguro</h3>
+      <p>A MoneyGram oferece transações seguras e rápidas em mais de 200 países. Com autenticação e tecnologia de ponta, seu dinheiro chega com confiança!</p>
+    </div>
+    <div class="benefit reveal d1">
+      <div class="bic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M12 18h.01"/></svg></div>
+      <h3>Facilidade</h3>
+      <p>Faça transações internacionais pelo celular, via Pix ou WhatsApp. Prático, rápido e sem complicações — envie dinheiro em minutos!</p>
+    </div>
+    <div class="benefit reveal d2">
+      <div class="bic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15 15 0 0 1 0 20M12 2a15 15 0 0 0 0 20"/></svg></div>
+      <h3>Global</h3>
+      <p>Rede presente em mais de 200 países com milhares de pontos de retirada — seu destinatário recebe onde estiver.</p>
+    </div>
   </div>
 </div></section>
 
 <section style="padding-top:0"><div class="wrap">
-  <p class="eyebrow reveal">Como funciona</p>
-  <h2 class="s-title reveal d1" style="max-width:18ch">O mundo conectado pela MoneyGram</h2>
-  <div class="prose reveal d2" style="margin-top:clamp(22px,3vw,32px)">
-        <p>Com a <strong>MoneyGram</strong>, você envia ou recebe dinheiro de forma rápida e segura, com a comodidade de retirar em pontos próximos no destino.</p>
-        <p>A Money Way é seu ponto de atendimento em Porto Alegre: orientamos você em toda a operação. Fale com a nossa equipe para começar.</p>
-  </div>
-  <div class="page-cta reveal d3">
-    <a class="btn btn--grad" href="https://wa.me/5551999649824?text=Ol%C3%A1!%20Quero%20saber%20mais%20sobre%20MoneyGram." target="_blank" rel="noopener">Chamar no WhatsApp
-      <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg></span></a>
+  <p class="eyebrow reveal">Como posso ajudar?</p>
+  <h2 class="s-title reveal d1" style="max-width:22ch">Enviar ou receber com a <span class="grad-text">MoneyGram</span></h2>
+  <p class="s-sub reveal d2">Escolha o que você quer fazer, preencha os dados e abriremos o WhatsApp com a mensagem já pronta.</p>
+
+  <div class="mg-widget reveal d2">
+    <div class="mg-toggle">
+      <button class="mg-t active" data-mode="send" onclick="mgSwitch('send')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>
+        Enviar dinheiro
+      </button>
+      <button class="mg-t" data-mode="receive" onclick="mgSwitch('receive')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        Receber dinheiro
+      </button>
+    </div>
+
+    <div class="mg-panel" id="mg-send">
+      <div class="mg-field">
+        <label>Seu nome completo</label>
+        <input type="text" id="mg-send-name" placeholder="Ex: João Silva" autocomplete="name" />
+      </div>
+      <div class="mg-field">
+        <label>País de destino</label>
+        <select id="mg-send-country">
+          <option value="">Selecione o país</option>
+          <option>Estados Unidos</option>
+          <option>Portugal</option>
+          <option>Espanha</option>
+          <option>Argentina</option>
+          <option>Uruguai</option>
+          <option>Paraguai</option>
+          <option>Itália</option>
+          <option>Alemanha</option>
+          <option>França</option>
+          <option>Reino Unido</option>
+          <option>Japão</option>
+          <option>Austrália</option>
+          <option>Canadá</option>
+          <option>México</option>
+          <option>Peru</option>
+          <option>Colômbia</option>
+          <option>Chile</option>
+          <option>China</option>
+          <option>Índia</option>
+          <option>Outro</option>
+        </select>
+      </div>
+      <div class="mg-field">
+        <label>Valor a enviar</label>
+        <div class="mg-input-wrap">
+          <span>R$</span>
+          <input type="text" id="mg-send-amount" placeholder="0,00" inputmode="decimal" />
+        </div>
+      </div>
+      <button class="btn btn--grad" onclick="mgSend()">
+        Iniciar no WhatsApp
+        <span class="ic"><svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18"><path d="M12 2a10 10 0 0 0-8.6 15l-1.3 4 4.1-1.3A10 10 0 1 0 12 2zm5.4 14.2c-.2.6-1.2 1.1-1.7 1.2-.4.1-1 .1-1.6-.1-.4-.1-.9-.3-1.5-.5-2.6-1.1-4.3-3.8-4.4-4-.1-.2-1-1.4-1-2.6s.6-1.8.9-2.1c.2-.2.5-.3.6-.3h.5c.2 0 .4 0 .5.4l.7 1.7c.1.1.1.3 0 .5l-.3.5-.3.3c-.1.1-.2.3-.1.5.1.2.6 1 1.3 1.6.9.8 1.6 1 1.8 1.1.2.1.3.1.5-.1l.6-.7c.2-.2.3-.2.5-.1l1.6.8c.2.1.4.2.4.3.1.1.1.6-.1 1z"/></svg></span>
+      </button>
+      <p class="mg-note">Você será direcionado ao WhatsApp com a mensagem já preenchida.</p>
+    </div>
+
+    <div class="mg-panel" id="mg-receive" style="display:none">
+      <div class="mg-field">
+        <label>Seu nome completo</label>
+        <input type="text" id="mg-recv-name" placeholder="Ex: Maria Santos" autocomplete="name" />
+      </div>
+      <div class="mg-field">
+        <label>Código de recebimento</label>
+        <input type="text" id="mg-recv-code" placeholder="Ex: 12345678 (se tiver)" inputmode="numeric" />
+      </div>
+      <button class="btn btn--grad" onclick="mgReceive()">
+        Iniciar no WhatsApp
+        <span class="ic"><svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18"><path d="M12 2a10 10 0 0 0-8.6 15l-1.3 4 4.1-1.3A10 10 0 1 0 12 2zm5.4 14.2c-.2.6-1.2 1.1-1.7 1.2-.4.1-1 .1-1.6-.1-.4-.1-.9-.3-1.5-.5-2.6-1.1-4.3-3.8-4.4-4-.1-.2-1-1.4-1-2.6s.6-1.8.9-2.1c.2-.2.5-.3.6-.3h.5c.2 0 .4 0 .5.4l.7 1.7c.1.1.1.3 0 .5l-.3.5-.3.3c-.1.1-.2.3-.1.5.1.2.6 1 1.3 1.6.9.8 1.6 1 1.8 1.1.2.1.3.1.5-.1l.6-.7c.2-.2.3-.2.5-.1l1.6.8c.2.1.4.2.4.3.1.1.1.6-.1 1z"/></svg></span>
+      </button>
+      <p class="mg-note">Você será direcionado ao WhatsApp com a mensagem já preenchida.</p>
+    </div>
   </div>
 </div></section>
+
 <footer class="foot"><div class="wrap">
   <div class="foot__bar" style="border-top:none;margin-top:0;padding-top:0">
     <span>© 2026 Money Way Câmbio. Todos os direitos reservados.</span>
-    <span><a href="../Money Way - Site.html#top" style="color:inherit;text-decoration:none">Voltar ao início →</a></span>
+    <span><a href="../index.html" style="color:inherit;text-decoration:none">Voltar ao início →</a></span>
   </div>
 </div></footer>
+
 <a class="wa" href="https://wa.me/5551999649824?text=Ol%C3%A1!%20Gostaria%20de%20falar%20com%20a%20Money%20Way%20C%C3%A2mbio." target="_blank" rel="noopener" aria-label="Falar no WhatsApp">
   <svg viewBox="0 0 24 24"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38c1.45.79 3.08 1.21 4.79 1.21h.01c5.46 0 9.91-4.45 9.91-9.91C21.96 6.45 17.5 2 12.04 2zm0 18.13h-.01c-1.52 0-3.01-.41-4.3-1.18l-.31-.18-3.12.82.83-3.04-.2-.31a8.2 8.2 0 0 1-1.26-4.35c0-4.54 3.7-8.23 8.24-8.23 2.2 0 4.27.86 5.82 2.42a8.18 8.18 0 0 1 2.41 5.82c0 4.54-3.69 8.41-8.3 8.41zm4.52-6.16c-.25-.12-1.47-.72-1.69-.81-.23-.08-.39-.12-.56.13-.16.25-.64.81-.79.97-.14.17-.29.19-.54.06-.25-.12-1.05-.39-1.99-1.23-.74-.66-1.23-1.47-1.38-1.72-.14-.25-.01-.38.11-.51.11-.11.25-.29.37-.43.13-.14.17-.25.25-.41.08-.17.04-.31-.02-.43-.06-.12-.56-1.34-.76-1.84-.2-.48-.41-.42-.56-.43h-.48c-.17 0-.43.06-.66.31-.23.25-.86.85-.86 2.07 0 1.22.89 2.4 1.01 2.56.12.17 1.75 2.67 4.23 3.74.59.26 1.05.41 1.41.52.59.19 1.13.16 1.56.1.48-.07 1.47-.6 1.68-1.18.21-.58.21-1.07.14-1.18-.06-.1-.22-.16-.47-.28z"/></svg>
 </a>
+
 <script src="../moneyway-site/app.js"></script>
-</body></html>
+<script>
+function mgSwitch(mode) {
+  document.querySelectorAll('.mg-t').forEach(function(b) {
+    b.classList.toggle('active', b.dataset.mode === mode);
+  });
+  document.getElementById('mg-send').style.display = mode === 'send' ? 'flex' : 'none';
+  document.getElementById('mg-receive').style.display = mode === 'receive' ? 'flex' : 'none';
+}
+
+function mgSend() {
+  var name = document.getElementById('mg-send-name').value.trim();
+  var country = document.getElementById('mg-send-country').value;
+  var amount = document.getElementById('mg-send-amount').value.trim();
+  if (!name || !country || !amount) {
+    alert('Preencha todos os campos antes de continuar.');
+    return;
+  }
+  var msg = 'Oi, meu nome é ' + name + '. Quero enviar R$ ' + amount + ' para ' + country + '.';
+  window.open('https://wa.me/5551999649824?text=' + encodeURIComponent(msg), '_blank');
+}
+
+function mgReceive() {
+  var name = document.getElementById('mg-recv-name').value.trim();
+  var code = document.getElementById('mg-recv-code').value.trim();
+  if (!name) {
+    alert('Informe seu nome antes de continuar.');
+    return;
+  }
+  var msg = 'Oi, meu nome é ' + name + '. Quero receber.';
+  if (code) msg += ' Meu código é ' + code + '.';
+  window.open('https://wa.me/5551999649824?text=' + encodeURIComponent(msg), '_blank');
+}
+</script>
+</body>
+</html>
