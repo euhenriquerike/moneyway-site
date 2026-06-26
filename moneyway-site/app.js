@@ -8,12 +8,14 @@
 
   /* ========== RATES (global, atualizadas pela API) ========== */
   window.MW_RATES = {
-    USD: { buy: 4.85, sell: 5.50, name: 'Dólar Americano',   sign: 'US$' },
-    EUR: { buy: 5.75, sell: 6.42, name: 'Euro',               sign: '€'   },
-    GBP: { buy: 6.30, sell: 7.55, name: 'Libra Esterlina',    sign: '£'   },
-    CHF: { buy: 5.20, sell: 7.00, name: 'Franco Suíço',       sign: 'Fr'  },
-    CAD: { buy: 3.20, sell: 4.05, name: 'Dólar Canadense',    sign: 'C$'  },
-    AUD: { buy: 3.15, sell: 3.90, name: 'Dólar Australiano',  sign: 'A$'  },
+    USD: { buy: 4.85,  sell: 5.50,  name: 'Dólar Americano',   sign: 'US$' },
+    EUR: { buy: 5.75,  sell: 6.42,  name: 'Euro',               sign: '€'   },
+    GBP: { buy: 6.30,  sell: 7.55,  name: 'Libra Esterlina',    sign: '£'   },
+    CHF: { buy: 5.20,  sell: 7.00,  name: 'Franco Suíço',       sign: 'Fr'  },
+    CAD: { buy: 3.20,  sell: 4.05,  name: 'Dólar Canadense',    sign: 'C$'  },
+    AUD: { buy: 3.15,  sell: 3.90,  name: 'Dólar Australiano',  sign: 'A$'  },
+    ARS: { buy: 0.004, sell: 0.006, name: 'Peso Argentino',     sign: 'AR$' },
+    UYU: { buy: 0.100, sell: 0.145, name: 'Peso Uruguaio',      sign: '$U'  },
   };
 
   /* ========== NAV ========== */
@@ -70,22 +72,43 @@
 
   /* ========== SIMULADOR ========== */
   (function () {
-    var st = { cur: 'USD', mode: 'buy', amount: 1000 };
+    var SPREAD_ESPECIE = 0.038;
+    var SPREAD_DEBITO  = 0.058; /* maior: inclui IOF de cartão (3,38%) */
+    var DEBITO_CURS    = ['USD', 'EUR', 'GBP', 'CAD', 'AUD'];
+
+    var st = { cur: 'USD', mode: 'buy', amount: 1000, tab: 'especie' };
     var amt = document.getElementById('sim-amt');
     if (!amt) return;
-    var sign     = document.getElementById('sim-sign');
-    var amtLabel = document.getElementById('sim-amt-label');
-    var rateLabel = document.getElementById('sim-rate-label');
-    var rateEl   = document.getElementById('sim-rate');
+    var sign       = document.getElementById('sim-sign');
+    var amtLabel   = document.getElementById('sim-amt-label');
+    var rateLabel  = document.getElementById('sim-rate-label');
+    var rateEl     = document.getElementById('sim-rate');
     var totalLabel = document.getElementById('sim-total-label');
-    var totalEl  = document.getElementById('sim-total');
-    var cta      = document.getElementById('sim-cta');
+    var totalEl    = document.getElementById('sim-total');
+    var cta        = document.getElementById('sim-cta');
+    var typeNote   = document.getElementById('sim-type-note');
 
     function brl(v) { return 'R$ ' + v.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 }); }
     function grp(n) { return n.toLocaleString('pt-BR'); }
 
+    function getRates(cur) {
+      var base = window.MW_RATES[cur];
+      if (st.tab === 'debito') {
+        /* recalcula com spread de débito sobre o mid */
+        var mid = (base.buy + base.sell) / (2 - SPREAD_ESPECIE * 0);
+        /* aproximação: inverte spread original para achar mid */
+        var midApprox = base.sell / (1 + SPREAD_ESPECIE);
+        return {
+          buy:  parseFloat((midApprox * (1 - SPREAD_DEBITO)).toFixed(3)),
+          sell: parseFloat((midApprox * (1 + SPREAD_DEBITO)).toFixed(3)),
+          name: base.name, sign: base.sign
+        };
+      }
+      return base;
+    }
+
     function render() {
-      var r = window.MW_RATES[st.cur];
+      var r = getRates(st.cur);
       var buying = st.mode === 'buy';
       var rate = buying ? r.sell : r.buy;
       var total = (st.amount || 0) * rate;
@@ -96,12 +119,29 @@
       if (totalLabel) totalLabel.textContent = buying ? 'Você paga (estimado)' : 'Você recebe (estimado)';
       if (totalEl) totalEl.textContent = brl(total);
       if (cta) {
+        var tipo = st.tab === 'debito' ? 'cartão de débito' : 'moeda em espécie';
         var verb = buying ? 'comprar' : 'vender';
-        var msg = 'Quero ' + verb + ' ' + r.sign + ' ' + grp(st.amount || 0) + ' em ' + r.name + '. Total estimado ' + brl(total) + '.';
+        var msg = 'Quero ' + verb + ' ' + r.sign + ' ' + grp(st.amount || 0) + ' em ' + r.name + ' (' + tipo + '). Total estimado ' + brl(total) + '.';
         cta.href = 'https://wa.me/5551999649824?text=' + encodeURIComponent(msg);
       }
     }
     window.MW_RENDER = render;
+
+    function applyTab() {
+      var isDebito = st.tab === 'debito';
+      if (typeNote) typeNote.textContent = isDebito ? 'para cartão de débito' : 'para moeda em espécie';
+      document.querySelectorAll('#sim-cur .especie-only').forEach(function (b) {
+        b.style.display = isDebito ? 'none' : '';
+      });
+      /* se moeda atual não disponível no débito, volta para USD */
+      if (isDebito && DEBITO_CURS.indexOf(st.cur) === -1) {
+        st.cur = 'USD';
+        document.querySelectorAll('#sim-cur button').forEach(function (b) {
+          b.classList.toggle('active', b.getAttribute('data-cur') === 'USD');
+        });
+      }
+      render();
+    }
 
     amt.addEventListener('input', function () {
       var digits = amt.value.replace(/\D/g, '');
@@ -109,6 +149,15 @@
       amt.value = st.amount ? grp(st.amount) : '';
       render();
     });
+
+    document.querySelectorAll('.sim__tab').forEach(function (b) {
+      b.addEventListener('click', function () {
+        st.tab = b.getAttribute('data-tab');
+        document.querySelectorAll('.sim__tab').forEach(function (x) { x.classList.toggle('active', x === b); });
+        applyTab();
+      });
+    });
+
     document.querySelectorAll('#sim-cur button').forEach(function (b) {
       b.addEventListener('click', function () {
         st.cur = b.getAttribute('data-cur');
@@ -131,10 +180,10 @@
     var SPREAD = 0.038;
 
     function applyRates(mid) {
-      ['USD', 'EUR', 'GBP', 'CHF', 'CAD', 'AUD'].forEach(function (cur) {
+      ['USD', 'EUR', 'GBP', 'CHF', 'CAD', 'AUD', 'ARS', 'UYU'].forEach(function (cur) {
         if (!mid[cur]) return;
-        window.MW_RATES[cur].buy  = parseFloat((mid[cur] * (1 - SPREAD)).toFixed(3));
-        window.MW_RATES[cur].sell = parseFloat((mid[cur] * (1 + SPREAD)).toFixed(3));
+        window.MW_RATES[cur].buy  = parseFloat((mid[cur] * (1 - SPREAD)).toFixed(4));
+        window.MW_RATES[cur].sell = parseFloat((mid[cur] * (1 + SPREAD)).toFixed(4));
       });
       if (window.MW_RENDER) window.MW_RENDER();
 
@@ -176,7 +225,7 @@
       .then(function (data) {
         if (data.result !== 'success') throw new Error();
         var mid = {};
-        ['USD', 'EUR', 'GBP', 'CHF', 'CAD', 'AUD'].forEach(function (cur) {
+        ['USD', 'EUR', 'GBP', 'CHF', 'CAD', 'AUD', 'ARS', 'UYU'].forEach(function (cur) {
           if (data.rates[cur]) mid[cur] = 1 / data.rates[cur];
         });
         applyRates(mid);

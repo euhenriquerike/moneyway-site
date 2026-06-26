@@ -96,18 +96,25 @@
   </div>
 </header>
 
-<!-- ============ COTAÇÃO ============ -->
+<!-- ============ SIMULADOR ============ -->
 <section id="cotacao">
   <div class="wrap">
     <span class="pill reveal"><span class="dot" style="background:var(--blue)"></span> Cotação atualizada agora</span>
-    <h2 class="s-title reveal d1" style="margin-top:20px;max-width:16ch">Acompanhe as <span class="grad-text">moedas</span> em tempo real</h2>
-    <p class="s-sub reveal d2">Valores de referência. Para cotação personalizada e melhores condições, fale com um especialista.</p>
+    <h2 class="s-title reveal d1" style="margin-top:20px;max-width:20ch">Simule seu <span class="grad-text">câmbio agora</span></h2>
+    <p class="s-sub reveal d2">Trabalhamos com mais de 10 tipos de moedas estrangeiras. Valores com IOF incluso.</p>
 
     <div class="sim reveal d1">
       <div class="sim__head">
-        <span class="sim__title">Simulador de câmbio</span>
-        <span class="sim__live"><span class="dot"></span> cotação ilustrativa</span>
+        <div class="sim__title-group">
+          <span class="sim__title">Simulador de câmbio</span>
+          <span class="sim__subtype" id="sim-type-note">para moeda em espécie</span>
+        </div>
+        <div class="sim__tabs">
+          <button class="sim__tab active" data-tab="especie">💵 Espécie</button>
+          <button class="sim__tab" data-tab="debito">💳 Cartão de Débito</button>
+        </div>
       </div>
+      <div class="sim__iof-note"><span class="dot"></span> IOF já incluso na cotação</div>
       <div class="sim__body">
         <div class="sim__controls">
           <div class="sim__row">
@@ -116,9 +123,11 @@
               <button data-cur="USD" class="active">🇺🇸 USD</button>
               <button data-cur="EUR">🇪🇺 EUR</button>
               <button data-cur="GBP">🇬🇧 GBP</button>
-              <button data-cur="CHF">🇭🇷 CHF</button>
+              <button data-cur="CHF" class="especie-only">🇨🇭 CHF</button>
               <button data-cur="CAD">🇨🇦 CAD</button>
               <button data-cur="AUD">🇦🇺 AUD</button>
+              <button data-cur="ARS" class="especie-only">🇦🇷 ARS</button>
+              <button data-cur="UYU" class="especie-only">🇺🇾 UYU</button>
             </div>
           </div>
           <div class="sim__row sim__row--2">
@@ -146,42 +155,20 @@
       </div>
     </div>
 
-    <div class="rates-wrap reveal d1">
-      <div class="rates-head">
-        <span class="ttl">Cotações agora</span>
-        <span class="upd"><span class="dot"></span> Atualizado: 22/06/2026, 11:37</span>
+    <div class="rates-cta-box reveal">
+      <div class="rates-cta-box__text">
+        <strong>Veja as cotações completas de todas as moedas</strong>
+        <span>Dólar, euro, libra, peso argentino, peso uruguaio e mais — atualizadas diariamente.</span>
       </div>
-      <div class="rates-scroll">
-        <table class="rates-table">
-          <thead>
-            <tr><th>Moeda</th><th class="num">Compra (R$)</th><th class="num">Venda (R$)</th></tr>
-          </thead>
-          <tbody>
-            <tr><td><div class="rates-cur"><span class="fl">🇺🇸</span><span class="cd">USD</span><span class="nm">Dólar Americano</span></div></td><td class="num">R$ 4,850</td><td class="num venda">R$ 5,500</td></tr>
-            <tr><td><div class="rates-cur"><span class="fl">🇪🇺</span><span class="cd">EUR</span><span class="nm">Euro</span></div></td><td class="num">R$ 5,750</td><td class="num venda">R$ 6,420</td></tr>
-            <tr><td><div class="rates-cur"><span class="fl">🇺🇾</span><span class="cd">UYU</span><span class="nm">Peso Uruguaio</span></div></td><td class="num">R$ 0,110</td><td class="num venda">R$ 0,155</td></tr>
-            <tr><td><div class="rates-cur"><span class="fl">🇬🇧</span><span class="cd">GBP</span><span class="nm">Libra Esterlina</span></div></td><td class="num">R$ 6,300</td><td class="num venda">R$ 7,550</td></tr>
-            <tr><td><div class="rates-cur"><span class="fl">🇨🇭</span><span class="cd">CHF</span><span class="nm">Franco Suíço</span></div></td><td class="num">R$ 5,200</td><td class="num venda">R$ 7,000</td></tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-
-    <div class="rates-more reveal">
-      <a href="subpaginas/cotacoes.html">Ver todas as moedas <span>→</span></a>
-    </div>
-
-    <div class="rates-notes reveal">
-      <p>Valores podem sofrer alterações ao longo do dia. Para fechamento, confirme no atendimento.</p>
-      <p>Valores sujeitos a alterações sem aviso prévio.</p>
-      <p>Todas as cotações já estão com o IOF incluso no valor final.</p>
-      <p>Para cotações atualizadas, entre em contato conosco no botão abaixo.</p>
+      <a class="btn btn--grad" href="subpaginas/cotacoes.html">Ver todas as cotações
+        <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+      </a>
     </div>
 
     <div class="notlisted reveal">
       <div>
         <div class="notlisted__t">Precisa de uma moeda que não está na lista?</div>
-        <div class="notlisted__s">Entre em contato — conseguimos uma taxa para você.</div>
+        <div class="notlisted__s">Trabalhamos com mais de 10 tipos de moedas — entre em contato e conseguimos uma taxa para você.</div>
       </div>
       <a class="btn btn--grad" href="https://wa.me/5551999649824?text=Preciso%20de%20uma%20moeda%20que%20n%C3%A3o%20est%C3%A1%20na%20lista." target="_blank" rel="noopener">Entre em contato
         <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 0 1-8.5 8.5 8.5 8.5 0 0 1-3.8-.9L3 21l1.9-5.7a8.5 8.5 0 1 1 16.1-3.8z"/></svg></span>
@@ -197,78 +184,11 @@
     <p class="s-sub reveal d1" style="margin-inline:auto">Mais de uma década conectando pessoas e empresas ao mundo.</p>
     <div class="stat-grid">
       <div class="stat reveal"><div class="stat__num stat__num--accent" data-count="10000" data-suf="+">0+</div><div class="stat__lab">Operações realizadas</div></div>
-      <div class="stat reveal d1"><div class="stat__num stat__num--accent" data-count="30" data-suf="+">0+</div><div class="stat__lab">Países atendidos</div></div>
+      <div class="stat reveal d1"><div class="stat__num stat__num--accent" data-count="10" data-suf="+">0+</div><div class="stat__lab">Cidades atendidas no Brasil</div></div>
       <div class="stat reveal d2"><div class="stat__num stat__num--accent" data-count="15" data-suf="+">0+</div><div class="stat__lab">Anos de experiência</div></div>
       <div class="stat reveal d3"><div class="stat__num stat__num--accent" data-count="5000" data-suf="+">0+</div><div class="stat__lab">Clientes atendidos</div></div>
     </div>
     <p class="numbers__foot reveal">⚡ Atendimento em até <b>poucos minutos</b></p>
-  </div>
-</section>
-
-<!-- ============ SOBRE ============ -->
-<section id="sobre">
-  <div class="wrap about__grid">
-    <div class="about__img reveal">
-      <img src="assets/photos/usd-pile.avif" alt="Money Way Câmbio" />
-      <span class="about__badge">✈️ Câmbio sem complicação para a sua viagem</span>
-    </div>
-    <div>
-      <p class="eyebrow reveal">Quem nós somos</p>
-      <h2 class="s-title reveal d1">Estamos aqui pra te ajudar a <span class="grad-text">descomplicar o câmbio</span> em Porto Alegre</h2>
-      <p class="s-sub reveal d2">Acreditamos que viajar é para todos — não deixe os super destinos te intimidarem! Seja uma lua de mel no Caribe ou um mochilão pela América Latina, as possibilidades são muitas e queremos te ajudar em todas elas. Temos experiência real em viagens low-cost e de mochila, e fazemos o que está ao nosso alcance para você economizar e curtir a viagem da melhor forma possível.</p>
-      <ul class="about__list reveal d3">
-        <li><span class="tick">✓</span> Experiência real em viagens low-cost e mochilão</li>
-        <li><span class="tick">✓</span> Atendimento próximo, sem complicação</li>
-        <li><span class="tick">✓</span> Foco em ajudar você a economizar</li>
-        <li><span class="tick">✓</span> Mais de 10 moedas estrangeiras</li>
-      </ul>
-    </div>
-  </div>
-</section>
-
-<!-- ============ SERVIÇOS ============ -->
-<section id="servicos">
-  <div class="wrap">
-    <p class="eyebrow reveal">Serviços</p>
-    <h2 class="s-title reveal d1">Conheça <span class="grad-text">nossos serviços</span></h2>
-    <div class="svc-grid">
-      <article class="svc reveal">
-        <div class="svc__ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 1v22M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>
-        <h3>Compra e venda de moedas</h3>
-        <p>Na Money Way você compra mais de 10 moedas estrangeiras, com cotações competitivas e atendimento personalizado.</p>
-        <a class="svc__more" href="https://wa.me/5551999649824?text=Quero%20saber%20mais%20sobre%20Compra%20e%20venda%20de%20moedas." target="_blank" rel="noopener">Saiba mais <span class="ar">→</span></a>
-      </article>
-      <article class="svc reveal d1">
-        <div class="svc__ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg></div>
-        <h3>Remessa expressa e internacional</h3>
-        <p>Envie e receba dinheiro ao redor do mundo com segurança e comodidade.</p>
-        <a class="svc__more" href="subpaginas/remessas.html">Saiba mais <span class="ar">→</span></a>
-      </article>
-      <article class="svc reveal d2">
-        <div class="svc__ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15 15 0 0 1 0 20M12 2a15 15 0 0 0 0 20"/></svg></div>
-        <h3>Conta global</h3>
-        <p>Pague despesas e faça compras em milhões de estabelecimentos ao redor do mundo.</p>
-        <a class="svc__more" href="subpaginas/conta-global.html">Saiba mais <span class="ar">→</span></a>
-      </article>
-      <article class="svc reveal">
-        <div class="svc__ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l8 4v6c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V6l8-4z"/><path d="M9 12l2 2 4-4"/></svg></div>
-        <h3>Seguro viagem</h3>
-        <p>Aproveite a sua viagem com tranquilidade e a proteção do seguro viagem.</p>
-        <a class="svc__more" href="subpaginas/seguro-viagem.html">Saiba mais <span class="ar">→</span></a>
-      </article>
-      <article class="svc reveal d1">
-        <div class="svc__ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.8 19.2L16 11l3.5-3.5a2.12 2.12 0 0 0-3-3L13 8 4.8 6.2a1 1 0 0 0-.9.3l-1 1a1 1 0 0 0 .2 1.5L8 12l-2 2-2-.5a1 1 0 0 0-.9.3l-.5.5a1 1 0 0 0 .2 1.6L6 18l1.6 2.7a1 1 0 0 0 1.6.2l.5-.5a1 1 0 0 0 .3-.9L11 18l2-2 2.9 5.8a1 1 0 0 0 1.5.2l1-1a1 1 0 0 0 .3-.9z"/></svg></div>
-        <h3>Passagens aéreas</h3>
-        <p>Encontre as melhores passagens com a ajuda de um de nossos agentes.</p>
-        <a class="svc__more" href="subpaginas/passagens.html">Saiba mais <span class="ar">→</span></a>
-      </article>
-      <article class="svc reveal d2">
-        <div class="svc__ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="5" width="20" height="14" rx="3"/><path d="M2 10h20"/></svg></div>
-        <h3>Visa Travel Money</h3>
-        <p>Cartão pré-pago internacional para levar sua moeda com segurança e praticidade.</p>
-        <a class="svc__more" href="subpaginas/visa-travel-money.html">Saiba mais <span class="ar">→</span></a>
-      </article>
-    </div>
   </div>
 </section>
 
@@ -287,15 +207,48 @@
   </div>
 </section>
 
-<!-- ============ COMO FUNCIONA ============ -->
-<section id="como-funciona" class="how">
+<!-- ============ SERVIÇOS ============ -->
+<section id="servicos">
   <div class="wrap">
-    <p class="eyebrow reveal">Como funciona</p>
-    <h2 class="s-title reveal d1">Em <span class="grad-text">3 passos simples</span></h2>
-    <div class="steps">
-      <div class="step reveal"><div class="step__no">1</div><h3>Solicite sua cotação</h3><p>Informe a moeda, valor e tipo de operação. Em minutos enviamos sua cotação.</p></div>
-      <div class="step reveal d1"><div class="step__no">2</div><h3>Fale com um especialista</h3><p>Nossa equipe orienta cada etapa com transparência e atenção total ao seu objetivo.</p></div>
-      <div class="step reveal d2"><div class="step__no">3</div><h3>Finalize com segurança</h3><p>Operação realizada com tecnologia, conformidade e total rastreabilidade.</p></div>
+    <p class="eyebrow reveal">Serviços</p>
+    <h2 class="s-title reveal d1">Conheça <span class="grad-text">nossos serviços</span></h2>
+    <div class="svc-grid">
+      <article class="svc reveal">
+        <div class="svc__ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 1v22M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>
+        <h3>Compra e venda de moedas estrangeiras</h3>
+        <p>Mais de 10 moedas estrangeiras em espécie, com cotações competitivas e atendimento personalizado.</p>
+        <a class="svc__more" href="https://wa.me/5551999649824?text=Quero%20saber%20mais%20sobre%20compra%20e%20venda%20de%20moedas." target="_blank" rel="noopener">Saiba mais <span class="ar">→</span></a>
+      </article>
+      <article class="svc reveal d1">
+        <div class="svc__ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg></div>
+        <h3>Transferências e remessas internacionais</h3>
+        <p>Envie e receba dinheiro ao redor do mundo com segurança, agilidade e transparência.</p>
+        <a class="svc__more" href="subpaginas/remessas.html">Saiba mais <span class="ar">→</span></a>
+      </article>
+      <article class="svc reveal d2">
+        <div class="svc__ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="8" cy="8" r="6"/><path d="M18.09 10.37A6 6 0 1 1 10.34 18M7 6h1v4"/></svg></div>
+        <h3>Compra de cédulas estrangeiras antigas</h3>
+        <p>Avaliamos e compramos cédulas antigas com segurança, transparência e expertise de mercado.</p>
+        <a class="svc__more" href="https://wa.me/5551999649824?text=Tenho%20c%C3%A9dulas%20antigas%20para%20avaliar." target="_blank" rel="noopener">Saiba mais <span class="ar">→</span></a>
+      </article>
+      <article class="svc reveal">
+        <div class="svc__ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l8 4v6c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V6l8-4z"/><path d="M9 12l2 2 4-4"/></svg></div>
+        <h3>Seguro viagem</h3>
+        <p>Aproveite sua viagem com tranquilidade. Coberturas completas para qualquer destino.</p>
+        <a class="svc__more" href="subpaginas/seguro-viagem.html">Saiba mais <span class="ar">→</span></a>
+      </article>
+      <article class="svc reveal d1">
+        <div class="svc__ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.8 19.2L16 11l3.5-3.5a2.12 2.12 0 0 0-3-3L13 8 4.8 6.2a1 1 0 0 0-.9.3l-1 1a1 1 0 0 0 .2 1.5L8 12l-2 2-2-.5a1 1 0 0 0-.9.3l-.5.5a1 1 0 0 0 .2 1.6L6 18l1.6 2.7a1 1 0 0 0 1.6.2l.5-.5a1 1 0 0 0 .3-.9L11 18l2-2 2.9 5.8a1 1 0 0 0 1.5.2l1-1a1 1 0 0 0 .3-.9z"/></svg></div>
+        <h3>Passagem aérea</h3>
+        <p>Encontre as melhores passagens com ajuda de nossos agentes especializados.</p>
+        <a class="svc__more" href="subpaginas/passagens.html">Saiba mais <span class="ar">→</span></a>
+      </article>
+      <article class="svc reveal d2">
+        <div class="svc__ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2M12 12v5M9 14h6"/></svg></div>
+        <h3>Importação e exportação</h3>
+        <p>Soluções cambiais completas para empresas que operam no comércio exterior.</p>
+        <a class="svc__more" href="subpaginas/pj.html">Ver soluções PJ <span class="ar">→</span></a>
+      </article>
     </div>
   </div>
 </section>
