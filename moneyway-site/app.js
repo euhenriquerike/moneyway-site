@@ -241,46 +241,41 @@
     var ctx = canvas.getContext('2d');
     var DPR = Math.min(window.devicePixelRatio || 1, 2);
 
-    /* --- estado de rotação --- */
-    var rotY = 0.4;   /* ângulo atual Y (rad) */
-    var rotX = 0.18;  /* ângulo atual X (rad) — leve tilt inicial */
-    var velY = 0.003; /* velocidade de auto-spin */
-    var velX = 0;
-    var tgtY = rotY, tgtX = rotX;
+    /* --- estado de rotação (apenas eixo Y — norte sempre fixo no topo) --- */
+    var rotY = 0.4;
+    var velY = 0.003;
+    var tgtY = rotY;
     var drag = false, px = 0, py = 0;
     var userDragged = false;
 
-    /* --- cidades [lat°, lng°, accent] --- */
+    /* --- cidades [lat°, lng°, accent, nome] — coordenadas reais --- */
     var CITIES = [
-      [-30.0, -51.2, true,  'Porto Alegre'],
-      [ 40.7, -74.0, false, 'New York'],
-      [ 51.5,  -0.1, false, 'Londres'],
-      [-23.5, -46.6, false, 'São Paulo'],
-      [ 48.8,   2.3, false, 'Paris'],
-      [ 25.2,  55.3, false, 'Dubai'],
-      [  1.4, 103.8, false, 'Singapore'],
-      [ 35.7, 139.7, false, 'Tóquio'],
+      [-30.03, -51.23, true,  'Porto Alegre'],   // 0
+      [ 40.71, -74.01, false, 'New York'],        // 1
+      [ 51.51,  -0.13, false, 'Londres'],         // 2
+      [-23.55, -46.63, false, 'São Paulo'],       // 3
+      [ 48.85,   2.35, false, 'Paris'],           // 4
+      [ 25.20,  55.27, false, 'Dubai'],           // 5
+      [  1.35, 103.82, false, 'Singapore'],       // 6
+      [ 35.68, 139.69, false, 'Tóquio'],          // 7
+      [-33.87, 151.21, false, 'Sydney'],          // 8
+      [ 34.05,-118.24, false, 'Los Angeles'],     // 9
+      [-33.92,  18.42, false, 'Cidade do Cabo'],  // 10
     ].map(function (c) {
       return { lat: c[0] * Math.PI / 180, lng: c[1] * Math.PI / 180, accent: c[2], name: c[3] };
     });
 
-    /* --- rotas entre cidades [idx_a, idx_b] --- */
-    var ROUTES = [[0,1],[0,2],[0,3],[1,2],[2,4],[2,5],[5,6],[6,7]];
+    /* --- rotas [idx_a, idx_b] --- */
+    var ROUTES = [[0,1],[0,2],[0,3],[9,1],[2,4],[2,5],[5,6],[6,7],[7,8],[0,10]];
 
-    /* projeta um ponto esférico com rotX/rotY atuais
-       retorna {x,y} em coordenadas normalizadas [-1,1] e z de profundidade */
+    /* projeta um ponto esférico — rotação apenas em Y (norte sempre no topo) */
     function project(lat, lng) {
-      /* ponto na esfera unitária */
-      var x0 =  Math.cos(lat) * Math.sin(lng);
-      var y0 =  Math.sin(lat);
-      var z0 =  Math.cos(lat) * Math.cos(lng);
-      /* rotação Y */
+      var x0 = Math.cos(lat) * Math.sin(lng);
+      var y0 = Math.sin(lat);
+      var z0 = Math.cos(lat) * Math.cos(lng);
       var x1 = x0 * Math.cos(rotY) + z0 * Math.sin(rotY);
       var z1 = -x0 * Math.sin(rotY) + z0 * Math.cos(rotY);
-      /* rotação X */
-      var y2 = y0 * Math.cos(rotX) - z1 * Math.sin(rotX);
-      var z2 = y0 * Math.sin(rotX) + z1 * Math.cos(rotX);
-      return { x: x1, y: -y2, z: z2 };
+      return { x: x1, y: -y0, z: z1 };
     }
 
     /* gera pontos de um grande círculo entre dois pontos da esfera */
@@ -463,22 +458,14 @@
 
       if (!drag) {
         if (!userDragged) {
-          /* auto-spin suave quando o usuário não interagiu */
           rotY += velY;
         } else {
-          /* desacelera gradualmente após soltar */
           velY *= 0.96;
           rotY += velY;
-          velX *= 0.96;
-          rotX += velX;
-          rotX = Math.max(-0.7, Math.min(0.7, rotX));
         }
-        /* scroll drive */
         tgtY = rotY;
-        tgtX = rotX;
       } else {
         rotY += (tgtY - rotY) * 0.18;
-        rotX += (tgtX - rotX) * 0.18;
       }
 
       draw();
@@ -499,19 +486,16 @@
     /* mouse drag */
     canvas.addEventListener('mousedown', function (e) {
       drag = true; userDragged = true;
-      px = e.clientX; py = e.clientY;
-      velY = 0; velX = 0;
+      px = e.clientX;
+      velY = 0;
       e.preventDefault();
     });
     window.addEventListener('mousemove', function (e) {
       if (!drag) return;
-      var dx = e.clientX - px, dy = e.clientY - py;
+      var dx = e.clientX - px;
       tgtY += dx * 0.008;
-      tgtX -= dy * 0.006;
-      tgtX = Math.max(-0.7, Math.min(0.7, tgtX));
       velY = dx * 0.004;
-      velX = -dy * 0.003;
-      px = e.clientX; py = e.clientY;
+      px = e.clientX;
     });
     window.addEventListener('mouseup', function () {
       drag = false;
@@ -520,17 +504,15 @@
     /* touch */
     canvas.addEventListener('touchstart', function (e) {
       drag = true; userDragged = true;
-      px = e.touches[0].clientX; py = e.touches[0].clientY;
-      velY = 0; velX = 0;
+      px = e.touches[0].clientX;
+      velY = 0;
     }, { passive: true });
     canvas.addEventListener('touchmove', function (e) {
       if (!drag) return;
-      var dx = e.touches[0].clientX - px, dy = e.touches[0].clientY - py;
+      var dx = e.touches[0].clientX - px;
       tgtY += dx * 0.008;
-      tgtX -= dy * 0.006;
-      tgtX = Math.max(-0.7, Math.min(0.7, tgtX));
-      velY = dx * 0.004; velX = -dy * 0.003;
-      px = e.touches[0].clientX; py = e.touches[0].clientY;
+      velY = dx * 0.004;
+      px = e.touches[0].clientX;
     }, { passive: true });
     canvas.addEventListener('touchend', function () { drag = false; });
   })();
@@ -603,6 +585,33 @@
       var btn = document.querySelector('.lang-sw button[data-lang="' + saved + '"]');
       if (btn) { btn.click(); }
     }
+  })();
+
+  /* ========== CARROSSEL GOOGLE REVIEWS ========== */
+  (function () {
+    var slides = document.querySelectorAll('.gc__slide');
+    var dots   = document.querySelectorAll('.gc__dot');
+    if (!slides.length) return;
+    var cur = 0, timer;
+
+    function go(i) {
+      slides[cur].classList.remove('active');
+      dots[cur].classList.remove('active');
+      cur = (i + slides.length) % slides.length;
+      slides[cur].classList.add('active');
+      dots[cur].classList.add('active');
+    }
+
+    function autoNext() { go(cur + 1); }
+    timer = setInterval(autoNext, 5000);
+
+    dots.forEach(function (d) {
+      d.addEventListener('click', function () {
+        clearInterval(timer);
+        go(Number(d.getAttribute('data-i')));
+        timer = setInterval(autoNext, 5000);
+      });
+    });
   })();
 
   /* ========== NEWSLETTER — seleção de canal ========== */

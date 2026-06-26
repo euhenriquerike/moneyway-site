@@ -248,11 +248,41 @@
 <!-- ============ GOOGLE RATING ============ -->
 <section class="google-section">
   <div class="wrap">
-    <div class="google-badge reveal">
-      <svg class="google-badge__icon" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/><path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/><path fill="none" d="M0 0h48v48H0z"/></svg>
-      <div class="google-badge__info">
-        <div class="google-badge__stars">★★★★★</div>
-        <div class="google-badge__score">5,0 <span class="google-badge__count">· 166 avaliações no Google</span></div>
+    <div class="google-wrap reveal">
+      <!-- badge -->
+      <div class="google-badge">
+        <svg class="google-badge__icon" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/><path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/><path fill="none" d="M0 0h48v48H0z"/></svg>
+        <div class="google-badge__info">
+          <div class="google-badge__stars">★★★★★</div>
+          <div class="google-badge__score">5,0 <span class="google-badge__count">· 166 avaliações no Google</span></div>
+        </div>
+      </div>
+      <!-- carrossel de avaliações -->
+      <div class="gc" id="gc">
+        <div class="gc__slides">
+          <div class="gc__slide active">
+            <p class="gc__text">"Super atenciosos desde o primeiro contato até o pós-venda. Foi a melhor cotação que encontrei e ainda me ajudaram com questões de entrega/retirada do valor."</p>
+            <span class="gc__author">Bruna Viesseri <span class="gc__when">· 2 meses atrás</span></span>
+          </div>
+          <div class="gc__slide">
+            <p class="gc__text">"Fui muito bem atendido, negociação super justa, atendimento excelente!"</p>
+            <span class="gc__author">Douglas Barbosa <span class="gc__when">· 5 meses atrás</span></span>
+          </div>
+          <div class="gc__slide">
+            <p class="gc__text">"Não tenho palavras pra descrever o atendimento da Money Way. Sempre atenciosos, prontos para ajudar e, além disso, sempre com as melhores cotações. Indico para todos os meus amigos."</p>
+            <span class="gc__author">Maiara Gomes <span class="gc__when">· um ano atrás</span></span>
+          </div>
+          <div class="gc__slide">
+            <p class="gc__text">"Excelente atendimento, empresa séria. Pessoal de toda a equipe está de parabéns. Segunda vez que utilizo o serviço e sempre muito prestativos."</p>
+            <span class="gc__author">João Toigo <span class="gc__when">· 3 anos atrás</span></span>
+          </div>
+        </div>
+        <div class="gc__nav">
+          <button class="gc__dot active" data-i="0" aria-label="Avaliação 1"></button>
+          <button class="gc__dot" data-i="1" aria-label="Avaliação 2"></button>
+          <button class="gc__dot" data-i="2" aria-label="Avaliação 3"></button>
+          <button class="gc__dot" data-i="3" aria-label="Avaliação 4"></button>
+        </div>
       </div>
     </div>
   </div>
