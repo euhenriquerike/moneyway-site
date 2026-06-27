@@ -46,23 +46,26 @@
 <!-- NAV -->
 <nav class="nav">
   <div class="nav__bar">
-    <a class="brand" href="../index.html">
+    <a class="brand" href="../index.html#top">
       <img class="brand__sym" src="../moneyway-site/sym.png" alt="" aria-hidden="true" />
       <span class="brand__name">Money&#8201;Way</span>
       <span class="brand__tag">Câmbio</span>
     </a>
     <div class="nav__links">
-      <a href="../subpaginas/cotacoes.html">Cotações</a>
+      <a href="cotacoes.html">Cotações</a>
       <div class="nav__drop">
-        <a href="#servicos">Serviços <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></a>
+        <a href="../index.html#servicos">Serviços <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></a>
         <div class="nav__menu"><div class="nav__menu-inner">
-          <a href="../subpaginas/conta-global.html"><span class="di"></span> Conta Global</a>
-          <a href="../subpaginas/transferencias.html"><span class="di"></span> Transferências</a>
-          <a href="../subpaginas/moneygram.html"><span class="di"></span> MoneyGram</a>
-          <a href="../subpaginas/seguro-viagem.html"><span class="di"></span> Seguro Viagem</a>
+          <a href="cotacoes.html"><span class="di"></span> Compra e venda de moedas</a>
+          <a href="transferencias.html"><span class="di"></span> Transferência de valores nacionais</a>
+          <a href="cedulas-antigas.html"><span class="di"></span> Cédulas Estrangeiras Antigas</a>
+          <a href="viagem.html"><span class="di"></span> Passagem Aérea e Seguro de Viagem</a>
+          <a href="moneygram.html"><span class="di"></span> MoneyGram</a>
+          <a href="pj.html"><span class="di"></span> Importação e Exportação</a>
         </div></div>
       </div>
       <a href="../index.html#sobre">Sobre</a>
+      <a href="blog.html">Blog</a>
       <a href="pj.html" class="nav__pj" style="color:var(--terra);font-weight:700">Empresas PJ</a>
       <a class="btn btn--grad nav__cta" href="https://wa.me/5551999649824?text=Ol%C3%A1!%20Sou%20PJ%20e%20gostaria%20de%20saber%20sobre%20as%20condi%C3%A7%C3%B5es%20para%20empresas." target="_blank" rel="noopener">Falar agora
         <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 0 1-8.5 8.5 8.5 8.5 0 0 1-3.8-.9L3 21l1.9-5.7a8.5 8.5 0 1 1 16.1-3.8z"/></svg></span>
@@ -325,7 +328,7 @@
   <div class="wrap">
     <div class="foot__grid">
       <div>
-        <a class="brand" href="../index.html">
+        <a class="brand" href="../index.html#top">
           <img class="brand__sym" src="../moneyway-site/sym-inv.png" alt="" aria-hidden="true" />
           <span class="brand__name">Money&#8201;Way</span>
           <span class="brand__tag">Câmbio</span>
@@ -355,7 +358,7 @@
 <script>
 /* Cotações PJ ao vivo */
 (function () {
-  var SPREAD_PJ = 0.02; // 2% spread PJ
+  var SPREAD_PJ = 0.02;
   var fallback = { USD: 5.30, EUR: 5.82, GBP: 6.72, CHF: 6.00, CAD: 3.85, AUD: 3.50 };
 
   function fmt(v) { return 'R$ ' + v.toFixed(3); }
