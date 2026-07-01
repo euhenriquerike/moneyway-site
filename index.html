@@ -26,8 +26,8 @@
   padding: clamp(22px, 2.4vw, 30px);
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
-  text-align: left;
+  align-items: center;
+  text-align: center;
   gap: 10px;
   box-shadow: var(--shadow-sm);
   transition: border-top-color .2s;
@@ -36,6 +36,7 @@
 .partner-item__logo {
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 10px;
   margin-bottom: 4px;
   min-height: 48px;
@@ -44,7 +45,7 @@
   height: 44px;
   max-width: 140px;
   object-fit: contain;
-  object-position: left center;
+  object-position: center;
 }
 .partner-item__logo-mark {
   font-family: var(--disp);
@@ -85,6 +86,31 @@
   font-size: 12.5px;
   color: var(--slate);
   line-height: 1.55;
+}
+
+/* Rodapé do simulador integrado com cotações */
+.sim__rates-footer {
+  padding: 16px clamp(20px, 3vw, 30px);
+  border-top: 1px solid rgba(255,255,255,.14);
+  background: rgba(0,0,0,.18);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+.sim__rates-footer-text strong {
+  display: block;
+  font-family: var(--disp);
+  font-weight: 700;
+  font-size: 14px;
+  color: var(--cream);
+}
+.sim__rates-footer-text span {
+  font-size: 12.5px;
+  color: rgba(244,239,230,.6);
+  display: block;
+  margin-top: 2px;
 }
 
 /* Popup cotações */
@@ -200,8 +226,7 @@
       <span class="brand__tag">Câmbio</span>
     </a>
     <div class="nav__center">
-      <a href="subpaginas/cotacoes.html" data-i18n="nav_cotacoes">Cotações</a>
-      <div class="nav__drop">
+    <div class="nav__drop">
         <a href="#servicos"><span data-i18n="nav_services">Serviços</span> <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></a>
         <div class="nav__menu"><div class="nav__menu-inner">
             <a href="subpaginas/cotacoes.html"><span class="di"></span> <span data-i18n="dd_buy_sell">Compra e venda de moedas</span></a>
@@ -212,10 +237,11 @@
           <a href="subpaginas/pj.html"><span class="di"></span> <span data-i18n="dd_impexp">Importação e Exportação</span></a>
         </div></div>
       </div>
-      <a href="#sobre" data-i18n="nav_about">Sobre</a>
-      <a href="subpaginas/blog.html" data-i18n="nav_blog">Blog</a>
-      <a href="subpaginas/pj.html" class="nav__pj" data-i18n="nav_pj">Câmbio para sua empresa</a>
-    </div>
+    <a href="subpaginas/pj.html" class="nav__pj" data-i18n="nav_pj">Câmbio para sua empresa</a>
+    <a href="subpaginas/cotacoes.html" data-i18n="nav_cotacoes">Cotações</a>
+    <a href="#sobre" data-i18n="nav_about">Sobre</a>
+    <a href="subpaginas/blog.html" data-i18n="nav_blog">Blog</a>
+  </div>
   <div class="nav__end">
     <div class="lang-sw">
         <button data-lang="pt" class="active">🇧🇷</button>
@@ -341,9 +367,8 @@
         </div>
       </div>
     </div>
-
-    <div class="rates-cta-box reveal">
-      <div class="rates-cta-box__text">
+    <div class="sim__rates-footer">
+      <div class="sim__rates-footer-text">
         <strong data-i18n="rates_cta_strong">Veja as cotações completas de todas as moedas</strong>
         <span data-i18n="rates_cta_span">Dólar, euro, libra, peso argentino, peso uruguaio e mais. Atualizadas diariamente.</span>
       </div>
