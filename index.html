@@ -13,7 +13,7 @@
 .partners-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: clamp(16px, 2.4vw, 28px);
+  gap: clamp(16px, 2.4vw, 24px);
   margin-top: clamp(36px, 5vw, 52px);
 }
 @media (max-width: 860px) { .partners-grid { grid-template-columns: 1fr 1fr; } }
@@ -21,34 +21,63 @@
 .partner-item {
   background: #fff;
   border: 1px solid var(--line);
+  border-top: 3px solid var(--line);
   border-radius: var(--r);
   padding: clamp(22px, 2.4vw, 30px);
   display: flex;
   flex-direction: column;
-  align-items: center;
-  text-align: center;
-  gap: 12px;
+  align-items: flex-start;
+  text-align: left;
+  gap: 10px;
   box-shadow: var(--shadow-sm);
+  transition: border-top-color .2s;
 }
-.partner-item__ic {
-  width: 60px;
-  height: 60px;
-  border-radius: 18px;
-  background: var(--navy);
-  color: var(--cream);
+.partner-item:hover { border-top-color: var(--terra); }
+.partner-item__logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 4px;
+}
+.partner-item__logo-mark {
+  font-family: var(--disp);
+  font-weight: 800;
+  font-size: 22px;
+  letter-spacing: -0.03em;
+  color: var(--navy);
+  line-height: 1;
+}
+.partner-item__logo-mark.sm { font-size: 16px; letter-spacing: -0.01em; }
+.partner-item__logo-sub {
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--slate-2);
+  line-height: 1.3;
+}
+.partner-item__seal {
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  background: var(--bg-2);
+  border: 1px solid var(--line);
   display: grid;
   place-items: center;
+  flex-shrink: 0;
 }
+.partner-item__seal svg { width: 20px; height: 20px; color: var(--slate); }
 .partner-item strong {
   font-family: var(--disp);
   font-weight: 700;
-  font-size: 16px;
+  font-size: 14px;
   color: var(--navy);
+  line-height: 1.3;
 }
 .partner-item span {
-  font-size: 13px;
+  font-size: 12.5px;
   color: var(--slate);
-  line-height: 1.5;
+  line-height: 1.55;
 }
 
 /* Popup cotações */
@@ -181,9 +210,9 @@
       <a href="subpaginas/blog.html" data-i18n="nav_blog">Blog</a>
       <a href="subpaginas/pj.html" class="nav__pj" data-i18n="nav_pj">Empresas PJ</a>
       <div class="lang-sw">
-        <button data-lang="pt" class="active">PT</button>
-        <button data-lang="en">EN</button>
-        <button data-lang="es">ES</button>
+        <button data-lang="pt" class="active">🇧🇷 PT</button>
+        <button data-lang="en">🇺🇸 EN</button>
+        <button data-lang="es">🇪🇸 ES</button>
       </div>
       <a class="btn btn--grad nav__cta" href="https://wa.me/5551999649824?text=Ol%C3%A1!%20Gostaria%20de%20falar%20com%20a%20Money%20Way%20C%C3%A2mbio." target="_blank" rel="noopener" data-i18n="nav_cta">Falar agora
         <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 0 1-8.5 8.5 8.5 8.5 0 0 1-3.8-.9L3 21l1.9-5.7a8.5 8.5 0 1 1 16.1-3.8z"/></svg></span>
@@ -322,7 +351,9 @@
         <p data-i18n="special_p">A Money Way avalia e orienta você com segurança, transparência e atendimento especializado. Cédulas antigas, moedas raras e valores especiais, tudo com a expertise de quem entende do mercado.</p>
         <a class="btn btn--white" href="https://wa.me/5551999649824?text=Tenho%20d%C3%B3lares%20antigos%20para%20avaliar." target="_blank" rel="noopener" data-i18n="special_btn">Quero avaliar minhas notas</a>
       </div>
-      <div class="special__glyph"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="8" cy="8" r="6"/><path d="M18.09 10.37A6 6 0 1 1 10.34 18M7 6h1v4M16.71 13.88l.7.71-2.82 2.82"/></svg></div>
+      <div class="special__img-wrap" aria-hidden="true">
+        <img src="assets/photos/usd-old-100.jpg" alt="" />
+      </div>
     </div>
   </div>
 </section>
@@ -369,7 +400,7 @@
       <article class="svc reveal">
         <div class="svc__ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.8 19.2L16 11l3.5-3.5a2.12 2.12 0 0 0-3-3L13 8 4.8 6.2a1 1 0 0 0-.9.3l-1 1a1 1 0 0 0 .2 1.5L8 12l-2 2-2-.5a1 1 0 0 0-.9.3l-.5.5a1 1 0 0 0 .2 1.6L6 18l1.6 2.7a1 1 0 0 0 1.6.2l.5-.5a1 1 0 0 0 .3-.9L11 18l2-2 2.9 5.8a1 1 0 0 0 1.5.2l1-1a1 1 0 0 0 .3-.9z"/><path d="M12 2l8 4v6c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V6l8-4z" opacity=".3"/></svg></div>
         <h3 data-i18n="svc4_h3">Passagem aérea e seguro de viagem</h3>
-        <p data-i18n="svc4_p">Passagens com agente especializado e seguro com cobertura completa — tudo em um só atendimento.</p>
+        <p data-i18n="svc4_p">Passagens com agente especializado e seguro com cobertura completa; tudo em um só atendimento.</p>
         <a class="svc__more" href="subpaginas/viagem.html" data-i18n="svc1_more">Saiba mais <span class="ar">→</span></a>
       </article>
       <article class="svc reveal d1">
@@ -438,32 +469,56 @@
     <h2 class="s-title reveal d1" style="text-align:center;max-width:32ch;margin-inline:auto" data-i18n-html="partners_h2">Operações respaldadas por <span class="grad-text">parceiros de confiança</span></h2>
     <div class="partners-grid reveal d2">
       <div class="partner-item">
-        <div class="partner-item__ic">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="32" height="32"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg>
+        <div class="partner-item__logo">
+          <div class="partner-item__seal">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="20" height="20"><path d="M12 2l3 6.5L22 9l-5 4.9 1.2 6.9L12 17.7l-6.2 3.2L7 14 2 9l7-.5z"/></svg>
+          </div>
+          <div>
+            <div class="partner-item__logo-mark">BCB</div>
+            <div class="partner-item__logo-sub">Banco Central</div>
+          </div>
         </div>
         <strong>Banco Central do Brasil</strong>
-        <span>Correspondente cambial credenciado e autorizado pelo BACEN</span>
+        <span>Correspondente cambial credenciado e autorizado pelo BACEN.</span>
       </div>
       <div class="partner-item">
-        <div class="partner-item__ic">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="32" height="32"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15 15 0 0 1 0 20M12 2a15 15 0 0 0 0 20"/></svg>
+        <div class="partner-item__logo">
+          <div class="partner-item__seal">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="20" height="20"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15 15 0 0 1 0 20"/></svg>
+          </div>
+          <div>
+            <div class="partner-item__logo-mark sm">CONFIDENCE</div>
+            <div class="partner-item__logo-sub">Travelex</div>
+          </div>
         </div>
         <strong>Confidence | Travelex</strong>
-        <span>Corretora parceira para câmbio e transferências internacionais</span>
+        <span>Corretora parceira para câmbio e transferências internacionais.</span>
       </div>
       <div class="partner-item">
-        <div class="partner-item__ic">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="32" height="32"><path d="M12 2l8 4v6c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V6l8-4z"/><path d="M9 12l2 2 4-4"/></svg>
+        <div class="partner-item__logo">
+          <div class="partner-item__seal">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="20" height="20"><path d="M12 2l8 4v6c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V6l8-4z"/></svg>
+          </div>
+          <div>
+            <div class="partner-item__logo-mark">GTA</div>
+            <div class="partner-item__logo-sub">Seguros</div>
+          </div>
         </div>
         <strong>GTA Seguros</strong>
-        <span>Parceiros de seguro viagem para destinos nacionais e internacionais</span>
+        <span>Parceiros de seguro viagem para destinos nacionais e internacionais.</span>
       </div>
       <div class="partner-item">
-        <div class="partner-item__ic">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="32" height="32"><path d="M17.8 19.2L16 11l3.5-3.5a2.12 2.12 0 0 0-3-3L13 8 4.8 6.2a1 1 0 0 0-.9.3l-1 1a1 1 0 0 0 .2 1.5L8 12l-2 2-2-.5a1 1 0 0 0-.9.3l-.5.5a1 1 0 0 0 .2 1.6L6 18l1.6 2.7a1 1 0 0 0 1.6.2l.5-.5a1 1 0 0 0 .3-.9L11 18l2-2 2.9 5.8a1 1 0 0 0 1.5.2l1-1a1 1 0 0 0 .3-.9z"/></svg>
+        <div class="partner-item__logo">
+          <div class="partner-item__seal">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="20" height="20"><path d="M17.8 19.2L16 11l3.5-3.5a2.12 2.12 0 0 0-3-3L13 8 4.8 6.2a1 1 0 0 0-.9.3l-1 1a1 1 0 0 0 .2 1.5L8 12l-2 2-2-.5a1 1 0 0 0-.9.3l-.5.5a1 1 0 0 0 .2 1.6L6 18l1.6 2.7a1 1 0 0 0 1.6.2l.5-.5a1 1 0 0 0 .3-.9L11 18l2-2 2.9 5.8a1 1 0 0 0 1.5.2l1-1a1 1 0 0 0 .3-.9z"/></svg>
+          </div>
+          <div>
+            <div class="partner-item__logo-mark">CVC</div>
+            <div class="partner-item__logo-sub">Passagens</div>
+          </div>
         </div>
         <strong>CVC</strong>
-        <span>Emissão de passagens aéreas nacionais e internacionais</span>
+        <span>Emissão de passagens aéreas nacionais e internacionais.</span>
       </div>
     </div>
   </div>

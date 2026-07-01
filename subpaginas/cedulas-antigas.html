@@ -25,44 +25,96 @@
   box-shadow: var(--shadow);
 }
 
-.cedula-types {
+.cedula-cards {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   gap: clamp(14px, 2vw, 22px);
-  margin-top: clamp(36px, 5vw, 52px);
+  margin-top: clamp(32px, 4vw, 48px);
 }
-@media (max-width: 720px) { .cedula-types { grid-template-columns: 1fr 1fr; } }
-@media (max-width: 480px) { .cedula-types { grid-template-columns: 1fr; } }
-.cedula-type {
+@media (max-width: 860px) { .cedula-cards { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 480px) { .cedula-cards { grid-template-columns: 1fr; } }
+.cedula-card {
   background: #fff;
   border: 1px solid var(--line);
   border-radius: var(--r);
-  padding: clamp(24px, 2.8vw, 34px);
+  overflow: hidden;
   box-shadow: var(--shadow-sm);
 }
-.cedula-type__ic {
-  width: 52px;
-  height: 52px;
-  border-radius: 16px;
-  background: var(--navy);
-  color: var(--cream);
-  display: grid;
-  place-items: center;
-  margin-bottom: 18px;
+.cedula-card__thumb {
+  width: 100%;
+  height: 148px;
+  object-fit: cover;
+  display: block;
 }
-.cedula-type__ic svg { width: 26px; height: 26px; }
-.cedula-type h3 {
+.cedula-card__fill {
+  width: 100%;
+  height: 148px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 58px;
+}
+.cedula-card__body {
+  padding: clamp(16px, 2vw, 22px);
+}
+.cedula-card__code {
+  font-family: var(--mono);
+  font-size: 10.5px;
+  font-weight: 500;
+  letter-spacing: .1em;
+  color: var(--slate-2);
+  text-transform: uppercase;
+  margin: 0 0 6px;
+}
+.cedula-card h3 {
   font-family: var(--disp);
   font-weight: 700;
-  font-size: 17px;
+  font-size: 16px;
   color: var(--navy);
-  margin: 0 0 10px;
+  margin: 0 0 8px;
   line-height: 1.3;
 }
-.cedula-type p {
+.cedula-card p {
   color: var(--slate);
-  font-size: 14px;
-  line-height: 1.65;
+  font-size: 13px;
+  line-height: 1.6;
+  margin: 0;
+}
+
+.no-coins {
+  margin-top: clamp(36px, 5vw, 56px);
+  background: var(--navy);
+  border-radius: var(--r);
+  padding: clamp(28px, 4vw, 44px) clamp(24px, 3vw, 40px);
+  display: flex;
+  align-items: center;
+  gap: clamp(20px, 3vw, 32px);
+}
+@media (max-width: 560px) { .no-coins { flex-direction: column; text-align: center; } }
+.no-coins__icon {
+  flex: none;
+  width: 68px;
+  height: 68px;
+  background: #e53e3e;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.no-coins__icon svg { width: 34px; height: 34px; color: #fff; }
+.no-coins__text strong {
+  display: block;
+  font-family: var(--disp);
+  font-weight: 800;
+  font-size: clamp(20px, 2.8vw, 28px);
+  color: var(--cream);
+  letter-spacing: -.01em;
+  margin-bottom: 6px;
+}
+.no-coins__text p {
+  color: rgba(244,239,230,.65);
+  font-size: 15px;
+  line-height: 1.55;
   margin: 0;
 }
 
@@ -217,36 +269,54 @@
 </div></section>
 
 <section style="padding-top:0"><div class="wrap">
-  <div class="cedula-img-row">
-    <img src="../assets/photos/usd-old-100.jpg" alt="Notas de dólar antigas" />
-    <img src="../assets/photos/dollar-100.jpg" alt="Cédulas estrangeiras" />
-  </div>
-</div></section>
-
-<section style="padding-top:0"><div class="wrap">
   <p class="eyebrow reveal">O que avaliamos</p>
-  <h2 class="s-title reveal d1" style="max-width:22ch">Quais cédulas a <span class="grad-text">Money Way compra</span></h2>
-  <div class="cedula-types">
-    <div class="cedula-type reveal">
-      <div class="cedula-type__ic">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15 15 0 0 1 0 20M12 2a15 15 0 0 0 0 20"/></svg>
+  <h2 class="s-title reveal d1" style="max-width:22ch">Cédulas antigas que <span class="grad-text">aceitamos</span></h2>
+  <div class="cedula-img-row reveal d2">
+    <img src="../assets/photos/gbp-notes.webp" alt="Cédulas de libra esterlina" />
+    <img src="../assets/photos/usd-old-100.jpg" alt="Cédulas de dólar americano antigo" />
+  </div>
+  <div class="cedula-cards">
+    <div class="cedula-card reveal">
+      <img class="cedula-card__thumb" src="../assets/photos/gbp-old.webp" alt="Libra Esterlina" />
+      <div class="cedula-card__body">
+        <p class="cedula-card__code">GBP · Reino Unido</p>
+        <h3>Libra Esterlina</h3>
+        <p>Cédulas de libra de qualquer série, incluindo emissões antigas do Banco da Inglaterra.</p>
       </div>
-      <h3>Dólares antigos</h3>
-      <p>Notas de dólar americano de séries antigas, incluindo cédulas com design anterior a 1996 que podem ter valor de coleção acima do facial.</p>
     </div>
-    <div class="cedula-type reveal d1">
-      <div class="cedula-type__ic">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2M12 12v5M9 14h6"/></svg>
+    <div class="cedula-card reveal d1">
+      <img class="cedula-card__thumb" src="../assets/photos/dollar-100.jpg" alt="Dólar Americano" />
+      <div class="cedula-card__body">
+        <p class="cedula-card__code">USD · Estados Unidos</p>
+        <h3>Dólar Americano</h3>
+        <p>Notas de dólar de todas as emissões, inclusive as séries antigas com design clássico.</p>
       </div>
-      <h3>Moedas europeias antigas</h3>
-      <p>Marcos alemães, liras italianas, francos franceses e outras moedas pré-Euro que ainda circulam em circuito de colecionadores.</p>
     </div>
-    <div class="cedula-type reveal d2">
-      <div class="cedula-type__ic">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l3 7H22l-5.5 4 2 7L12 17l-6.5 3 2-7L2 9h7z"/></svg>
+    <div class="cedula-card reveal d2">
+      <div class="cedula-card__fill" style="background:linear-gradient(135deg,#c41230 0%,#8b0d22 100%)">🍁</div>
+      <div class="cedula-card__body">
+        <p class="cedula-card__code">CAD · Canadá</p>
+        <h3>Dólar Canadense</h3>
+        <p>Cédulas de dólar canadense de qualquer emissão, antigas ou recentes.</p>
       </div>
-      <h3>Raridades e coleções</h3>
-      <p>Cédulas de edições comemorativas, erros de impressão, séries limitadas ou de países extintos com valor numismático.</p>
+    </div>
+    <div class="cedula-card reveal d3">
+      <div class="cedula-card__fill" style="background:linear-gradient(135deg,#1a1f3c 0%,#0d1126 100%)">🇨🇭</div>
+      <div class="cedula-card__body">
+        <p class="cedula-card__code">CHF · Suíça</p>
+        <h3>Franco Suíço</h3>
+        <p>Cédulas de franco suíço de qualquer série, incluindo emissões mais antigas do Banco Nacional Suíço.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="no-coins reveal">
+    <div class="no-coins__icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M15 9l-6 6M9 9l6 6"/></svg>
+    </div>
+    <div class="no-coins__text">
+      <strong>NÃO COMPRAMOS MOEDAS</strong>
+      <p>Trabalhamos exclusivamente com cédulas de papel. Não realizamos avaliação nem compra de moedas metálicas.</p>
     </div>
   </div>
 </div></section>
