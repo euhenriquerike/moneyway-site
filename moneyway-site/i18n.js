@@ -9,7 +9,7 @@
     nav_about:    { pt: 'Sobre', en: 'About', es: 'Sobre nosotros' },
     nav_how:      { pt: 'Como funciona', en: 'How it works', es: 'Cómo funciona' },
     nav_blog:     { pt: 'Blog', en: 'Blog', es: 'Blog' },
-    nav_pj:       { pt: 'Empresas PJ', en: 'Business', es: 'Empresas PJ' },
+    nav_pj:       { pt: 'Câmbio para sua empresa', en: 'Business Exchange', es: 'Cambio para su empresa' },
     nav_cta:      { pt: 'Falar agora', en: 'Talk now', es: 'Hablar ahora' },
 
     /* nav dropdown */

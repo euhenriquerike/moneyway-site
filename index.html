@@ -38,6 +38,13 @@
   align-items: center;
   gap: 10px;
   margin-bottom: 4px;
+  min-height: 48px;
+}
+.partner-logo-img {
+  height: 44px;
+  max-width: 140px;
+  object-fit: contain;
+  object-position: left center;
 }
 .partner-item__logo-mark {
   font-family: var(--disp);
@@ -207,13 +214,13 @@
       </div>
       <a href="#sobre" data-i18n="nav_about">Sobre</a>
       <a href="subpaginas/blog.html" data-i18n="nav_blog">Blog</a>
-      <a href="subpaginas/pj.html" class="nav__pj" data-i18n="nav_pj">Empresas PJ</a>
+      <a href="subpaginas/pj.html" class="nav__pj" data-i18n="nav_pj">Câmbio para sua empresa</a>
     </div>
   <div class="nav__end">
     <div class="lang-sw">
-        <button data-lang="pt" class="active">🇧🇷 PT</button>
-        <button data-lang="en">🇺🇸 EN</button>
-        <button data-lang="es">🇪🇸 ES</button>
+        <button data-lang="pt" class="active">🇧🇷</button>
+        <button data-lang="en">🇺🇸</button>
+        <button data-lang="es">🇪🇸</button>
       </div>
       <a class="btn btn--grad nav__cta" href="https://wa.me/5551999649824?text=Ol%C3%A1!%20Gostaria%20de%20falar%20com%20a%20Money%20Way%20C%C3%A2mbio." target="_blank" rel="noopener" data-i18n="nav_cta">Falar agora
         <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 0 1-8.5 8.5 8.5 8.5 0 0 1-3.8-.9L3 21l1.9-5.7a8.5 8.5 0 1 1 16.1-3.8z"/></svg></span>
@@ -228,7 +235,7 @@
     <div>
       <div class="hero__pills reveal">
         <span class="pill"><span class="dot"></span> <span data-i18n="hero_pill">Cotação em tempo real • Porto Alegre / RS</span></span>
-        <a class="pill pill--map" href="https://www.google.com/maps/search/?api=1&query=Avenida+Borges+de+Medeiros+453+Sala+132+Centro+Porto+Alegre+RS" target="_blank" rel="noopener">
+        <a class="pill pill--map" href="https://www.google.com/maps/place/Money+Way+C%C3%A2mbio/@-30.0305081,-51.2305132,17z/data=!3m2!4b1!5s0x951979058b43fd49:0x16c17fbbde7d919!4m6!3m5!1s0x951979a3006897af:0x565ab7985572ceab!8m2!3d-30.0305081!4d-51.2279383!16s%2Fg%2F11rrp4p63y?entry=ttu&g_ep=EgoyMDI2MDYyOC4wIKXMDSoASAFQAw%3D%3D" target="_blank" rel="noopener">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="13" height="13"><path d="M21 10c0 6-9 12-9 12s-9-6-9-12a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
           Como chegar
         </a>
@@ -349,7 +356,7 @@
 </section>
 
 <!-- ============ DÓLARES ANTIGOS (banner) ============ -->
-<section class="special">
+<section class="special" style="padding-top:clamp(24px,3vw,36px)">
   <div class="wrap">
     <div class="special__card reveal">
       <div class="special__inner">
@@ -477,52 +484,28 @@
     <div class="partners-grid reveal d2">
       <div class="partner-item">
         <div class="partner-item__logo">
-          <div class="partner-item__seal">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="20" height="20"><path d="M12 2l3 6.5L22 9l-5 4.9 1.2 6.9L12 17.7l-6.2 3.2L7 14 2 9l7-.5z"/></svg>
-          </div>
-          <div>
-            <div class="partner-item__logo-mark">BCB</div>
-            <div class="partner-item__logo-sub">Banco Central</div>
-          </div>
+          <img src="https://avatars.githubusercontent.com/u/16822015?s=280&v=4" alt="Banco Central do Brasil" class="partner-logo-img" />
         </div>
         <strong>Banco Central do Brasil</strong>
         <span>Correspondente cambial credenciado e autorizado pelo BACEN.</span>
       </div>
       <div class="partner-item">
         <div class="partner-item__logo">
-          <div class="partner-item__seal">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="20" height="20"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15 15 0 0 1 0 20"/></svg>
-          </div>
-          <div>
-            <div class="partner-item__logo-mark sm">CONFIDENCE</div>
-            <div class="partner-item__logo-sub">Travelex</div>
-          </div>
+          <img src="https://99prod.br-se1.magaluobjects.com/uploads/image/file/2541218/cf32c7192434c8e4771b3e3f5ec9b69c.png" alt="Confidence Travelex" class="partner-logo-img" />
         </div>
         <strong>Confidence | Travelex</strong>
         <span>Corretora parceira para câmbio e transferências internacionais.</span>
       </div>
       <div class="partner-item">
         <div class="partner-item__logo">
-          <div class="partner-item__seal">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="20" height="20"><path d="M12 2l8 4v6c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V6l8-4z"/></svg>
-          </div>
-          <div>
-            <div class="partner-item__logo-mark">GTA</div>
-            <div class="partner-item__logo-sub">Seguros</div>
-          </div>
+          <img src="https://assets.segur.com.br/bundles/gta/images/gta-logo.png" alt="GTA Seguros" class="partner-logo-img" />
         </div>
         <strong>GTA Seguros</strong>
         <span>Parceiros de seguro viagem para destinos nacionais e internacionais.</span>
       </div>
       <div class="partner-item">
         <div class="partner-item__logo">
-          <div class="partner-item__seal">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="20" height="20"><path d="M17.8 19.2L16 11l3.5-3.5a2.12 2.12 0 0 0-3-3L13 8 4.8 6.2a1 1 0 0 0-.9.3l-1 1a1 1 0 0 0 .2 1.5L8 12l-2 2-2-.5a1 1 0 0 0-.9.3l-.5.5a1 1 0 0 0 .2 1.6L6 18l1.6 2.7a1 1 0 0 0 1.6.2l.5-.5a1 1 0 0 0 .3-.9L11 18l2-2 2.9 5.8a1 1 0 0 0 1.5.2l1-1a1 1 0 0 0 .3-.9z"/></svg>
-          </div>
-          <div>
-            <div class="partner-item__logo-mark">CVC</div>
-            <div class="partner-item__logo-sub">Passagens</div>
-          </div>
+          <img src="https://www.cvc.com.br/dicas-de-viagem/wp-content/uploads/2021/12/LogoCVC_AzulDegrade.png" alt="CVC" class="partner-logo-img" />
         </div>
         <strong>CVC</strong>
         <span>Emissão de passagens aéreas nacionais e internacionais.</span>
