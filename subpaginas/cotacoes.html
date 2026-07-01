@@ -20,6 +20,20 @@
   .cc p, .cc a { display: block; color: var(--slate); text-decoration: none; font-size: 15px; line-height: 1.7; margin: 0; }
   .cc a:hover { color: var(--emerald); }
   .cc b { color: var(--navy); }
+
+  /* Duas colunas: simulador + tabela */
+  .cot-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(24px, 3vw, 40px);
+    align-items: start;
+  }
+  @media (max-width: 900px) { .cot-grid { grid-template-columns: 1fr; } }
+  .cot-grid .rates-wrap { margin-top: 0; }
+
+  /* Setas de variação */
+  .trend-up { color: #16a34a; font-size: 11.5px; font-family: var(--mono); font-weight: 600; white-space: nowrap; }
+  .trend-down { color: #dc2626; font-size: 11.5px; font-family: var(--mono); font-weight: 600; white-space: nowrap; }
 </style>
 </head>
 <body data-page="cotacoes">
@@ -66,75 +80,142 @@
 <section id="cotacao" style="padding-top: clamp(24px,3vw,40px)">
   <div class="wrap">
 
-    <div class="sim reveal d1">
-      <div class="sim__head">
-        <span class="sim__title" data-i18n="sim_title">Simulador de câmbio</span>
-        <span class="sim__live"><span class="dot"></span> <span data-i18n="cot_sim_live">cotação ilustrativa</span></span>
-      </div>
-      <div class="sim__body">
-        <div class="sim__controls">
-          <div class="sim__row">
-            <label>Moeda</label>
-            <div class="sim__cur" id="sim-cur">
-              <button data-cur="USD" class="active">🇺🇸 USD</button>
-              <button data-cur="EUR">🇪🇺 EUR</button>
-              <button data-cur="GBP">🇬🇧 GBP</button>
-              <button data-cur="CHF">🇨🇭 CHF</button>
-              <button data-cur="CAD">🇨🇦 CAD</button>
-              <button data-cur="AUD">🇦🇺 AUD</button>
-            </div>
-          </div>
-          <div class="sim__row sim__row--2">
-            <div>
-              <label>Operação</label>
-              <div class="sim__toggle" id="sim-mode">
-                <button data-mode="buy" class="active">Comprar</button>
-                <button data-mode="sell">Vender</button>
+    <div class="cot-grid">
+
+      <div class="sim reveal d1">
+        <div class="sim__head">
+          <span class="sim__title" data-i18n="sim_title">Simulador de câmbio</span>
+          <span class="sim__live"><span class="dot"></span> <span data-i18n="cot_sim_live">cotação ilustrativa</span></span>
+        </div>
+        <div class="sim__body">
+          <div class="sim__controls">
+            <div class="sim__row">
+              <label>Moeda</label>
+              <div class="sim__cur" id="sim-cur">
+                <button data-cur="USD" class="active">🇺🇸 USD</button>
+                <button data-cur="EUR">🇪🇺 EUR</button>
+                <button data-cur="GBP">🇬🇧 GBP</button>
+                <button data-cur="CHF">🇨🇭 CHF</button>
+                <button data-cur="CAD">🇨🇦 CAD</button>
+                <button data-cur="AUD">🇦🇺 AUD</button>
               </div>
             </div>
-            <div>
-              <label id="sim-amt-label">Quanto em USD</label>
-              <div class="sim__input"><span id="sim-sign">$</span><input id="sim-amt" type="text" inputmode="numeric" value="1.000" aria-label="Valor em moeda estrangeira" /></div>
+            <div class="sim__row sim__row--2">
+              <div>
+                <label>Operação</label>
+                <div class="sim__toggle" id="sim-mode">
+                  <button data-mode="buy" class="active">Comprar</button>
+                  <button data-mode="sell">Vender</button>
+                </div>
+              </div>
+              <div>
+                <label id="sim-amt-label">Quanto em USD</label>
+                <div class="sim__input"><span id="sim-sign">$</span><input id="sim-amt" type="text" inputmode="numeric" value="1.000" aria-label="Valor em moeda estrangeira" /></div>
+              </div>
             </div>
           </div>
-        </div>
-        <div class="sim__out">
-          <div class="sim__rate"><span id="sim-rate-label">Taxa de venda</span><b id="sim-rate">R$ 5,50</b></div>
-          <div class="sim__total"><span id="sim-total-label">Você paga (estimado)</span><strong id="sim-total">R$ 5.500,00</strong></div>
-          <a class="btn btn--grad" id="sim-cta" href="https://wa.me/5551999649824?text=Quero%20comprar%20US%24%201.000%20em%20D%C3%B3lar%20Americano." target="_blank" rel="noopener" data-i18n="sim_lock_cot">Travar essa taxa no WhatsApp
-            <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 0 1-8.5 8.5 8.5 8.5 0 0 1-3.8-.9L3 21l1.9-5.7a8.5 8.5 0 1 1 16.1-3.8z"/></svg></span>
-          </a>
-          <p class="sim__note" data-i18n="sim_note_cot">Valores ilustrativos. A cotação oficial é confirmada no atendimento, no momento do fechamento.</p>
+          <div class="sim__out">
+            <div class="sim__rate"><span id="sim-rate-label">Taxa de venda</span><b id="sim-rate">R$ 5,50</b></div>
+            <div class="sim__total"><span id="sim-total-label">Você paga (estimado)</span><strong id="sim-total">R$ 5.500,00</strong></div>
+            <a class="btn btn--grad" id="sim-cta" href="https://wa.me/5551999649824?text=Quero%20comprar%20US%24%201.000%20em%20D%C3%B3lar%20Americano." target="_blank" rel="noopener" data-i18n="sim_lock_cot">Travar essa taxa no WhatsApp
+              <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 0 1-8.5 8.5 8.5 8.5 0 0 1-3.8-.9L3 21l1.9-5.7a8.5 8.5 0 1 1 16.1-3.8z"/></svg></span>
+            </a>
+            <p class="sim__note" data-i18n="sim_note_cot">Valores ilustrativos. A cotação oficial é confirmada no atendimento, no momento do fechamento.</p>
+          </div>
         </div>
       </div>
-    </div>
 
-    <div class="rates-wrap reveal d1">
-      <div class="rates-head">
-        <span class="ttl" data-i18n="cot_rates_ttl">Cotações agora</span>
-        <span class="upd"><span class="dot"></span> Atualizado: 22/06/2026, 11:37</span>
+      <div class="rates-wrap reveal d1">
+        <div class="rates-head">
+          <span class="ttl" data-i18n="cot_rates_ttl">Cotações agora</span>
+          <span class="upd"><span class="dot"></span> Atualizado: 22/06/2026, 11:37</span>
+        </div>
+        <div class="rates-scroll">
+          <table class="rates-table">
+            <thead>
+              <tr>
+                <th data-i18n="cot_th_cur">Moeda</th>
+                <th class="num" data-i18n="cot_th_buy">Compra (R$)</th>
+                <th class="num" data-i18n="cot_th_sell">Venda (R$)</th>
+                <th class="num">Var. 24h</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><div class="rates-cur"><span class="fl">🇺🇸</span><span class="cd">USD</span><span class="nm">Dólar Americano</span></div></td>
+                <td class="num">R$ 4,850</td><td class="num venda">R$ 5,500</td>
+                <td class="num"><span class="trend-up">↑ +0.8%</span></td>
+              </tr>
+              <tr>
+                <td><div class="rates-cur"><span class="fl">🇺🇸</span><span class="cd">USD</span><span class="nm">Dólar Intermediário</span></div></td>
+                <td class="num">R$ 4,350</td><td class="num venda">R$ 4,980</td>
+                <td class="num"><span class="trend-up">↑ +0.5%</span></td>
+              </tr>
+              <tr>
+                <td><div class="rates-cur"><span class="fl">🇺🇸</span><span class="cd">USD</span><span class="nm">Dólar Antigo</span></div></td>
+                <td class="num">R$ 2,800</td><td class="num venda">R$ 3,400</td>
+                <td class="num"><span class="trend-down">↓ -0.2%</span></td>
+              </tr>
+              <tr>
+                <td><div class="rates-cur"><span class="fl">🇪🇺</span><span class="cd">EUR</span><span class="nm">Euro</span></div></td>
+                <td class="num">R$ 5,750</td><td class="num venda">R$ 6,420</td>
+                <td class="num"><span class="trend-up">↑ +0.3%</span></td>
+              </tr>
+              <tr>
+                <td><div class="rates-cur"><span class="fl">🇬🇧</span><span class="cd">GBP</span><span class="nm">Libra Esterlina</span></div></td>
+                <td class="num">R$ 6,300</td><td class="num venda">R$ 7,550</td>
+                <td class="num"><span class="trend-down">↓ -0.4%</span></td>
+              </tr>
+              <tr>
+                <td><div class="rates-cur"><span class="fl">🇨🇭</span><span class="cd">CHF</span><span class="nm">Franco Suíço</span></div></td>
+                <td class="num">R$ 5,200</td><td class="num venda">R$ 7,000</td>
+                <td class="num"><span class="trend-up">↑ +0.6%</span></td>
+              </tr>
+              <tr>
+                <td><div class="rates-cur"><span class="fl">🇨🇦</span><span class="cd">CAD</span><span class="nm">Dólar Canadense</span></div></td>
+                <td class="num">R$ 3,200</td><td class="num venda">R$ 4,050</td>
+                <td class="num"><span class="trend-up">↑ +0.2%</span></td>
+              </tr>
+              <tr>
+                <td><div class="rates-cur"><span class="fl">🇦🇺</span><span class="cd">AUD</span><span class="nm">Dólar Australiano</span></div></td>
+                <td class="num">R$ 3,150</td><td class="num venda">R$ 3,900</td>
+                <td class="num"><span class="trend-down">↓ -0.5%</span></td>
+              </tr>
+              <tr>
+                <td><div class="rates-cur"><span class="fl">🇳🇿</span><span class="cd">NZD</span><span class="nm">Dólar Neozelandês</span></div></td>
+                <td class="num">R$ 2,500</td><td class="num venda">R$ 3,300</td>
+                <td class="num"><span class="trend-down">↓ -1.1%</span></td>
+              </tr>
+              <tr>
+                <td><div class="rates-cur"><span class="fl">🇲🇽</span><span class="cd">MXN</span><span class="nm">Novo Peso Mexicano</span></div></td>
+                <td class="num">R$ 0,200</td><td class="num venda">R$ 0,390</td>
+                <td class="num"><span class="trend-down">↓ -0.9%</span></td>
+              </tr>
+              <tr>
+                <td><div class="rates-cur"><span class="fl">🇦🇷</span><span class="cd">ARS</span><span class="nm">Peso Argentino</span></div></td>
+                <td class="num">R$ 0,002</td><td class="num venda">R$ 0,005</td>
+                <td class="num"><span class="trend-down">↓ -2.3%</span></td>
+              </tr>
+              <tr>
+                <td><div class="rates-cur"><span class="fl">🇨🇱</span><span class="cd">CLP</span><span class="nm">Peso Chileno</span></div></td>
+                <td class="num">R$ 0,004</td><td class="num venda">R$ 0,0068</td>
+                <td class="num"><span class="trend-up">↑ +0.1%</span></td>
+              </tr>
+              <tr>
+                <td><div class="rates-cur"><span class="fl">🇺🇾</span><span class="cd">UYU</span><span class="nm">Peso Uruguaio</span></div></td>
+                <td class="num">R$ 0,110</td><td class="num venda">R$ 0,155</td>
+                <td class="num"><span class="trend-down">↓ -0.7%</span></td>
+              </tr>
+              <tr>
+                <td><div class="rates-cur"><span class="fl">🇵🇪</span><span class="cd">PEN</span><span class="nm">Novo Sol Peruano</span></div></td>
+                <td class="num">R$ 1,200</td><td class="num venda">R$ 1,800</td>
+                <td class="num"><span class="trend-up">↑ +0.4%</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
-      <div class="rates-scroll">
-        <table class="rates-table">
-          <thead>
-            <tr><th data-i18n="cot_th_cur">Moeda</th><th class="num" data-i18n="cot_th_buy">Compra (R$)</th><th class="num" data-i18n="cot_th_sell">Venda (R$)</th></tr>
-          </thead>
-          <tbody>
-            <tr><td><div class="rates-cur"><span class="fl">🇺🇸</span><span class="cd">USD</span><span class="nm">Dólar Americano</span></div></td><td class="num">R$ 4,850</td><td class="num venda">R$ 5,500</td></tr>
-            <tr><td><div class="rates-cur"><span class="fl">🇪🇺</span><span class="cd">EUR</span><span class="nm">Euro</span></div></td><td class="num">R$ 5,750</td><td class="num venda">R$ 6,420</td></tr>
-            <tr><td><div class="rates-cur"><span class="fl">🇦🇺</span><span class="cd">AUD</span><span class="nm">Dólar Australiano</span></div></td><td class="num">R$ 3,150</td><td class="num venda">R$ 3,900</td></tr>
-            <tr><td><div class="rates-cur"><span class="fl">🇨🇦</span><span class="cd">CAD</span><span class="nm">Dólar Canadense</span></div></td><td class="num">R$ 3,200</td><td class="num venda">R$ 4,050</td></tr>
-            <tr><td><div class="rates-cur"><span class="fl">🇳🇿</span><span class="cd">NZD</span><span class="nm">Dólar Neozelandês</span></div></td><td class="num">R$ 2,500</td><td class="num venda">R$ 3,300</td></tr>
-            <tr><td><div class="rates-cur"><span class="fl">🇨🇭</span><span class="cd">CHF</span><span class="nm">Franco Suíço</span></div></td><td class="num">R$ 5,200</td><td class="num venda">R$ 7,000</td></tr>
-            <tr><td><div class="rates-cur"><span class="fl">🇬🇧</span><span class="cd">GBP</span><span class="nm">Libra Esterlina</span></div></td><td class="num">R$ 6,300</td><td class="num venda">R$ 7,550</td></tr>
-            <tr><td><div class="rates-cur"><span class="fl">🇲🇽</span><span class="cd">MXN</span><span class="nm">Novo Peso Mexicano</span></div></td><td class="num">R$ 0,200</td><td class="num venda">R$ 0,390</td></tr>
-            <tr><td><div class="rates-cur"><span class="fl">🇦🇷</span><span class="cd">ARS</span><span class="nm">Peso Argentino</span></div></td><td class="num">R$ 0,002</td><td class="num venda">R$ 0,005</td></tr>
-            <tr><td><div class="rates-cur"><span class="fl">🇨🇱</span><span class="cd">CLP</span><span class="nm">Peso Chileno</span></div></td><td class="num">R$ 0,004</td><td class="num venda">R$ 0,0068</td></tr>
-            <tr><td><div class="rates-cur"><span class="fl">🇺🇾</span><span class="cd">UYU</span><span class="nm">Peso Uruguaio</span></div></td><td class="num">R$ 0,110</td><td class="num venda">R$ 0,155</td></tr>
-            <tr><td><div class="rates-cur"><span class="fl">🇵🇪</span><span class="cd">PEN</span><span class="nm">Novo Sol Peruano</span></div></td><td class="num">R$ 1,200</td><td class="num venda">R$ 1,800</td></tr>
-          </tbody>
-        </table>
-      </div>
+
     </div>
 
     <div class="rates-notes reveal">

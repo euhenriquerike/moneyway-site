@@ -68,36 +68,103 @@
 .sim-transfer__head {
   padding: 20px clamp(22px, 3vw, 32px);
   border-bottom: 1px solid var(--line);
-  background: var(--bg-2);
+  background: var(--navy);
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 14px;
 }
 .sim-transfer__head-ic {
-  width: 44px;
-  height: 44px;
-  border-radius: 13px;
-  background: var(--emerald);
+  width: 52px;
+  height: 52px;
+  border-radius: 14px;
+  background: rgba(255,255,255,.12);
   color: #fff;
   display: grid;
   place-items: center;
   flex: none;
+  font-size: 26px;
 }
-.sim-transfer__head-ic svg { width: 22px; height: 22px; }
 .sim-transfer__head-text strong {
   display: block;
   font-family: var(--disp);
   font-weight: 700;
   font-size: 17px;
-  color: var(--navy);
+  color: #fff;
 }
 .sim-transfer__head-text span {
   font-family: var(--mono);
   font-size: 11.5px;
   letter-spacing: .1em;
   text-transform: uppercase;
+  color: rgba(255,255,255,.5);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 2px;
+}
+.sim-transfer__head-text span .dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #4ade80;
+  display: inline-block;
+  animation: ping 1.8s ease-out infinite;
+}
+
+/* Route visual strip */
+.stf-route {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px clamp(22px, 3vw, 32px);
+  background: var(--bg-2);
+  border-bottom: 1px solid var(--line);
+}
+.stf-route__node {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+}
+.stf-route__flag { font-size: 28px; line-height: 1; }
+.stf-route__name {
+  font-family: var(--mono);
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: .1em;
   color: var(--slate-2);
 }
+.stf-route__mid {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+  position: relative;
+}
+.stf-route__line {
+  height: 2px;
+  width: 100%;
+  background: linear-gradient(90deg, var(--emerald), var(--navy));
+  border-radius: 2px;
+}
+.stf-route__plane {
+  font-size: 18px;
+  display: block;
+  animation: stf-plane 2.2s ease-in-out infinite;
+}
+
+@keyframes stf-plane {
+  0%, 100% { transform: translateX(-4px) translateY(0); }
+  50% { transform: translateX(4px) translateY(-3px); }
+}
+@keyframes stf-flash {
+  0% { background: rgba(16, 122, 84, 0.14); border-radius: 8px; }
+  100% { background: transparent; border-radius: 8px; }
+}
+
+.sim-transfer__preview-msg.flash { animation: stf-flash 0.45s ease; }
+
 .sim-transfer__body {
   padding: clamp(24px, 3vw, 36px);
   display: grid;
@@ -238,6 +305,118 @@
   </div>
 </div></header>
 
+<!-- SIMULADOR -->
+<section style="padding-top:clamp(20px,3vw,40px)"><div class="wrap">
+  <p class="eyebrow reveal">✈️ Simule agora</p>
+  <h2 class="s-title reveal d1" style="max-width:22ch">Preencha e fale com <span class="grad-text">um especialista</span></h2>
+  <p class="s-sub reveal d2">Informe os dados abaixo — ao clicar em "Enviar" abrimos o WhatsApp com a mensagem já preparada.</p>
+
+  <div class="sim-transfer reveal d1">
+
+    <div class="sim-transfer__head">
+      <div class="sim-transfer__head-ic">🌐</div>
+      <div class="sim-transfer__head-text">
+        <strong>💸 Simulador de transferência internacional</strong>
+        <span><span class="dot"></span> Gera mensagem automática no WhatsApp</span>
+      </div>
+    </div>
+
+    <!-- Rota visual animada -->
+    <div class="stf-route">
+      <div class="stf-route__node">
+        <span class="stf-route__flag">🇧🇷</span>
+        <span class="stf-route__name">Brasil</span>
+      </div>
+      <div class="stf-route__mid">
+        <span class="stf-route__plane">✈️</span>
+        <div class="stf-route__line"></div>
+      </div>
+      <div class="stf-route__node">
+        <span class="stf-route__flag" id="stf-dest-flag">🌍</span>
+        <span class="stf-route__name" id="stf-dest-flag-name">Destino</span>
+      </div>
+    </div>
+
+    <div class="sim-transfer__body">
+      <!-- Direção -->
+      <div class="stf-group">
+        <label>🔄 Operação</label>
+        <div class="stf-dir">
+          <button class="active" data-dir="enviar" type="button" id="stf-dir-enviar">📤 Quero enviar</button>
+          <button data-dir="receber" type="button" id="stf-dir-receber">📥 Quero receber</button>
+        </div>
+      </div>
+
+      <!-- Destino/Origem -->
+      <div class="stf-group">
+        <label id="stf-dest-label">🌍 Para qual país</label>
+        <select id="stf-dest">
+          <option value="">Selecione o país</option>
+          <option value="Estados Unidos">🇺🇸 Estados Unidos</option>
+          <option value="Portugal">🇵🇹 Portugal</option>
+          <option value="Espanha">🇪🇸 Espanha</option>
+          <option value="Itália">🇮🇹 Itália</option>
+          <option value="Alemanha">🇩🇪 Alemanha</option>
+          <option value="França">🇫🇷 França</option>
+          <option value="Reino Unido">🇬🇧 Reino Unido</option>
+          <option value="Argentina">🇦🇷 Argentina</option>
+          <option value="Uruguai">🇺🇾 Uruguai</option>
+          <option value="Canadá">🇨🇦 Canadá</option>
+          <option value="Austrália">🇦🇺 Austrália</option>
+          <option value="Japão">🇯🇵 Japão</option>
+          <option value="Outros">🌍 Outros</option>
+        </select>
+      </div>
+
+      <!-- Moeda -->
+      <div class="stf-group">
+        <label>💱 Moeda</label>
+        <select id="stf-cur">
+          <option value="USD">🇺🇸 Dólar Americano (USD)</option>
+          <option value="EUR">🇪🇺 Euro (EUR)</option>
+          <option value="GBP">🇬🇧 Libra Esterlina (GBP)</option>
+          <option value="CHF">🇨🇭 Franco Suíço (CHF)</option>
+          <option value="CAD">🇨🇦 Dólar Canadense (CAD)</option>
+          <option value="AUD">🇦🇺 Dólar Australiano (AUD)</option>
+          <option value="ARS">🇦🇷 Peso Argentino (ARS)</option>
+          <option value="UYU">🇺🇾 Peso Uruguaio (UYU)</option>
+          <option value="Outra">🌍 Outra</option>
+        </select>
+      </div>
+
+      <!-- Valor -->
+      <div class="stf-group">
+        <label>💵 Valor aproximado</label>
+        <input type="text" id="stf-val" inputmode="numeric" placeholder="Ex: 5.000" />
+      </div>
+
+      <!-- Motivo -->
+      <div class="stf-group stf-group--full">
+        <label>📋 Motivo (opcional)</label>
+        <select id="stf-motivo">
+          <option value="">Não preciso informar</option>
+          <option>Manutenção de familiar no exterior</option>
+          <option>Pagamento de curso ou evento</option>
+          <option>Transferência de patrimônio</option>
+          <option>Cidadania, visto ou documentação</option>
+          <option>Importação ou exportação</option>
+          <option>Outro</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="sim-transfer__foot">
+      <div class="sim-transfer__preview">
+        <div class="sim-transfer__preview-label">💬 Mensagem que será enviada</div>
+        <div class="sim-transfer__preview-msg" id="stf-preview">Preencha os campos acima para ver a mensagem.</div>
+      </div>
+      <button class="btn btn--grad" id="stf-btn" type="button">Enviar no WhatsApp
+        <span class="ic"><svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18"><path d="M12 2a10 10 0 0 0-8.6 15l-1.3 4 4.1-1.3A10 10 0 1 0 12 2zm5.4 14.2c-.2.6-1.2 1.1-1.7 1.2-.4.1-1 .1-1.6-.1-.4-.1-.9-.3-1.5-.5-2.6-1.1-4.3-3.8-4.4-4-.1-.2-1-1.4-1-2.6s.6-1.8.9-2.1c.2-.2.5-.3.6-.3h.5c.2 0 .4 0 .5.4l.7 1.7c.1.1.1.3 0 .5l-.3.5-.3.3c-.1.1-.2.3-.1.5.1.2.6 1 1.3 1.6.9.8 1.6 1 1.8 1.1.2.1.3.1.5-.1l.6-.7c.2-.2.3-.2.5-.1l1.6.8c.2.1.4.2.4.3.1.1.1.6-.1 1z"/></svg></span>
+      </button>
+    </div>
+  </div>
+</div></section>
+
 <!-- BENEFÍCIOS -->
 <section style="padding-top:clamp(20px,3vw,40px)"><div class="wrap">
   <div class="benefit-grid">
@@ -256,16 +435,6 @@
       <h3>100% online se preferir</h3>
       <p>Todo o processo pode ser feito remotamente. Sem precisar sair de casa para fechar sua operação.</p>
     </div>
-  </div>
-</div></section>
-
-<!-- SOBRE O SERVIÇO -->
-<section style="padding-top:0"><div class="wrap">
-  <p class="eyebrow reveal">O serviço</p>
-  <h2 class="s-title reveal d1" style="max-width:22ch">Dinheiro pelo mundo, <span class="grad-text">sem complicação</span></h2>
-  <div class="prose reveal d2" style="margin-top:clamp(22px,3vw,32px)">
-    <p>Oferecemos aos nossos clientes a possibilidade de efetuar ou receber transferências financeiras internacionais, devidamente autorizadas e regulamentadas pelo Banco Central do Brasil. Com a Money Way, você conta com total rapidez, transparência e segurança em todas as transações.</p>
-    <p>Nosso atendimento pode ser totalmente online e garante que suas transferências sejam processadas de forma ágil e confiável, seja para enviar ou para receber valores do exterior.</p>
   </div>
 </div></section>
 
@@ -313,100 +482,13 @@
   </div>
 </div></section>
 
-<!-- FORMULÁRIO DE SIMULAÇÃO -->
-<section><div class="wrap">
-  <p class="eyebrow reveal">Simule agora</p>
-  <h2 class="s-title reveal d1" style="max-width:22ch">Preencha e fale com <span class="grad-text">um especialista</span></h2>
-  <p class="s-sub reveal d2">Informe os dados abaixo e ao clicar em "Enviar" abriremos o WhatsApp com a mensagem já preparada.</p>
-
-  <div class="sim-transfer reveal d1">
-    <div class="sim-transfer__head">
-      <div class="sim-transfer__head-ic">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>
-      </div>
-      <div class="sim-transfer__head-text">
-        <strong>Simulador de transferência internacional</strong>
-        <span>Gera mensagem automática no WhatsApp</span>
-      </div>
-    </div>
-
-    <div class="sim-transfer__body">
-      <!-- Direção -->
-      <div class="stf-group">
-        <label>Operação</label>
-        <div class="stf-dir">
-          <button class="active" data-dir="enviar" type="button" id="stf-dir-enviar">Quero enviar</button>
-          <button data-dir="receber" type="button" id="stf-dir-receber">Quero receber</button>
-        </div>
-      </div>
-
-      <!-- Destino/Origem -->
-      <div class="stf-group">
-        <label id="stf-dest-label">Para qual país</label>
-        <select id="stf-dest">
-          <option value="">Selecione o país</option>
-          <option>Estados Unidos</option>
-          <option>Portugal</option>
-          <option>Espanha</option>
-          <option>Itália</option>
-          <option>Alemanha</option>
-          <option>França</option>
-          <option>Reino Unido</option>
-          <option>Argentina</option>
-          <option>Uruguai</option>
-          <option>Canadá</option>
-          <option>Austrália</option>
-          <option>Japão</option>
-          <option>Outros</option>
-        </select>
-      </div>
-
-      <!-- Moeda -->
-      <div class="stf-group">
-        <label>Moeda</label>
-        <select id="stf-cur">
-          <option value="USD">Dólar Americano (USD)</option>
-          <option value="EUR">Euro (EUR)</option>
-          <option value="GBP">Libra Esterlina (GBP)</option>
-          <option value="CHF">Franco Suíço (CHF)</option>
-          <option value="CAD">Dólar Canadense (CAD)</option>
-          <option value="AUD">Dólar Australiano (AUD)</option>
-          <option value="ARS">Peso Argentino (ARS)</option>
-          <option value="UYU">Peso Uruguaio (UYU)</option>
-          <option value="Outra">Outra</option>
-        </select>
-      </div>
-
-      <!-- Valor -->
-      <div class="stf-group">
-        <label>Valor aproximado</label>
-        <input type="text" id="stf-val" inputmode="numeric" placeholder="Ex: 5.000" />
-      </div>
-
-      <!-- Motivo -->
-      <div class="stf-group stf-group--full">
-        <label>Motivo (opcional)</label>
-        <select id="stf-motivo">
-          <option value="">Não preciso informar</option>
-          <option>Manutenção de familiar no exterior</option>
-          <option>Pagamento de curso ou evento</option>
-          <option>Transferência de patrimônio</option>
-          <option>Cidadania, visto ou documentação</option>
-          <option>Importação ou exportação</option>
-          <option>Outro</option>
-        </select>
-      </div>
-    </div>
-
-    <div class="sim-transfer__foot">
-      <div class="sim-transfer__preview">
-        <div class="sim-transfer__preview-label">Mensagem que será enviada</div>
-        <div class="sim-transfer__preview-msg" id="stf-preview">Preencha os campos acima para ver a mensagem.</div>
-      </div>
-      <button class="btn btn--grad" id="stf-btn" type="button">Enviar no WhatsApp
-        <span class="ic"><svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18"><path d="M12 2a10 10 0 0 0-8.6 15l-1.3 4 4.1-1.3A10 10 0 1 0 12 2zm5.4 14.2c-.2.6-1.2 1.1-1.7 1.2-.4.1-1 .1-1.6-.1-.4-.1-.9-.3-1.5-.5-2.6-1.1-4.3-3.8-4.4-4-.1-.2-1-1.4-1-2.6s.6-1.8.9-2.1c.2-.2.5-.3.6-.3h.5c.2 0 .4 0 .5.4l.7 1.7c.1.1.1.3 0 .5l-.3.5-.3.3c-.1.1-.2.3-.1.5.1.2.6 1 1.3 1.6.9.8 1.6 1 1.8 1.1.2.1.3.1.5-.1l.6-.7c.2-.2.3-.2.5-.1l1.6.8c.2.1.4.2.4.3.1.1.1.6-.1 1z"/></svg></span>
-      </button>
-    </div>
+<!-- O SERVIÇO -->
+<section style="padding-top:0"><div class="wrap">
+  <p class="eyebrow reveal">O serviço</p>
+  <h2 class="s-title reveal d1" style="max-width:22ch">Dinheiro pelo mundo, <span class="grad-text">sem complicação</span></h2>
+  <div class="prose reveal d2" style="margin-top:clamp(22px,3vw,32px)">
+    <p>Oferecemos aos nossos clientes a possibilidade de efetuar ou receber transferências financeiras internacionais, devidamente autorizadas e regulamentadas pelo Banco Central do Brasil. Com a Money Way, você conta com total rapidez, transparência e segurança em todas as transações.</p>
+    <p>Nosso atendimento pode ser totalmente online e garante que suas transferências sejam processadas de forma ágil e confiável, seja para enviar ou para receber valores do exterior.</p>
   </div>
 </div></section>
 
@@ -436,13 +518,28 @@
   var motivoSel = document.getElementById('stf-motivo');
   var preview = document.getElementById('stf-preview');
   var sendBtn = document.getElementById('stf-btn');
+  var destFlag = document.getElementById('stf-dest-flag');
+  var destFlagName = document.getElementById('stf-dest-flag-name');
+
+  var flagMap = {
+    'Estados Unidos': '🇺🇸', 'Portugal': '🇵🇹', 'Espanha': '🇪🇸',
+    'Itália': '🇮🇹', 'Alemanha': '🇩🇪', 'França': '🇫🇷',
+    'Reino Unido': '🇬🇧', 'Argentina': '🇦🇷', 'Uruguai': '🇺🇾',
+    'Canadá': '🇨🇦', 'Austrália': '🇦🇺', 'Japão': '🇯🇵', 'Outros': '🌍'
+  };
 
   function updateDir(d) {
     dir = d;
     btnEnviar.classList.toggle('active', d === 'enviar');
     btnReceber.classList.toggle('active', d === 'receber');
-    destLabel.textContent = d === 'enviar' ? 'Para qual país' : 'De qual país';
+    destLabel.textContent = d === 'enviar' ? '🌍 Para qual país' : '🌍 De qual país';
     updatePreview();
+  }
+
+  function updateRoute() {
+    var dest = destSel.value;
+    destFlag.textContent = flagMap[dest] || '🌍';
+    destFlagName.textContent = dest || 'Destino';
   }
 
   function buildMsg() {
@@ -467,11 +564,14 @@
 
   function updatePreview() {
     preview.textContent = buildMsg();
+    preview.classList.remove('flash');
+    void preview.offsetWidth;
+    preview.classList.add('flash');
   }
 
   btnEnviar.addEventListener('click', function () { updateDir('enviar'); });
   btnReceber.addEventListener('click', function () { updateDir('receber'); });
-  destSel.addEventListener('change', updatePreview);
+  destSel.addEventListener('change', function () { updateRoute(); updatePreview(); });
   curSel.addEventListener('change', updatePreview);
   valIn.addEventListener('input', updatePreview);
   motivoSel.addEventListener('change', updatePreview);
