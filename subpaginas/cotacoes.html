@@ -30,10 +30,12 @@
   }
   @media (max-width: 900px) { .cot-grid { grid-template-columns: 1fr; } }
   .cot-grid .rates-wrap { margin-top: 0; }
+  /* Simulador dentro da cot-grid: forçar coluna única para não cortar conteúdo */
+  .cot-grid .sim .sim__body { grid-template-columns: 1fr !important; }
 
-  /* Setas de variação */
-  .trend-up { color: #16a34a; font-size: 11.5px; font-family: var(--mono); font-weight: 600; white-space: nowrap; }
-  .trend-down { color: #dc2626; font-size: 11.5px; font-family: var(--mono); font-weight: 600; white-space: nowrap; }
+  /* Setas de variação — só a seta, sem número */
+  .trend-up { color: #16a34a; font-size: 15px; font-family: var(--mono); font-weight: 700; white-space: nowrap; }
+  .trend-down { color: #dc2626; font-size: 15px; font-family: var(--mono); font-weight: 700; white-space: nowrap; }
 </style>
 </head>
 <body data-page="cotacoes">
@@ -43,7 +45,6 @@
     <span class="brand__name">Money&#8201;Way</span><span class="brand__tag">Câmbio</span>
   </a>
   <div class="nav__center">
-    <a href="cotacoes.html" data-i18n="nav_cotacoes">Cotações</a>
     <div class="nav__drop">
       <a href="../index.html#servicos"><span data-i18n="nav_services">Serviços</span> <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></a>
       <div class="nav__menu"><div class="nav__menu-inner">
@@ -55,9 +56,10 @@
         <a href="pj.html"><span class="di"></span> <span data-i18n="dd_impexp">Importação e Exportação</span></a>
       </div></div>
     </div>
+    <a href="pj.html" class="nav__pj" data-i18n="nav_pj">Câmbio para sua empresa</a>
+    <a href="cotacoes.html" data-i18n="nav_cotacoes">Cotações</a>
     <a href="../index.html#sobre" data-i18n="nav_about">Sobre</a>
     <a href="blog.html" data-i18n="nav_blog">Blog</a>
-    <a href="pj.html" class="nav__pj" data-i18n="nav_pj">Câmbio para sua empresa</a>
   </div>
   <div class="nav__end">
     <div class="lang-sw">
@@ -146,72 +148,72 @@
               <tr>
                 <td><div class="rates-cur"><span class="fl">🇺🇸</span><span class="cd">USD</span><span class="nm">Dólar Americano</span></div></td>
                 <td class="num">R$ 4,850</td><td class="num venda">R$ 5,500</td>
-                <td class="num"><span class="trend-up">↑ +0.8%</span></td>
+                <td class="num"><span class="trend-up">↑</span></td>
               </tr>
               <tr>
                 <td><div class="rates-cur"><span class="fl">🇺🇸</span><span class="cd">USD</span><span class="nm">Dólar Intermediário</span></div></td>
                 <td class="num">R$ 4,350</td><td class="num venda">R$ 4,980</td>
-                <td class="num"><span class="trend-up">↑ +0.5%</span></td>
+                <td class="num"><span class="trend-up">↑</span></td>
               </tr>
               <tr>
                 <td><div class="rates-cur"><span class="fl">🇺🇸</span><span class="cd">USD</span><span class="nm">Dólar Antigo</span></div></td>
                 <td class="num">R$ 2,800</td><td class="num venda">R$ 3,400</td>
-                <td class="num"><span class="trend-down">↓ -0.2%</span></td>
+                <td class="num"><span class="trend-down">↓</span></td>
               </tr>
               <tr>
                 <td><div class="rates-cur"><span class="fl">🇪🇺</span><span class="cd">EUR</span><span class="nm">Euro</span></div></td>
                 <td class="num">R$ 5,750</td><td class="num venda">R$ 6,420</td>
-                <td class="num"><span class="trend-up">↑ +0.3%</span></td>
+                <td class="num"><span class="trend-up">↑</span></td>
               </tr>
               <tr>
                 <td><div class="rates-cur"><span class="fl">🇬🇧</span><span class="cd">GBP</span><span class="nm">Libra Esterlina</span></div></td>
                 <td class="num">R$ 6,300</td><td class="num venda">R$ 7,550</td>
-                <td class="num"><span class="trend-down">↓ -0.4%</span></td>
+                <td class="num"><span class="trend-down">↓</span></td>
               </tr>
               <tr>
                 <td><div class="rates-cur"><span class="fl">🇨🇭</span><span class="cd">CHF</span><span class="nm">Franco Suíço</span></div></td>
                 <td class="num">R$ 5,200</td><td class="num venda">R$ 7,000</td>
-                <td class="num"><span class="trend-up">↑ +0.6%</span></td>
+                <td class="num"><span class="trend-up">↑</span></td>
               </tr>
               <tr>
                 <td><div class="rates-cur"><span class="fl">🇨🇦</span><span class="cd">CAD</span><span class="nm">Dólar Canadense</span></div></td>
                 <td class="num">R$ 3,200</td><td class="num venda">R$ 4,050</td>
-                <td class="num"><span class="trend-up">↑ +0.2%</span></td>
+                <td class="num"><span class="trend-up">↑</span></td>
               </tr>
               <tr>
                 <td><div class="rates-cur"><span class="fl">🇦🇺</span><span class="cd">AUD</span><span class="nm">Dólar Australiano</span></div></td>
                 <td class="num">R$ 3,150</td><td class="num venda">R$ 3,900</td>
-                <td class="num"><span class="trend-down">↓ -0.5%</span></td>
+                <td class="num"><span class="trend-down">↓</span></td>
               </tr>
               <tr>
                 <td><div class="rates-cur"><span class="fl">🇳🇿</span><span class="cd">NZD</span><span class="nm">Dólar Neozelandês</span></div></td>
                 <td class="num">R$ 2,500</td><td class="num venda">R$ 3,300</td>
-                <td class="num"><span class="trend-down">↓ -1.1%</span></td>
+                <td class="num"><span class="trend-down">↓</span></td>
               </tr>
               <tr>
                 <td><div class="rates-cur"><span class="fl">🇲🇽</span><span class="cd">MXN</span><span class="nm">Novo Peso Mexicano</span></div></td>
                 <td class="num">R$ 0,200</td><td class="num venda">R$ 0,390</td>
-                <td class="num"><span class="trend-down">↓ -0.9%</span></td>
+                <td class="num"><span class="trend-down">↓</span></td>
               </tr>
               <tr>
                 <td><div class="rates-cur"><span class="fl">🇦🇷</span><span class="cd">ARS</span><span class="nm">Peso Argentino</span></div></td>
                 <td class="num">R$ 0,002</td><td class="num venda">R$ 0,005</td>
-                <td class="num"><span class="trend-down">↓ -2.3%</span></td>
+                <td class="num"><span class="trend-down">↓</span></td>
               </tr>
               <tr>
                 <td><div class="rates-cur"><span class="fl">🇨🇱</span><span class="cd">CLP</span><span class="nm">Peso Chileno</span></div></td>
                 <td class="num">R$ 0,004</td><td class="num venda">R$ 0,0068</td>
-                <td class="num"><span class="trend-up">↑ +0.1%</span></td>
+                <td class="num"><span class="trend-up">↑</span></td>
               </tr>
               <tr>
                 <td><div class="rates-cur"><span class="fl">🇺🇾</span><span class="cd">UYU</span><span class="nm">Peso Uruguaio</span></div></td>
                 <td class="num">R$ 0,110</td><td class="num venda">R$ 0,155</td>
-                <td class="num"><span class="trend-down">↓ -0.7%</span></td>
+                <td class="num"><span class="trend-down">↓</span></td>
               </tr>
               <tr>
                 <td><div class="rates-cur"><span class="fl">🇵🇪</span><span class="cd">PEN</span><span class="nm">Novo Sol Peruano</span></div></td>
                 <td class="num">R$ 1,200</td><td class="num venda">R$ 1,800</td>
-                <td class="num"><span class="trend-up">↑ +0.4%</span></td>
+                <td class="num"><span class="trend-up">↑</span></td>
               </tr>
             </tbody>
           </table>

@@ -218,7 +218,6 @@
     <span class="brand__name">Money&#8201;Way</span><span class="brand__tag">Câmbio</span>
   </a>
   <div class="nav__center">
-    <a href="cotacoes.html" data-i18n="nav_cotacoes">Cotações</a>
     <div class="nav__drop">
       <a href="../index.html#servicos"><span data-i18n="nav_services">Serviços</span> <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></a>
       <div class="nav__menu"><div class="nav__menu-inner">
@@ -230,9 +229,10 @@
         <a href="pj.html"><span class="di"></span> <span data-i18n="dd_impexp">Importação e Exportação</span></a>
       </div></div>
     </div>
+    <a href="pj.html" class="nav__pj" data-i18n="nav_pj">Câmbio para sua empresa</a>
+    <a href="cotacoes.html" data-i18n="nav_cotacoes">Cotações</a>
     <a href="../index.html#sobre" data-i18n="nav_about">Sobre</a>
     <a href="blog.html" data-i18n="nav_blog">Blog</a>
-    <a href="pj.html" class="nav__pj" data-i18n="nav_pj">Câmbio para sua empresa</a>
   </div>
   <div class="nav__end">
     <div class="lang-sw">
@@ -258,51 +258,12 @@
   </div>
 </div></header>
 
-<section style="padding-top:clamp(20px,3vw,40px)"><div class="wrap">
-  <div class="viagem-grid">
-    <div class="viagem-card reveal">
-      <div class="viagem-card__ic">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.8 19.2L16 11l3.5-3.5a2.12 2.12 0 0 0-3-3L13 8 4.8 6.2a1 1 0 0 0-.9.3l-1 1a1 1 0 0 0 .2 1.5L8 12l-2 2-2-.5a1 1 0 0 0-.9.3l-.5.5a1 1 0 0 0 .2 1.6L6 18l1.6 2.7a1 1 0 0 0 1.6.2l.5-.5a1 1 0 0 0 .3-.9L11 18l2-2 2.9 5.8a1 1 0 0 0 1.5.2l1-1a1 1 0 0 0 .3-.9z"/></svg>
-      </div>
-      <h3>Passagens Aéreas</h3>
-      <p>Nossos agentes especialistas encontram as melhores tarifas e roteiros para você. Mais praticidade, menos estresse.</p>
-      <ul>
-        <li>Atendimento personalizado por agente especializado</li>
-        <li>Busca das melhores tarifas e conexões</li>
-        <li>Roteiros nacionais e internacionais</li>
-        <li>Planejamento completo da viagem</li>
-        <li>Câmbio e seguro no mesmo atendimento</li>
-      </ul>
-      <a class="btn btn--grad" href="https://wa.me/5551999649824?text=Ol%C3%A1!%20Quero%20saber%20mais%20sobre%20Passagens%20A%C3%A9reas." target="_blank" rel="noopener">Solicitar passagem
-        <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg></span>
-      </a>
-    </div>
-    <div class="viagem-card reveal d1">
-      <div class="viagem-card__ic">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l8 4v6c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V6l8-4z"/><path d="M9 12l2 2 4-4"/></svg>
-      </div>
-      <h3>Seguro Viagem</h3>
-      <p>Viaje com tranquilidade. Coberturas completas para saúde, bagagem e imprevistos em qualquer destino do mundo.</p>
-      <ul>
-        <li>Assistência médica e hospitalar</li>
-        <li>Cobertura de bagagem extraviada</li>
-        <li>Cancelamento e atraso de voo</li>
-        <li>Atende exigência do Tratado de Schengen</li>
-        <li>Planos para qualquer destino e duração</li>
-      </ul>
-      <a class="btn btn--grad" href="https://wa.me/5551999649824?text=Ol%C3%A1!%20Quero%20saber%20mais%20sobre%20Seguro%20Viagem." target="_blank" rel="noopener">Solicitar seguro
-        <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg></span>
-      </a>
-    </div>
-  </div>
-</div></section>
-
 <section><div class="wrap">
   <p class="eyebrow reveal">Simule agora</p>
   <h2 class="s-title reveal d1" style="max-width:24ch">Preencha e fale com <span class="grad-text">um especialista</span></h2>
   <p class="s-sub reveal d2">Escolha o serviço abaixo, preencha os dados e ao clicar em "Enviar" abriremos o WhatsApp com a mensagem já pronta.</p>
 
-  <div class="vtabs reveal d1">
+  <div class="vtabs reveal d1" style="margin-top:clamp(24px,3vw,36px);">
     <button class="vtab active" id="vtab-seguro" type="button">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg>
       Seguro de Viagem
@@ -425,6 +386,45 @@
   </div>
 </div></section>
 
+<section style="padding-top:clamp(20px,3vw,40px)"><div class="wrap">
+  <div class="viagem-grid">
+    <div class="viagem-card reveal">
+      <div class="viagem-card__ic">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.8 19.2L16 11l3.5-3.5a2.12 2.12 0 0 0-3-3L13 8 4.8 6.2a1 1 0 0 0-.9.3l-1 1a1 1 0 0 0 .2 1.5L8 12l-2 2-2-.5a1 1 0 0 0-.9.3l-.5.5a1 1 0 0 0 .2 1.6L6 18l1.6 2.7a1 1 0 0 0 1.6.2l.5-.5a1 1 0 0 0 .3-.9L11 18l2-2 2.9 5.8a1 1 0 0 0 1.5.2l1-1a1 1 0 0 0 .3-.9z"/></svg>
+      </div>
+      <h3>Passagens Aéreas</h3>
+      <p>Nossos agentes especialistas encontram as melhores tarifas e roteiros para você. Mais praticidade, menos estresse.</p>
+      <ul>
+        <li>Atendimento personalizado por agente especializado</li>
+        <li>Busca das melhores tarifas e conexões</li>
+        <li>Roteiros nacionais e internacionais</li>
+        <li>Planejamento completo da viagem</li>
+        <li>Câmbio e seguro no mesmo atendimento</li>
+      </ul>
+      <a class="btn btn--grad" href="https://wa.me/5551999649824?text=Ol%C3%A1!%20Quero%20saber%20mais%20sobre%20Passagens%20A%C3%A9reas." target="_blank" rel="noopener">Solicitar passagem
+        <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg></span>
+      </a>
+    </div>
+    <div class="viagem-card reveal d1">
+      <div class="viagem-card__ic">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l8 4v6c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V6l8-4z"/><path d="M9 12l2 2 4-4"/></svg>
+      </div>
+      <h3>Seguro Viagem</h3>
+      <p>Viaje com tranquilidade. Coberturas completas para saúde, bagagem e imprevistos em qualquer destino do mundo.</p>
+      <ul>
+        <li>Assistência médica e hospitalar</li>
+        <li>Cobertura de bagagem extraviada</li>
+        <li>Cancelamento e atraso de voo</li>
+        <li>Atende exigência do Tratado de Schengen</li>
+        <li>Planos para qualquer destino e duração</li>
+      </ul>
+      <a class="btn btn--grad" href="https://wa.me/5551999649824?text=Ol%C3%A1!%20Quero%20saber%20mais%20sobre%20Seguro%20Viagem." target="_blank" rel="noopener">Solicitar seguro
+        <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg></span>
+      </a>
+    </div>
+  </div>
+</div></section>
+
 <section style="background:var(--bg-2)"><div class="wrap">
   <p class="eyebrow reveal">Vantagem exclusiva</p>
   <h2 class="s-title reveal d1" style="max-width:22ch">Tudo junto: <span class="grad-text">câmbio, passagem e seguro</span></h2>
@@ -434,17 +434,13 @@
   </div>
   <div class="partner-strip reveal d2">
     <div class="partner-chip">
-      <img src="../assets/logo-cvc.png" alt="CVC" />
+      <svg width="80" height="36" viewBox="0 0 80 36" xmlns="http://www.w3.org/2000/svg"><rect width="80" height="36" rx="6" fill="#E4002B"/><text x="40" y="26" font-family="Arial Black, Arial, sans-serif" font-weight="900" font-size="20" fill="#fff" text-anchor="middle">CVC</text></svg>
       <span class="partner-chip__label">Passagens aéreas</span>
     </div>
     <div class="partner-chip">
-      <img src="../assets/logo-gta.png" alt="GTA Seguros" />
+      <svg width="80" height="36" viewBox="0 0 80 36" xmlns="http://www.w3.org/2000/svg"><rect width="80" height="36" rx="6" fill="#1B3346"/><text x="40" y="23" font-family="Arial Black, Arial, sans-serif" font-weight="900" font-size="15" fill="#fff" text-anchor="middle">GTA</text><text x="40" y="33" font-family="Arial, sans-serif" font-size="7" fill="rgba(255,255,255,.7)" text-anchor="middle">SEGUROS</text></svg>
       <span class="partner-chip__label">Seguro viagem</span>
     </div>
-  </div>
-  <div class="partner-discount reveal d3">
-    <svg class="partner-discount__ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-    <p><strong>Desconto especial ao fechar tudo aqui:</strong> quem contrata câmbio, passagem e seguro em um só atendimento na Money Way garante condições exclusivas que você não encontra separando os serviços.</p>
   </div>
   <div class="page-cta reveal d4">
     <a class="btn btn--grad" href="https://wa.me/5551999649824?text=Ol%C3%A1!%20Quero%20organizar%20minha%20viagem%20com%20a%20Money%20Way." target="_blank" rel="noopener">Começar a planejar minha viagem
@@ -569,5 +565,95 @@
   updatePaPreview();
 })();
 </script>
+<!-- Sticker flutuante de desconto -->
+<style>
+#desconto-sticker {
+  position: fixed;
+  bottom: clamp(16px, 3vw, 28px);
+  left: clamp(16px, 3vw, 28px);
+  z-index: 94;
+  max-width: 272px;
+  background: #fff;
+  border: 2px solid var(--terra);
+  border-radius: 18px;
+  padding: 18px 20px 16px;
+  box-shadow: 0 8px 36px rgba(0,0,0,.16);
+  animation: stickerIn .4s cubic-bezier(.34,1.56,.64,1) both;
+}
+@keyframes stickerIn {
+  from { opacity: 0; transform: translateY(24px) scale(.92); }
+  to   { opacity: 1; transform: none; }
+}
+#desconto-sticker__head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+#desconto-sticker__badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  background: var(--terra);
+  color: #fff;
+  border-radius: 100px;
+  padding: 4px 12px;
+  font-family: var(--disp);
+  font-weight: 700;
+  font-size: 12px;
+  letter-spacing: .02em;
+}
+#desconto-sticker__close {
+  flex-shrink: 0;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--slate-2);
+  font-size: 20px;
+  line-height: 1;
+  padding: 0;
+  margin-top: -2px;
+  transition: color .15s;
+}
+#desconto-sticker__close:hover { color: var(--navy); }
+#desconto-sticker p {
+  font-size: 13px;
+  color: var(--slate);
+  line-height: 1.55;
+  margin: 0 0 14px;
+}
+#desconto-sticker a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: var(--grad);
+  color: #fff;
+  font-family: var(--disp);
+  font-weight: 700;
+  font-size: 13.5px;
+  border-radius: 10px;
+  padding: 11px 16px;
+  text-decoration: none;
+  transition: opacity .18s;
+}
+#desconto-sticker a:hover { opacity: .88; }
+</style>
+<div id="desconto-sticker">
+  <div id="desconto-sticker__head">
+    <span id="desconto-sticker__badge">
+      <svg viewBox="0 0 24 24" fill="currentColor" width="13" height="13"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+      Desconto exclusivo
+    </span>
+    <button id="desconto-sticker__close" onclick="document.getElementById('desconto-sticker').style.display='none'" aria-label="Fechar">&#215;</button>
+  </div>
+  <p>Câmbio + passagem + seguro em um atendimento: condições exclusivas que você não encontra separando os serviços.</p>
+  <a href="https://wa.me/5551999649824?text=Ol%C3%A1!%20Quero%20saber%20sobre%20o%20desconto%20especial%20para%20c%C3%A2mbio%2C%20passagem%20e%20seguro%20juntos." target="_blank" rel="noopener">
+    <svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16"><path d="M12 2a10 10 0 0 0-8.6 15l-1.3 4 4.1-1.3A10 10 0 1 0 12 2zm5.4 14.2c-.2.6-1.2 1.1-1.7 1.2-.4.1-1 .1-1.6-.1-.4-.1-.9-.3-1.5-.5-2.6-1.1-4.3-3.8-4.4-4-.1-.2-1-1.4-1-2.6s.6-1.8.9-2.1c.2-.2.5-.3.6-.3h.5c.2 0 .4 0 .5.4l.7 1.7c.1.1.1.3 0 .5l-.3.5-.3.3c-.1.1-.2.3-.1.5.1.2.6 1 1.3 1.6.9.8 1.6 1 1.8 1.1.2.1.3.1.5-.1l.6-.7c.2-.2.3-.2.5-.1l1.6.8c.2.1.4.2.4.3.1.1.1.6-.1 1z"/></svg>
+    Aproveitar agora
+  </a>
+</div>
+
 </body>
 </html>
