@@ -150,6 +150,7 @@
     /* blog */
     blog_eyebrow: { pt: 'Conteúdos', en: 'Content', es: 'Contenidos' },
     blog_h2:      { pt: 'Blog <span class="grad-text">Money Way</span>', en: 'Blog <span class="grad-text">Money Way</span>', es: 'Blog <span class="grad-text">Money Way</span>' },
+    blog_lede:    { pt: 'Dicas de câmbio, viagem e tudo para você economizar e viajar melhor.', en: 'Currency, travel and money tips to help you save and travel smarter.', es: 'Consejos de cambio, viaje y todo para que ahorres y viajes mejor.' },
     post1_cat:  { pt: 'Cédulas Antigas', en: 'Vintage Banknotes', es: 'Billetes Antiguos' },
     post1_h3:   { pt: 'Cédulas estrangeiras antigas: o que fazer com elas?', en: 'Old foreign banknotes: what to do with them?', es: 'Billetes extranjeros antiguos: ¿qué hacer con ellos?' },
     post1_p:    { pt: 'Saiba como avaliar, onde vender e qual o valor de notas antigas guardadas em casa.', en: 'Learn how to evaluate, where to sell and what old banknotes stored at home are worth.', es: 'Sepa cómo evaluar, dónde vender y cuánto valen los billetes viejos guardados en casa.' },

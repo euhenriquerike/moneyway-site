@@ -426,6 +426,20 @@ section { padding-block: clamp(44px, 6vw, 72px); position: relative; }
 .prose { max-width: 62ch; }
 .prose p { color: var(--slate); font-size: 16.5px; line-height: 1.7; margin: 0 0 18px; }
 .prose p strong { color: var(--navy); font-weight: 600; }
+.prose h2 { font-family: var(--disp); font-weight: 700; font-size: clamp(20px, 2.4vw, 26px); color: var(--navy); letter-spacing: -.01em; margin: clamp(30px, 4vw, 44px) 0 14px; }
+.prose h2:first-child { margin-top: 0; }
+.prose ul { list-style: none; margin: 0 0 22px; padding: 0; display: flex; flex-direction: column; gap: 12px; }
+.prose li { position: relative; padding-left: 30px; color: var(--slate); font-size: 16.5px; line-height: 1.6; }
+.prose li::before { content: ""; position: absolute; left: 4px; top: 9px; width: 8px; height: 8px; border-radius: 50%; background: var(--emerald); }
+.prose li strong { color: var(--navy); font-weight: 600; }
+.prose a { color: var(--emerald); font-weight: 600; text-decoration: none; }
+.prose a:hover { text-decoration: underline; }
+.article-hero-img { width: 100%; height: clamp(220px, 34vw, 400px); object-fit: cover; border-radius: var(--r); box-shadow: var(--shadow); margin-top: clamp(24px, 3vw, 36px); }
+.article-meta { display: flex; flex-wrap: wrap; gap: 8px 16px; align-items: center; margin-top: 18px; font-family: var(--mono); font-size: 12px; letter-spacing: .04em; text-transform: uppercase; color: var(--slate-2); }
+.article-meta .dot { width: 3px; height: 3px; border-radius: 50%; background: var(--slate-2); opacity: .5; }
+.article-end { margin-top: clamp(36px, 5vw, 56px); padding-top: clamp(28px, 3vw, 36px); border-top: 1px solid var(--line); display: flex; flex-wrap: wrap; gap: 16px; justify-content: space-between; align-items: center; }
+.article-end a.back { color: var(--slate); font-size: 14px; text-decoration: none; }
+.article-end a.back:hover { color: var(--navy); }
 .page-cta { margin-top: clamp(22px, 3vw, 32px); display: flex; flex-wrap: wrap; gap: 12px; }
 .benefit-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(16px, 2vw, 24px); margin-top: clamp(30px, 4vw, 46px); }
 @media (max-width: 820px) { .benefit-grid { grid-template-columns: 1fr; } }
