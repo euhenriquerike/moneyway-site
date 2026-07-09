@@ -54,7 +54,7 @@
       head.className = 'mnav__grouphead';
       head.type = 'button';
       var svcLabelEl = document.querySelector('.nav__drop > a span, .nav__drop > a');
-      head.innerHTML = '<span>' + (svcLabelEl ? svcLabelEl.textContent.trim() : 'Serviços') +
+      head.innerHTML = '<span data-i18n="nav_services">' + (svcLabelEl ? svcLabelEl.textContent.trim() : 'Serviços') +
         '</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>';
       var sub = document.createElement('div');
       sub.className = 'mnav__sub';
