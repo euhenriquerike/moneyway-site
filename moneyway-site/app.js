@@ -24,6 +24,108 @@
     if (nav) nav.classList.toggle('is-stuck', window.scrollY > 20);
   }, { passive: true });
 
+  /* ========== MOBILE NAV (hambúrguer + drawer) ========== */
+  (function buildMobileNav() {
+    var bar = document.querySelector('.nav__bar');
+    if (!bar || document.querySelector('.nav__burger')) return;
+
+    var burger = document.createElement('button');
+    burger.className = 'nav__burger';
+    burger.setAttribute('aria-label', 'Abrir menu');
+    burger.setAttribute('aria-expanded', 'false');
+    burger.innerHTML = '<span></span><span></span><span></span>';
+    bar.appendChild(burger);
+
+    var overlay = document.createElement('div');
+    overlay.className = 'mnav__overlay';
+    var drawer = document.createElement('aside');
+    drawer.className = 'mnav';
+    drawer.setAttribute('aria-hidden', 'true');
+    var inner = document.createElement('div');
+    inner.className = 'mnav__inner';
+    drawer.appendChild(inner);
+
+    /* Serviços (accordion) */
+    var svcLinks = document.querySelectorAll('.nav__menu-inner a');
+    if (svcLinks.length) {
+      var grp = document.createElement('div');
+      grp.className = 'mnav__group';
+      var head = document.createElement('button');
+      head.className = 'mnav__grouphead';
+      head.type = 'button';
+      var svcLabelEl = document.querySelector('.nav__drop > a span, .nav__drop > a');
+      head.innerHTML = '<span>' + (svcLabelEl ? svcLabelEl.textContent.trim() : 'Serviços') +
+        '</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>';
+      var sub = document.createElement('div');
+      sub.className = 'mnav__sub';
+      svcLinks.forEach(function (a) { sub.appendChild(a.cloneNode(true)); });
+      head.addEventListener('click', function () { grp.classList.toggle('open'); });
+      grp.appendChild(head); grp.appendChild(sub);
+      inner.appendChild(grp);
+    }
+
+    /* links principais (empresa, cotações, sobre, blog) */
+    document.querySelectorAll('.nav__center > a').forEach(function (a) {
+      var c = a.cloneNode(true);
+      c.classList.add('mnav__link');
+      if (a.classList.contains('nav__pj')) c.classList.add('mnav__link--pj');
+      inner.appendChild(c);
+    });
+
+    /* idioma — reencaminha para os botões originais */
+    var langSw = document.querySelector('.lang-sw');
+    if (langSw) {
+      var langWrap = document.createElement('div');
+      langWrap.className = 'mnav__lang';
+      var origBtns = langSw.querySelectorAll('button');
+      function syncLang() {
+        langWrap.querySelectorAll('button').forEach(function (nb, i) {
+          if (origBtns[i]) nb.classList.toggle('active', origBtns[i].classList.contains('active'));
+        });
+      }
+      origBtns.forEach(function (b) {
+        var nb = document.createElement('button');
+        nb.type = 'button';
+        nb.textContent = b.textContent;
+        nb.className = b.className;
+        nb.addEventListener('click', function () { b.click(); syncLang(); });
+        langWrap.appendChild(nb);
+      });
+      inner.appendChild(langWrap);
+    }
+
+    /* CTA principal */
+    var cta = document.querySelector('.nav__cta');
+    if (cta) {
+      var cc = cta.cloneNode(true);
+      cc.classList.add('mnav__cta');
+      inner.appendChild(cc);
+    }
+
+    document.body.appendChild(overlay);
+    document.body.appendChild(drawer);
+
+    function open() {
+      drawer.classList.add('open'); overlay.classList.add('open');
+      burger.classList.add('open'); burger.setAttribute('aria-expanded', 'true');
+      drawer.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+    }
+    function close() {
+      drawer.classList.remove('open'); overlay.classList.remove('open');
+      burger.classList.remove('open'); burger.setAttribute('aria-expanded', 'false');
+      drawer.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+    }
+    burger.addEventListener('click', function () {
+      drawer.classList.contains('open') ? close() : open();
+    });
+    overlay.addEventListener('click', close);
+    drawer.querySelectorAll('a').forEach(function (a) { a.addEventListener('click', close); });
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape') close(); });
+    window.addEventListener('resize', function () { if (window.innerWidth > 980) close(); });
+  })();
+
   /* ========== REVEAL + COUNTERS ========== */
   var revEls = document.querySelectorAll('.reveal');
   function revealAll() {

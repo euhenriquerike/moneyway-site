@@ -84,7 +84,7 @@
     sim_h2:    { pt: 'Simule seu <span class="grad-text">câmbio agora</span>', en: 'Simulate your <span class="grad-text">exchange now</span>', es: 'Simule su <span class="grad-text">cambio ahora</span>' },
     sim_sub:   { pt: 'Trabalhamos com mais de 10 tipos de moedas estrangeiras. Valores com IOF incluso.', en: 'We work with over 10 types of foreign currency. Rates include IOF tax.', es: 'Trabajamos con más de 10 tipos de divisas extranjeras. Valores con IOF incluido.' },
     sim_title: { pt: 'Simulador de câmbio', en: 'Currency simulator', es: 'Simulador de cambio' },
-    sim_type_note: { pt: 'para moeda em espécie', en: 'for cash currency', es: 'para moneda en efectivo' },
+    sim_type_note: { pt: 'para moeda em espécie', en: 'for cash', es: 'para moneda en efectivo' },
     sim_tab_cash:  { pt: '💵 Espécie', en: '💵 Cash', es: '💵 Efectivo' },
     sim_tab_card:  { pt: '💳 Cartão de Débito', en: '💳 Debit Card', es: '💳 Tarjeta de Débito' },
     sim_iof:       { pt: 'IOF já incluso na cotação', en: 'IOF tax included in rate', es: 'IOF ya incluido en la cotización' },
@@ -151,7 +151,7 @@
     blog_eyebrow: { pt: 'Conteúdos', en: 'Content', es: 'Contenidos' },
     blog_h2:      { pt: 'Blog <span class="grad-text">Money Way</span>', en: 'Blog <span class="grad-text">Money Way</span>', es: 'Blog <span class="grad-text">Money Way</span>' },
     post1_cat:  { pt: 'Cédulas Antigas', en: 'Vintage Banknotes', es: 'Billetes Antiguos' },
-    post1_h3:   { pt: 'Cédulas estrangeiras antigas: o que fazer com elas?', en: 'Old foreign banknotes: what to do with them?', es: '¿Billetes extranjeros antiguos? ¿Qué hacer con ellos?' },
+    post1_h3:   { pt: 'Cédulas estrangeiras antigas: o que fazer com elas?', en: 'Old foreign banknotes: what to do with them?', es: 'Billetes extranjeros antiguos: ¿qué hacer con ellos?' },
     post1_p:    { pt: 'Saiba como avaliar, onde vender e qual o valor de notas antigas guardadas em casa.', en: 'Learn how to evaluate, where to sell and what old banknotes stored at home are worth.', es: 'Sepa cómo evaluar, dónde vender y cuánto valen los billetes viejos guardados en casa.' },
     post1_more: { pt: 'Ler mais →', en: 'Read more →', es: 'Leer más →' },
     post2_cat:  { pt: 'Empresas PJ', en: 'Business', es: 'Empresas PJ' },
@@ -221,7 +221,7 @@
     cc3_h3:  { pt: 'Nossa sede', en: 'Our office', es: 'Nuestra sede' },
     cc3_p3:  { pt: 'Venha nos fazer uma visita! 👋', en: 'Come visit us! 👋', es: '¡Venga a visitarnos! 👋' },
     sim_lock_cot: { pt: 'Travar essa taxa no WhatsApp', en: 'Lock this rate on WhatsApp', es: 'Fijar esta tasa en WhatsApp' },
-    sim_note_cot: { pt: 'Valores ilustrativos. A cotação oficial é confirmada no atendimento, no momento do fechamento.', en: 'Illustrative values. The official rate is confirmed at service, at the time of closing.', es: 'Valores ilustrativos. La cotización oficial se confirma en la atención, al momento del cierre.' },
+    sim_note_cot: { pt: 'Valores ilustrativos. A cotação oficial é confirmada no atendimento, no momento do fechamento.', en: 'Illustrative values. The official rate is confirmed with our team, at the time of closing.', es: 'Valores ilustrativos. La cotización oficial se confirma en la atención, al momento del cierre.' },
     sim_currencies_note: { pt: 'Trabalhamos com mais de 10 moedas. <a href="https://wa.me/5551999649824?text=Preciso%20de%20uma%20moeda%20que%20n%C3%A3o%20est%C3%A1%20na%20lista." target="_blank" rel="noopener">Fale conosco</a> para outras cotações.', en: 'We work with over 10 currencies. <a href="https://wa.me/5551999649824?text=Preciso%20de%20uma%20moeda%20que%20n%C3%A3o%20est%C3%A1%20na%20lista." target="_blank" rel="noopener">Contact us</a> for other rates.', es: 'Trabajamos con más de 10 divisas. <a href="https://wa.me/5551999649824?text=Preciso%20de%20uma%20moeda%20que%20n%C3%A3o%20est%C3%A1%20na%20lista." target="_blank" rel="noopener">Contáctenos</a> para otras cotizaciones.' },
 
     /* ===== SEGURO-VIAGEM.HTML ===== */
@@ -298,7 +298,7 @@
     mg_ben1_h3:   { pt: 'Seguro', en: 'Secure', es: 'Seguro' },
     mg_ben1_p:    { pt: 'A MoneyGram oferece transações seguras e rápidas em mais de 200 países. Com autenticação e tecnologia de ponta, seu dinheiro chega com confiança!', en: 'MoneyGram offers secure and fast transactions in over 200 countries. With authentication and cutting-edge technology, your money arrives with confidence!', es: 'MoneyGram ofrece transacciones seguras y rápidas en más de 200 países. ¡Con autenticación y tecnología de vanguardia, su dinero llega con confianza!' },
     mg_ben2_h3:   { pt: 'Facilidade', en: 'Easy', es: 'Facilidad' },
-    mg_ben2_p:    { pt: 'Faça transações internacionais pelo celular, via Pix ou WhatsApp. Prático, rápido e sem complicações; envie dinheiro em minutos!', en: 'Make international transactions via mobile, Pix or WhatsApp. Practical, fast and hassle-free; send money in minutes!', es: '¡Realice transacciones internacionales desde el celular, vía Pix o WhatsApp. Práctico, rápido y sin complicaciones; envíe dinero en minutos!' },
+    mg_ben2_p:    { pt: 'Faça transações internacionais pelo celular, via Pix ou WhatsApp. Prático, rápido e sem complicações; envie dinheiro em minutos!', en: 'Make international transactions via mobile, Pix or WhatsApp. Practical, fast and hassle-free; send money in minutes!', es: 'Realice transacciones internacionales desde el celular, vía Pix o WhatsApp. ¡Práctico, rápido y sin complicaciones; envíe dinero en minutos!' },
     mg_ben3_h3:   { pt: 'Global', en: 'Global', es: 'Global' },
     mg_ben3_p:    { pt: 'Rede presente em mais de 200 países com milhares de pontos de retirada; seu destinatário recebe onde estiver.', en: 'Network present in over 200 countries with thousands of pick-up points; your recipient receives wherever they are.', es: 'Red presente en más de 200 países con miles de puntos de retiro; su destinatario recibe donde esté.' },
     mg_how_ey:    { pt: 'Como posso ajudar?', en: 'How can I help?', es: '¿Cómo puedo ayudar?' },
@@ -447,7 +447,7 @@
     pj_ben2_h3:   { pt: 'Remessas internacionais', en: 'International transfers', es: 'Remesas internacionales' },
     pj_ben2_p:    { pt: 'Pagamento de fornecedores no exterior, recebimento de exportação e transferências corporativas.', en: 'Payment to overseas suppliers, export receipts and corporate transfers.', es: 'Pago de proveedores en el exterior, recepción de exportaciones y transferencias corporativas.' },
     pj_ben3_h3:   { pt: 'Conta global empresarial', en: 'Business global account', es: 'Cuenta global empresarial' },
-    pj_ben3_p:    { pt: 'Movimente recursos em múltiplas moedas com uma conta multi-currency dedicada ao seu CNPJ.', en: 'Move funds in multiple currencies with a multi-currency account dedicated to your company.', es: 'Mueva recursos en múltiples divisas con una cuenta multi-currency dedicada a su empresa.' },
+    pj_ben3_p:    { pt: 'Movimente recursos em múltiplas moedas com uma conta multi-currency dedicada ao seu CNPJ.', en: 'Move funds in multiple currencies with a multi-currency account dedicated to your company.', es: 'Mueva recursos en múltiples divisas con una cuenta multidivisa dedicada a su empresa.' },
     pj_ben4_h3:   { pt: 'Gestor dedicado', en: 'Dedicated manager', es: 'Gestor dedicado' },
     pj_ben4_p:    { pt: 'Atendimento exclusivo com gestor que conhece o seu negócio e acompanha cada operação.', en: 'Exclusive service with a manager who knows your business and follows every operation.', es: 'Atención exclusiva con gestor que conoce su negocio y acompaña cada operación.' },
     pj_ben5_h3:   { pt: 'Documentação facilitada', en: 'Simplified documentation', es: 'Documentación facilitada' },
@@ -456,7 +456,11 @@
     pj_ben6_p:    { pt: 'Operações auditáveis, conformes com as normas do BACEN e totalmente rastreáveis para sua contabilidade.', en: 'Auditable operations, compliant with BACEN regulations and fully traceable for your accounting.', es: 'Operaciones auditables, conformes con las normas del BACEN y totalmente rastreables para su contabilidad.' },
     pj_ie_ey:     { pt: 'Comércio exterior', en: 'International trade', es: 'Comercio exterior' },
     pj_ie_h2:     { pt: 'Câmbio para <span class="grad-text">importação e exportação</span>', en: 'FX for <span class="grad-text">import and export</span>', es: 'Cambio para <span class="grad-text">importación y exportación</span>' },
-    pj_ie_sub:    { pt: 'A Money Way é correspondente cambial autorizado pelo Banco Central do Brasil. Facilitamos operações de câmbio para comércio exterior através de nossa corretora parceira, com total segurança regulatória e agilidade operacional.', en: 'Money Way is an exchange correspondent authorized by the Brazilian Central Bank. We facilitate FX operations for international trade through our partner broker, with full regulatory safety and operational agility.', es: 'Money Way es correspondiente cambiario autorizado por el Banco Central de Brasil. Facilitamos operaciones de cambio para comercio exterior a través de nuestra corredora asociada, con total seguridad regulatoria y agilidad operacional.' }
+    pj_ie_sub:    { pt: 'A Money Way é correspondente cambial autorizado pelo Banco Central do Brasil. Facilitamos operações de câmbio para comércio exterior através de nossa corretora parceira, com total segurança regulatória e agilidade operacional.', en: 'Money Way is an exchange correspondent authorized by the Brazilian Central Bank. We facilitate FX operations for international trade through our partner broker, with full regulatory safety and operational agility.', es: 'Money Way es correspondiente cambiario autorizado por el Banco Central de Brasil. Facilitamos operaciones de cambio para comercio exterior a través de nuestra corredora asociada, con total seguridad regulatoria y agilidad operacional.' },
+
+    /* ===== VISA-TRAVEL-MONEY.HTML ===== */
+    visa_h1:      { pt: 'Cartão de débito <em>internacional</em>', en: '<em>International</em> debit card', es: 'Tarjeta de débito <em>internacional</em>' },
+    visa_lede:    { pt: 'Trave o câmbio antes de embarcar. Pague e saque em mais de 200 países com <strong>segurança, praticidade e sem surpresas na cotação</strong>.', en: 'Lock in your exchange rate before boarding. Pay and withdraw in over 200 countries with <strong>security, convenience and no surprises on the rate</strong>.', es: 'Fije el cambio antes de embarcar. Pague y retire en más de 200 países con <strong>seguridad, practicidad y sin sorpresas en la cotización</strong>.' }
   };
 
   /* ---- renderer ---- */

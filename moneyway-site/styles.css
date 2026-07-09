@@ -570,3 +570,95 @@ html.js .reveal.in { opacity: 1; transform: none; }
 .partner-discount__ic { flex-shrink: 0; width: 20px; height: 20px; color: var(--terra); margin-top: 1px; }
 .partner-discount p { margin: 0; color: var(--navy); font-size: 15px; line-height: 1.6; }
 .partner-discount strong { color: var(--terra); font-weight: 600; }
+
+/* =========================================================
+   MOBILE NAV — hambúrguer + drawer (injetado via app.js)
+   ========================================================= */
+.nav__burger { display: none; }
+.mnav, .mnav__overlay { display: none; }
+
+@media (max-width: 980px) {
+  /* nav vira flex simples: logo à esquerda, hambúrguer à direita */
+  .nav__bar { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+  .nav__burger {
+    display: inline-flex; flex-direction: column; justify-content: center; gap: 5px;
+    width: 46px; height: 46px; padding: 0 12px; margin: 0;
+    background: transparent; border: none; cursor: pointer; border-radius: 12px; flex: none;
+  }
+  .nav__burger span { display: block; height: 2px; width: 22px; background: var(--navy); border-radius: 2px;
+    transition: transform .25s ease, opacity .2s ease; }
+  .nav__burger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .nav__burger.open span:nth-child(2) { opacity: 0; }
+  .nav__burger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+  .mnav__overlay { display: block; position: fixed; inset: 0; background: rgba(10,23,34,.5);
+    backdrop-filter: blur(2px); opacity: 0; visibility: hidden; transition: opacity .3s, visibility .3s; z-index: 130; }
+  .mnav__overlay.open { opacity: 1; visibility: visible; }
+
+  .mnav { display: block; position: fixed; top: 0; right: 0; bottom: 0; width: min(87vw, 370px);
+    background: #fff; z-index: 140; transform: translateX(100%);
+    transition: transform .32s cubic-bezier(.4,0,.2,1); box-shadow: -24px 0 60px -30px rgba(10,23,34,.55);
+    overflow-y: auto; -webkit-overflow-scrolling: touch; }
+  .mnav.open { transform: translateX(0); }
+  .mnav__inner { display: flex; flex-direction: column; gap: 2px; padding: 88px 20px 28px; min-height: 100%; }
+
+  .mnav__link, .mnav__grouphead {
+    font-family: var(--disp); font-weight: 600; font-size: 17px; color: var(--navy); text-decoration: none;
+    padding: 15px 12px; border-radius: 12px; display: flex; align-items: center; justify-content: space-between;
+    gap: 10px; width: 100%; background: transparent; border: none; text-align: left; cursor: pointer;
+    min-height: 52px; box-sizing: border-box;
+  }
+  .mnav__link .chev { display: none; }
+  .mnav__link:active, .mnav__grouphead:active { background: var(--bg-2); }
+  .mnav__link--pj { color: var(--terra); font-weight: 700; }
+
+  .mnav__grouphead svg { width: 18px; height: 18px; color: var(--slate-2); transition: transform .25s; flex: none; }
+  .mnav__group.open .mnav__grouphead svg { transform: rotate(180deg); }
+  .mnav__sub { display: none; flex-direction: column; padding-left: 6px; margin-bottom: 6px; }
+  .mnav__group.open .mnav__sub { display: flex; }
+  .mnav__sub a { display: flex; align-items: center; gap: 11px; padding: 13px 12px; border-radius: 10px;
+    font-family: var(--disp); font-weight: 500; font-size: 15px; color: var(--slate); text-decoration: none; min-height: 48px; box-sizing: border-box; }
+  .mnav__sub a:active { background: var(--bg-2); color: var(--emerald); }
+  .mnav__sub a .di { width: 6px; height: 6px; border-radius: 50%; background: var(--terra-soft); flex: none; }
+
+  .mnav__lang { display: flex; gap: 8px; margin: 16px 8px 8px; }
+  .mnav__lang button { flex: 1; font-size: 20px; padding: 11px 0; border: 1px solid var(--line);
+    background: var(--bg); border-radius: 12px; cursor: pointer; transition: all .18s; line-height: 1; min-height: 46px; }
+  .mnav__lang button.active { background: var(--navy); border-color: var(--navy); }
+
+  .mnav__cta { margin-top: auto; width: 100%; justify-content: center; font-size: 16px; padding: 16px; }
+  .mnav__cta { display: inline-flex; }
+}
+
+/* =========================================================
+   RESPONSIVO — tipografia fluida, grids e overflow (mobile/tablet)
+   ========================================================= */
+@media (max-width: 640px) {
+  /* Tipografia: reduz mínimos para telas pequenas mantendo fluidez */
+  .hero h1 { font-size: clamp(34px, 8.6vw, 56px); line-height: 1.06; margin-top: 18px; }
+  .hero__lede { font-size: clamp(15.5px, 4vw, 18px); margin-top: 20px; }
+  .s-title { font-size: clamp(28px, 7vw, 44px); }
+  .page-hero h1 { font-size: clamp(30px, 8vw, 52px); line-height: 1.06; }
+  .page-lede { font-size: clamp(16px, 4.2vw, 19px); }
+  .special h2, .final h2 { font-size: clamp(28px, 7.4vw, 46px); }
+
+  /* CTAs empilham e ficam full-width (toque confortável) */
+  .hero__cta, .page-cta { flex-direction: column; align-items: stretch; }
+  .hero__cta .btn, .page-cta .btn { width: 100%; justify-content: center; }
+
+  /* espaçamento vertical um pouco mais enxuto */
+  section { padding-block: clamp(40px, 11vw, 60px); }
+}
+
+@media (max-width: 480px) {
+  /* Cena do globo: contida para não estourar a viewport */
+  .scene { max-width: 320px; }
+  /* Simulador: evita overflow horizontal em telas estreitas */
+  .sim__body, .sim__out, .sim__row, .sim__row--2, .sim__controls { min-width: 0; }
+  .sim__cur { gap: 7px; }
+  .sim__cur button { padding: 9px 12px; font-size: 13px; }
+  .sim__input input { font-size: 20px; min-width: 0; }
+  .sim__total strong { font-size: clamp(30px, 9vw, 40px); }
+  /* Nav bar: logo levemente menor para caber com folga */
+  .brand__name { font-size: 18px; }
+}
