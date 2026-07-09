@@ -14,7 +14,7 @@
 
     /* nav dropdown */
     dd_buy_sell:  { pt: 'Compra e venda de moedas', en: 'Buy & sell currency', es: 'Compra y venta de divisas' },
-    dd_transfers: { pt: 'Transferência de valores nacionais', en: 'National transfers', es: 'Transferencias nacionales' },
+    dd_transfers: { pt: 'Transferência de valores internacionais', en: 'International transfers', es: 'Transferencias internacionales' },
     dd_old_notes: { pt: 'Cédulas Estrangeiras Antigas', en: 'Vintage Foreign Banknotes', es: 'Billetes Extranjeros Antiguos' },
     dd_travel:    { pt: 'Passagem Aérea e Seguro de Viagem', en: 'Flights & Travel Insurance', es: 'Vuelos y Seguro de Viaje' },
     dd_moneygram: { pt: 'MoneyGram', en: 'MoneyGram', es: 'MoneyGram' },
@@ -120,7 +120,7 @@
     svc1_h3:       { pt: 'Compra e venda de moedas estrangeiras', en: 'Buy & sell foreign currency', es: 'Compra y venta de divisas extranjeras' },
     svc1_p:        { pt: 'Mais de 10 moedas estrangeiras em espécie, com cotações competitivas e atendimento personalizado.', en: 'Over 10 foreign currencies in cash, with competitive rates and personalized service.', es: 'Más de 10 divisas extranjeras en efectivo, con cotizaciones competitivas y atención personalizada.' },
     svc1_more:     { pt: 'Saiba mais', en: 'Learn more', es: 'Saber más' },
-    svc2_h3:       { pt: 'Transferência de valores nacionais', en: 'National value transfers', es: 'Transferencia de valores nacionales' },
+    svc2_h3:       { pt: 'Transferência de valores internacionais', en: 'International value transfers', es: 'Transferencia de valores internacionales' },
     svc2_p:        { pt: 'Envie valores em reais com agilidade, segurança e atendimento próximo para qualquer banco do Brasil.', en: 'Send amounts in BRL quickly and securely to any bank in Brazil with dedicated support.', es: 'Envíe valores en reales con agilidad, seguridad y atención personalizada a cualquier banco de Brasil.' },
     svc2_more:     { pt: 'Saiba mais', en: 'Learn more', es: 'Saber más' },
     svc3_h3:       { pt: 'Compra de cédula estrangeira antiga', en: 'Purchase of old foreign banknotes', es: 'Compra de billetes extranjeros antiguos' },
