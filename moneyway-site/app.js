@@ -8,14 +8,18 @@
 
   /* ========== RATES (global, atualizadas pela API) ========== */
   window.MW_RATES = {
-    USD: { buy: 4.85,  sell: 5.50,  name: 'Dólar Americano',   sign: 'US$' },
-    EUR: { buy: 5.75,  sell: 6.42,  name: 'Euro',               sign: '€'   },
-    GBP: { buy: 6.30,  sell: 7.55,  name: 'Libra Esterlina',    sign: '£'   },
-    CHF: { buy: 5.20,  sell: 7.00,  name: 'Franco Suíço',       sign: 'Fr'  },
-    CAD: { buy: 3.20,  sell: 4.05,  name: 'Dólar Canadense',    sign: 'C$'  },
-    AUD: { buy: 3.15,  sell: 3.90,  name: 'Dólar Australiano',  sign: 'A$'  },
-    ARS: { buy: 0.004, sell: 0.006, name: 'Peso Argentino',     sign: 'AR$' },
-    UYU: { buy: 0.100, sell: 0.145, name: 'Peso Uruguaio',      sign: '$U'  },
+    USD: { buy: 4.85,  sell: 5.55,  name: 'Dólar Americano',    sign: 'US$', flag: '🇺🇸' },
+    EUR: { buy: 5.65,  sell: 6.40,  name: 'Euro',               sign: '€',   flag: '🇪🇺' },
+    AUD: { buy: 3.15,  sell: 3.90,  name: 'Dólar Australiano',  sign: 'A$',  flag: '🇦🇺' },
+    CAD: { buy: 3.20,  sell: 4.05,  name: 'Dólar Canadense',    sign: 'C$',  flag: '🇨🇦' },
+    NZD: { buy: 2.50,  sell: 3.30,  name: 'Dólar Neozelandês',  sign: 'NZ$', flag: '🇳🇿' },
+    CHF: { buy: 5.20,  sell: 7.10,  name: 'Franco Suíço',       sign: 'Fr',  flag: '🇨🇭' },
+    GBP: { buy: 6.30,  sell: 7.55,  name: 'Libra Esterlina',    sign: '£',   flag: '🇬🇧' },
+    MXN: { buy: 0.20,  sell: 0.39,  name: 'Novo Peso Mexicano', sign: 'MX$', flag: '🇲🇽' },
+    ARS: { buy: 0.002, sell: 0.005, name: 'Peso Argentino',     sign: 'AR$', flag: '🇦🇷' },
+    CLP: { buy: 0.004, sell: 0.007, name: 'Peso Chileno',       sign: 'CLP$',flag: '🇨🇱' },
+    UYU: { buy: 0.11,  sell: 0.16,  name: 'Peso Uruguaio',      sign: '$U',  flag: '🇺🇾' },
+    PEN: { buy: 1.25,  sell: 1.75,  name: 'Novo Sol Peruano',   sign: 'S/',  flag: '🇵🇪' },
   };
 
   /* ========== NAV ========== */
@@ -277,62 +281,84 @@
     render();
   })();
 
-  /* ========== LIVE RATES (API pública gratuita) ========== */
+  /* ========== COTAÇÕES DO DIA (planilha Google editável pela cliente) ==========
+     A cliente edita as colunas Compra/Venda na planilha toda manhã; o site lê e
+     atualiza sozinho. Se a planilha falhar, usa os valores embutidos em MW_RATES. */
   (function () {
-    var SPREAD = 0.038;
+    var SHEET_ID  = '136z8PbMHy7C_yMTQl2pQIEYHVDwRgpNljXo305Iy7Zw';
+    var SHEET_GID = '0';
+    var ORDER = ['USD','EUR','AUD','CAD','NZD','CHF','GBP','MXN','ARS','CLP','UYU','PEN'];
+    var SIGNS = { USD:'US$', EUR:'€', GBP:'£', CHF:'Fr', CAD:'C$', AUD:'A$',
+                  NZD:'NZ$', ARS:'AR$', MXN:'MX$', CLP:'CLP$', UYU:'$U', PEN:'S/' };
 
-    function applyRates(mid) {
-      ['USD', 'EUR', 'GBP', 'CHF', 'CAD', 'AUD', 'ARS', 'UYU'].forEach(function (cur) {
-        if (!mid[cur]) return;
-        window.MW_RATES[cur].buy  = parseFloat((mid[cur] * (1 - SPREAD)).toFixed(4));
-        window.MW_RATES[cur].sell = parseFloat((mid[cur] * (1 + SPREAD)).toFixed(4));
+    function fmt(n) { return 'R$ ' + Number(n).toFixed(3).replace('.', ','); }
+
+    function renderTable(rows) {
+      var tbody = document.querySelector('.rates-table tbody');
+      if (!tbody) return;
+      tbody.innerHTML = rows.map(function (r) {
+        return '<tr><td><div class="rates-cur">' +
+          '<span class="fl">' + r.flag + '</span>' +
+          '<span class="cd">' + r.code + '</span>' +
+          '<span class="nm">' + r.name + '</span></div></td>' +
+          '<td class="num">' + fmt(r.buy) + '</td>' +
+          '<td class="num venda">' + fmt(r.sell) + '</td></tr>';
+      }).join('');
+    }
+
+    function apply(rows) {
+      rows.forEach(function (r) {
+        window.MW_RATES[r.code] = { buy: r.buy, sell: r.sell, name: r.name,
+                                    sign: SIGNS[r.code] || r.code, flag: r.flag };
       });
       if (window.MW_RENDER) window.MW_RENDER();
 
-      /* hero float cards */
       var heroUsd = document.getElementById('hero-usd');
       var heroEur = document.getElementById('hero-eur');
-      if (heroUsd && mid.USD) heroUsd.textContent = 'R$ ' + window.MW_RATES.USD.sell.toFixed(2);
-      if (heroEur && mid.EUR) heroEur.textContent = 'R$ ' + window.MW_RATES.EUR.sell.toFixed(2);
+      if (heroUsd && window.MW_RATES.USD) heroUsd.textContent = 'R$ ' + window.MW_RATES.USD.sell.toFixed(2);
+      if (heroEur && window.MW_RATES.EUR) heroEur.textContent = 'R$ ' + window.MW_RATES.EUR.sell.toFixed(2);
 
-      /* tabela de cotações */
-      var tbody = document.querySelector('.rates-table tbody');
-      if (tbody) {
-        tbody.querySelectorAll('tr').forEach(function (row) {
-          var cd = row.querySelector('.cd');
-          if (!cd) return;
-          var cur = cd.textContent.trim();
-          var r = window.MW_RATES[cur];
-          if (!r) return;
-          var cells = row.querySelectorAll('.num');
-          if (cells[0]) cells[0].textContent = 'R$ ' + r.buy.toFixed(3);
-          if (cells[1]) cells[1].textContent = 'R$ ' + r.sell.toFixed(3);
-        });
-      }
+      renderTable(rows);
 
-      /* timestamp */
       var upd = document.querySelector('.rates-head .upd');
       if (upd) {
-        var now = new Date().toLocaleString('pt-BR', { day: '2-digit', month: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit' });
-        upd.innerHTML = '<span class="dot"></span> Atualizado: ' + now;
+        var hoje = new Date().toLocaleDateString('pt-BR', { day: '2-digit', month: '2-digit', year: 'numeric' });
+        upd.innerHTML = '<span class="dot"></span> Atualizado: ' + hoje;
       }
-
-      /* sim__live label */
       var liveLabel = document.querySelector('.sim__live');
-      if (liveLabel) liveLabel.innerHTML = '<span class="dot"></span> cotação ao vivo';
+      if (liveLabel) liveLabel.innerHTML = '<span class="dot"></span> cotação do dia';
     }
 
-    fetch('https://open.er-api.com/v6/latest/BRL')
-      .then(function (r) { return r.json(); })
-      .then(function (data) {
-        if (data.result !== 'success') throw new Error();
-        var mid = {};
-        ['USD', 'EUR', 'GBP', 'CHF', 'CAD', 'AUD', 'ARS', 'UYU'].forEach(function (cur) {
-          if (data.rates[cur]) mid[cur] = 1 / data.rates[cur];
+    function fallback() {
+      apply(ORDER.filter(function (c) { return window.MW_RATES[c]; }).map(function (c) {
+        var r = window.MW_RATES[c];
+        return { code: c, flag: r.flag || '', name: r.name, buy: r.buy, sell: r.sell };
+      }));
+    }
+
+    if (!SHEET_ID || SHEET_ID.indexOf('__') === 0) { fallback(); return; }
+
+    var url = 'https://docs.google.com/spreadsheets/d/' + SHEET_ID +
+              '/gviz/tq?tqx=out:json&gid=' + SHEET_GID + '&t=' + Date.now();
+
+    fetch(url)
+      .then(function (r) { return r.text(); })
+      .then(function (txt) {
+        var json = JSON.parse(txt.substring(txt.indexOf('{'), txt.lastIndexOf('}') + 1));
+        var rows = [];
+        (json.table.rows || []).forEach(function (row) {
+          var c = row.c || [];
+          var code = c[0] && c[0].v;
+          var buy  = c[3] && c[3].v;
+          var sell = c[4] && c[4].v;
+          if (!code || buy == null || sell == null) return;
+          rows.push({ code: String(code).trim(), flag: (c[1] && c[1].v) || '',
+                      name: (c[2] && c[2].v) || String(code), buy: Number(buy), sell: Number(sell) });
         });
-        applyRates(mid);
+        if (!rows.length) throw new Error('planilha vazia');
+        apply(rows);
       })
-      .catch(function () { /* mantém os valores fallback */ });
+      .catch(fallback);
   })();
 
   /* ========== GLOBO 3D — Canvas com projeção ortográfica ========== */
