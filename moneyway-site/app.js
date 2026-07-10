@@ -197,12 +197,20 @@
     function brl(v) { return 'R$ ' + v.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 }); }
     function grp(n) { return n.toLocaleString('pt-BR'); }
 
+    function debitoCurs() {
+      var d = window.MW_RATES_DEBITO;
+      if (d && Object.keys(d).length) return Object.keys(d);
+      return DEBITO_CURS;
+    }
+
     function getRates(cur) {
       var base = window.MW_RATES[cur];
       if (st.tab === 'debito') {
-        /* recalcula com spread de débito sobre o mid */
-        var mid = (base.buy + base.sell) / (2 - SPREAD_ESPECIE * 0);
-        /* aproximação: inverte spread original para achar mid */
+        /* usa as taxas de débito que a cliente preenche na aba "Débito" */
+        var d = (window.MW_RATES_DEBITO || {})[cur];
+        if (d) return { buy: d.buy, sell: d.sell, name: d.name || (base && base.name) || cur,
+                        sign: (base && base.sign) || d.sign || cur };
+        /* moeda sem taxa de débito na planilha: estima a partir da espécie */
         var midApprox = base.sell / (1 + SPREAD_ESPECIE);
         return {
           buy:  parseFloat((midApprox * (1 - SPREAD_DEBITO)).toFixed(3)),
@@ -236,18 +244,21 @@
     function applyTab() {
       var isDebito = st.tab === 'debito';
       if (typeNote) typeNote.textContent = isDebito ? 'para cartão de débito' : 'para moeda em espécie';
-      document.querySelectorAll('#sim-cur .especie-only').forEach(function (b) {
-        b.style.display = isDebito ? 'none' : '';
+      var curs = debitoCurs();
+      document.querySelectorAll('#sim-cur button').forEach(function (b) {
+        var c = b.getAttribute('data-cur');
+        b.style.display = (!isDebito || curs.indexOf(c) !== -1) ? '' : 'none';
       });
-      /* se moeda atual não disponível no débito, volta para USD */
-      if (isDebito && DEBITO_CURS.indexOf(st.cur) === -1) {
-        st.cur = 'USD';
+      /* se moeda atual não disponível no débito, volta para a primeira disponível */
+      if (isDebito && curs.indexOf(st.cur) === -1) {
+        st.cur = curs[0] || 'USD';
         document.querySelectorAll('#sim-cur button').forEach(function (b) {
-          b.classList.toggle('active', b.getAttribute('data-cur') === 'USD');
+          b.classList.toggle('active', b.getAttribute('data-cur') === st.cur);
         });
       }
       render();
     }
+    window.MW_APPLY_TAB = applyTab;
 
     amt.addEventListener('input', function () {
       var digits = amt.value.replace(/\D/g, '');
@@ -285,8 +296,9 @@
      A cliente edita as colunas Compra/Venda na planilha toda manhã; o site lê e
      atualiza sozinho. Se a planilha falhar, usa os valores embutidos em MW_RATES. */
   (function () {
-    var SHEET_ID  = '136z8PbMHy7C_yMTQl2pQIEYHVDwRgpNljXo305Iy7Zw';
-    var SHEET_GID = '0';
+    var SHEET_ID         = '136z8PbMHy7C_yMTQl2pQIEYHVDwRgpNljXo305Iy7Zw';
+    var SHEET_GID        = '0';          /* aba Espécie */
+    var SHEET_GID_DEBITO = '733419888';  /* aba Débito  */
     var ORDER = ['USD','EUR','AUD','CAD','NZD','CHF','GBP','MXN','ARS','CLP','UYU','PEN'];
     var SIGNS = { USD:'US$', EUR:'€', GBP:'£', CHF:'Fr', CAD:'C$', AUD:'A$',
                   NZD:'NZ$', ARS:'AR$', MXN:'MX$', CLP:'CLP$', UYU:'$U', PEN:'S/' };
@@ -336,29 +348,55 @@
       }));
     }
 
+    function gvizUrl(gid) {
+      return 'https://docs.google.com/spreadsheets/d/' + SHEET_ID +
+             '/gviz/tq?tqx=out:json&gid=' + gid + '&t=' + Date.now();
+    }
+
+    function parseRows(txt) {
+      var json = JSON.parse(txt.substring(txt.indexOf('{'), txt.lastIndexOf('}') + 1));
+      var rows = [];
+      (json.table.rows || []).forEach(function (row) {
+        var c = row.c || [];
+        var code = c[0] && c[0].v;
+        var buy  = c[3] && c[3].v;
+        var sell = c[4] && c[4].v;
+        if (!code || buy == null || sell == null) return;
+        rows.push({ code: String(code).trim(), flag: (c[1] && c[1].v) || '',
+                    name: (c[2] && c[2].v) || String(code), buy: Number(buy), sell: Number(sell) });
+      });
+      return rows;
+    }
+
+    /* aba Débito: taxas de cartão de débito que a cliente preenche */
+    function loadDebito() {
+      fetch(gvizUrl(SHEET_GID_DEBITO))
+        .then(function (r) { return r.text(); })
+        .then(function (txt) {
+          var d = {};
+          parseRows(txt).forEach(function (r) {
+            d[r.code] = { buy: r.buy, sell: r.sell, name: r.name, flag: r.flag };
+          });
+          if (Object.keys(d).length) {
+            window.MW_RATES_DEBITO = d;
+            if (window.MW_APPLY_TAB) window.MW_APPLY_TAB();
+          }
+        })
+        .catch(function () {});
+    }
+
     if (!SHEET_ID || SHEET_ID.indexOf('__') === 0) { fallback(); return; }
 
-    var url = 'https://docs.google.com/spreadsheets/d/' + SHEET_ID +
-              '/gviz/tq?tqx=out:json&gid=' + SHEET_GID + '&t=' + Date.now();
-
-    fetch(url)
+    fetch(gvizUrl(SHEET_GID))
       .then(function (r) { return r.text(); })
       .then(function (txt) {
-        var json = JSON.parse(txt.substring(txt.indexOf('{'), txt.lastIndexOf('}') + 1));
-        var rows = [];
-        (json.table.rows || []).forEach(function (row) {
-          var c = row.c || [];
-          var code = c[0] && c[0].v;
-          var buy  = c[3] && c[3].v;
-          var sell = c[4] && c[4].v;
-          if (!code || buy == null || sell == null) return;
-          rows.push({ code: String(code).trim(), flag: (c[1] && c[1].v) || '',
-                      name: (c[2] && c[2].v) || String(code), buy: Number(buy), sell: Number(sell) });
-        });
+        var rows = parseRows(txt);
         if (!rows.length) throw new Error('planilha vazia');
         apply(rows);
       })
       .catch(fallback);
+
+    loadDebito();
   })();
 
   /* ========== GLOBO 3D — Canvas com projeção ortográfica ========== */
