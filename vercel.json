@@ -1,0 +1,16 @@
+{
+  "trailingSlash": true,
+  "rewrites": [
+    { "source": "/remessas-internacionais", "destination": "/subpaginas/remessas.html" },
+    { "source": "/contato", "destination": "/subpaginas/contato.html" },
+    { "source": "/cotacoes", "destination": "/subpaginas/cotacoes.html" },
+    { "source": "/compra-e-venda", "destination": "/subpaginas/cotacoes.html" },
+    { "source": "/blog", "destination": "/subpaginas/blog.html" },
+    { "source": "/passagens-aereas", "destination": "/subpaginas/passagens.html" },
+    { "source": "/conta-global", "destination": "/subpaginas/conta-global.html" },
+    { "source": "/tem-franco-suico-libra-ou-dolar-canadense-antigo-compramos-de-voce", "destination": "/subpaginas/cedulas-antigas.html" }
+  ],
+  "redirects": [
+    { "source": "/nossos-servicos", "destination": "/#servicos", "permanent": true }
+  ]
+}
