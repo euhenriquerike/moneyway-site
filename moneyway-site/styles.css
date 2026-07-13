@@ -245,7 +245,19 @@ section { padding-block: clamp(44px, 6vw, 72px); position: relative; }
 .rates-cur .nm { font-size: 13px; color: var(--slate-2); }
 .rates-table td.num { font-family: var(--disp); font-weight: 700; color: var(--navy); font-size: 16px; }
 .rates-table td.venda { color: var(--terra); }
-@media (max-width: 560px) { .rates-cur .nm { display: none; } }
+@media (max-width: 560px) {
+  .rates-cur .nm { display: none; }
+  .rates-scroll { overflow-x: visible; }
+  .rates-table { min-width: 0; }
+  .rates-table th, .rates-table td { padding: 13px 10px; }
+  .rates-table th:first-child, .rates-table td:first-child { padding-left: 14px; }
+  .rates-table th:last-child, .rates-table td:last-child { padding-right: 14px; }
+  .rates-table thead th { font-size: 10px; letter-spacing: .06em; }
+  .rates-cur { gap: 8px; }
+  .rates-cur .fl { font-size: 19px; }
+  .rates-cur .cd { font-size: 14px; }
+  .rates-table td.num { font-size: 15px; }
+}
 .rates-more { display: flex; justify-content: center; margin-top: clamp(20px, 2.4vw, 28px); }
 .rates-more a { font-family: var(--disp); font-weight: 700; font-size: 15px; color: var(--emerald); text-decoration: none; display: inline-flex; align-items: center; gap: 8px; border: 1px solid var(--line); background: #fff; border-radius: 100px; padding: 12px 22px; box-shadow: var(--shadow-sm); transition: transform .2s, border-color .2s, color .2s; }
 .rates-more a:hover { transform: translateY(-2px); border-color: var(--terra-soft); color: var(--terra); }
