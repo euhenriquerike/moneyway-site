@@ -8,9 +8,10 @@
     { "source": "/blog/", "destination": "/subpaginas/blog.html" },
     { "source": "/passagens-aereas/", "destination": "/subpaginas/passagens.html" },
     { "source": "/conta-global/", "destination": "/subpaginas/conta-global.html" },
-    { "source": "/tem-franco-suico-libra-ou-dolar-canadense-antigo-compramos-de-voce/", "destination": "/subpaginas/cedulas-antigas.html" }
+    { "source": "/cedulas-estrangeiras-antigas/", "destination": "/subpaginas/cedulas-antigas.html" }
   ],
   "redirects": [
-    { "source": "/nossos-servicos/", "destination": "/#servicos", "permanent": true }
+    { "source": "/nossos-servicos/", "destination": "/#servicos", "permanent": true },
+    { "source": "/tem-franco-suico-libra-ou-dolar-canadense-antigo-compramos-de-voce/", "destination": "/cedulas-estrangeiras-antigas/", "permanent": true }
   ]
 }
