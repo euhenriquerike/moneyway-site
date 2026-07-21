@@ -745,6 +745,7 @@
   (function () {
     var forms = document.querySelectorAll('.js-brevo-sync');
     forms.forEach(function (form) {
+      var renderedAt = Date.now();
       form.addEventListener('submit', function () {
         var data = new FormData(form);
         var payload = {
@@ -754,6 +755,7 @@
           canal: data.get('canal'),
           source: form.getAttribute('data-source'),
           _honey: data.get('_honey'),
+          _ts: renderedAt,
         };
         fetch('/api/subscribe', {
           method: 'POST',
