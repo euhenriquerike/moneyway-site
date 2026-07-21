@@ -741,4 +741,28 @@
     });
   })();
 
+  /* ========== Sincroniza cadastros com o Brevo (não bloqueia o envio pro formsubmit) ========== */
+  (function () {
+    var forms = document.querySelectorAll('.js-brevo-sync');
+    forms.forEach(function (form) {
+      form.addEventListener('submit', function () {
+        var data = new FormData(form);
+        var payload = {
+          nome: data.get('nome'),
+          email: data.get('email'),
+          whatsapp: data.get('whatsapp'),
+          canal: data.get('canal'),
+          source: form.getAttribute('data-source'),
+          _honey: data.get('_honey'),
+        };
+        fetch('/api/subscribe', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload),
+          keepalive: true,
+        }).catch(function () {});
+      });
+    });
+  })();
+
 })();
