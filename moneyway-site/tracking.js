@@ -6,6 +6,7 @@
   window.gtag = gtag;
   gtag("js", new Date());
   gtag("config", "AW-17037077137");
+  gtag("config", "G-YQR24TXRY8");
 
   // Conversão "Visualização de página": disparada na página de Contato.
   // Ajustar aqui se o cliente preferir outra página como sinal de intenção.
